@@ -1,0 +1,37 @@
+name: Deploy to GitHub Pages
+    on:
+      push:
+        branches: 'main'
+    jobs:
+      build_site:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          - name: Install and Build
+            run: |
+              npm install
+              npm run build
+          - name: Upload Artifacts
+            uses: actions/upload-pages-artifact@v3
+            with:
+              path: dist
+          - name: Deploy
+            uses: actions/deploy-pages@v4
+            permissions:
+              pages: write
+              id-token: write
+    ```
+
+4.  **Отправь изменения**:
+    
+```cmd
+    git add .
+    git commit -m "add github action for vite"
+    git push
+    ```
+
+**Что произойдет:**
+Теперь при каждом `git push` GitHub сам будет запускать команду `npm run build` и выкладывать содержимое папки `dist` на твой сайт. 
+
+Попробуй создать этот файл и запушить — через пару минут сайт по ссылке оживет!
