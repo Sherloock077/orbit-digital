@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+
+@import url('https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: 'Rubik', sans-serif;
+  --min-font-size: 14px;
+  --max-font-size: 18px;
+  --fluid-font-size: clamp(var(--min-font-size), 2vw, var(--max-font-size));
+}
+
+html {
+  font-size: var(--fluid-font-size);
+}
+
+body {
+  margin: 0;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
