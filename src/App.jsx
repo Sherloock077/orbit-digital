@@ -212,6 +212,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black text-[#BBBBBB] font-mono selection:bg-cyan-500/30 overflow-x-hidden relative">
+
       <SpaceBackground />
 
       <header className="fixed top-0 left-0 w-full z-[100] px-4 md:px-16 py-4 md:py-6 flex items-center justify-between border-b border-cyan-500/20 backdrop-blur-xl bg-black/60">
@@ -306,7 +307,7 @@ function App() {
       <main className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 pt-20">
 
         {/* --- ГЛАВНЫЙ БЛОК --- */}
-        <section className="py-20 sm:py-32 md:py-72 xl:py-96 text-center relative overflow-visible">
+        <section className="py-20 sm:py-32 md:py-72 px-5 sm:px-10 text-center relative overflow-visible">
           {/* --- ДЕКОРАТИВНАЯ ПЛАНЕТА --- */}
           <motion.img
             src={planetImg}
@@ -329,14 +330,14 @@ function App() {
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none"></div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
-            <h1 className="text-4xl sm:text-6xl md:text-[10rem] xl:text-[12rem] font-black leading-[0.9] mb-8 md:mb-14 xl:mb-20 tracking-tight select-none font-sans">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[0.9] mb-8 md:mb-14 tracking-tight select-none font-sans">
               <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] uppercase">ORBIT</span>
               <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-pulse">
                 Digital
               </span>
             </h1>
-            <p className="text-[10px] md:text-xl text-gray-500 max-w-xs md:max-w-xl mx-auto font-light tracking-[0.3em] md:tracking-[0.4em] uppercase leading-relaxed border-t border-b border-gray-800 py-3 md:py-4">
+            <p className="text-base md:text-xl text-gray-500 max-w-xs md:max-w-xl mx-auto font-light tracking-[0.3em] md:tracking-[0.4em] uppercase leading-relaxed border-t border-b border-gray-800 py-3 md:py-4">
               // Технологии и автоматизация для бизнеса
             </p>
           </motion.div>
@@ -358,7 +359,7 @@ function App() {
             ].map((item, i) => (
               <div
                 key={i}
-                className={`relative py-20 px-12 group overflow-hidden transition-all duration-500 hover:bg-white/[0.02]
+                className={`relative py-24 px-8 sm:px-12 group overflow-hidden transition-all duration-500 hover:bg-white/[0.02]
           ${i !== 2 ? 'md:border-r border-white/5' : ''}`} // Тонкая вертикальная линия между блоками
               >
                 {/* Световой индикатор сверху при наведении */}
