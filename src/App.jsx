@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- ИМПОРТ ВСЕХ РЕСУРСОВ ---
-import myLogo from './assets/логотип.png';
-import aiCardImage from './assets/ИИ.png';
-import dataCardImage from './assets/база-данных.png';
-import autoCardImage from './assets/автомотизация.png';
-import aiIcon from './assets/ии-логотип.png';
-import dataIcon from './assets/база-данных-иконка.png';
-import autoIcon from './assets/автоматизация-иконка.png';
-// Подключаем твою планету (убедись, что файл .png)
-import planetImage from './assets/планета.png';
+// --- ИМПОРТЫ ИЗОБРАЖЕНИЙ ---
+import logoImg from './assets/logo.png';
+import planetImg from './assets/planet.png';
+import aiImg from './assets/ai.png';
+import aiIconImg from './assets/ai-icon.png';
+import dataImg from './assets/data.jpg';
+import dataIconImg from './assets/data-icon.png';
+import autoImg from './assets/auto.png';
+import autoIconImg from './assets/auto-icon.png';
 
-// --- КОМПОНЕНТ ФОНА (ПЛАВНАЯ ГАЛАКТИКА) ---
+// --- КОМПОНЕНТ ФОНА ---
 const SpaceBackground = () => {
   const canvasRef = useRef(null);
   const targetScrollRotation = useRef(0);
@@ -219,9 +218,9 @@ function App() {
         <div className="flex-shrink-0 relative group">
           <div className="absolute inset-0 bg-cyan-500 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
           <img
-            src={myLogo}
+            src={logoImg}
             alt="Orbit Digital"
-            className="h-13 md:h-24 w-auto object-contain cursor-pointer relative z-10 grayscale hover:grayscale-0 transition-all"
+            className="h-10 sm:h-16 md:h-24 w-auto object-contain cursor-pointer relative z-10 grayscale hover:grayscale-0 transition-all"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           />
         </div>
@@ -307,10 +306,10 @@ function App() {
       <main className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 pt-20">
 
         {/* --- ГЛАВНЫЙ БЛОК --- */}
-        <section className="py-24 md:py-72 text-center relative overflow-visible">
+        <section className="py-20 sm:py-32 md:py-72 xl:py-96 text-center relative overflow-visible">
           {/* --- ДЕКОРАТИВНАЯ ПЛАНЕТА --- */}
           <motion.img
-            src={planetImage}
+            src={planetImg}
             alt="Planet Decor"
             initial={{ opacity: 0, x: 150, y: -80 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
@@ -318,7 +317,7 @@ function App() {
 
             // УМЕНЬШЕНО: теперь ширина 400px на мобильных и 750px на десктопе.
             // Подправлены отступы (right-[-35%]), чтобы маленькая планета не прилипала к тексту.
-            className="absolute top-[-5%] right-[-55%] md:top-[-20%] md:right-[-65%] w-[400px] md:w-[750px] h-auto pointer-events-none z-0 select-none filter blur-[0.5px]"
+            className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[300px] sm:w-[400px] md:w-[750px] xl:w-[1000px] h-auto pointer-events-none z-0 select-none filter blur-[0.5px]"
 
             style={{
               maxWidth: 'none',
@@ -330,7 +329,7 @@ function App() {
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none"></div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
-            <h1 className="text-4xl md:text-[10rem] font-black leading-[0.9] mb-8 md:mb-14 tracking-tight select-none font-sans">
+            <h1 className="text-4xl sm:text-6xl md:text-[10rem] xl:text-[12rem] font-black leading-[0.9] mb-8 md:mb-14 xl:mb-20 tracking-tight select-none font-sans">
               <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] uppercase">ORBIT</span>
               <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-pulse">
@@ -411,11 +410,11 @@ function App() {
             <NeonFrame color="cyan">
               <div className="grid grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-center gap-8 md:gap-16 p-6 md:p-12">
                 <div className="relative overflow-hidden border border-cyan-500/30">
-                  <img src={aiCardImage} alt="AI Services" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
+                  <img src={aiImg} alt="AI Services" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
                 <div className="space-y-4 md:space-y-8 text-left">
-                  <motion.img src={aiIcon} alt="AI" className="w-12 h-12 md:w-20 md:h-20 filter saturate-50 group-hover:saturate-100 transition-all" animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3 }} />
+                  <motion.img src={aiIconImg} alt="AI" className="w-12 h-12 md:w-20 md:h-20 filter saturate-50 group-hover:saturate-100 transition-all" animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3 }} />
                   <div className="space-y-2 md:space-y-4">
                     <h3 className="text-2xl md:text-5xl font-black text-white tracking-tighter leading-none font-sans uppercase">Интеллектуальные <br /> системы</h3>
                     <p className="text-sm md:text-2xl text-gray-400 font-light leading-relaxed">Внедрение продвинутых алгоритмов машинного обучения и виртуальных помощников. Наши ИИ-решения берут на себя интеллектуальную нагрузку, гарантируя высокую производительность.</p>
@@ -430,7 +429,7 @@ function App() {
             <NeonFrame color="purple">
               <div className="grid grid-cols-1 lg:grid-cols-[2fr,1.5fr] items-center gap-8 md:gap-16 p-6 md:p-12">
                 <div className="lg:order-1 space-y-4 md:space-y-8 text-left">
-                  <motion.img src={dataIcon} alt="Data" className="w-12 h-12 md:w-20 md:h-20 filter saturate-50 group-hover:saturate-100 transition-all" animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, delay: 0.5 }} />
+                  <motion.img src={dataIconImg} alt="Data" className="w-12 h-12 md:w-20 md:h-20 filter saturate-50 group-hover:saturate-100 transition-all" animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, delay: 0.5 }} />
                   <div className="space-y-2 md:space-y-4">
                     <h3 className="text-2xl md:text-5xl font-black text-white tracking-tighter leading-none font-sans uppercase">Работа <br /> с данными</h3>
                     <p className="text-sm md:text-2xl text-gray-400 font-light leading-relaxed">Разработка серверной логики и аналитических движков для работы с Big Data. Мы строим системы, где каждый байт информации работает на достижение ваших стратегических целей.</p>
@@ -438,7 +437,7 @@ function App() {
                   <div className="text-[10px] md:text-lg text-purple-600 group-hover:text-purple-400 transition-colors">&gt; Data_Process_Run</div>
                 </div>
                 <div className="lg:order-2 relative overflow-hidden border border-purple-500/30">
-                  <img src={dataCardImage} alt="Data Management" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
+                  <img src={dataImg} alt="Data Management" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
               </div>
@@ -449,11 +448,11 @@ function App() {
             <NeonFrame color="blue">
               <div className="grid grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-center gap-8 md:gap-16 p-6 md:p-12">
                 <div className="relative overflow-hidden border border-blue-500/30">
-                  <img src={autoCardImage} alt="Automation" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
+                  <img src={autoImg} alt="Automation" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
                 <div className="space-y-4 md:space-y-8 text-left">
-                  <motion.img src={autoIcon} alt="Auto" className="w-12 h-12 md:w-20 md:h-20 filter saturate-50 group-hover:saturate-100 transition-all" animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, delay: 1 }} />
+                  <motion.img src={autoIconImg} alt="Auto" className="w-12 h-12 md:w-20 md:h-20 filter saturate-50 group-hover:saturate-100 transition-all" animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, delay: 1 }} />
                   <div className="space-y-2 md:space-y-4">
                     <h3 className="text-2xl md:text-5xl font-black text-white tracking-tighter leading-none font-sans uppercase">Инженерная <br /> оптимизация</h3>
                     <p className="text-sm md:text-2xl text-gray-400 font-light leading-relaxed">Разработка и внедрение прикладного ПО для синхронизации сложных бизнес-операций. Обеспечиваем бесперебойную работу цифровых сервисов без необходимости внешнего контроля.</p>
