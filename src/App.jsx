@@ -221,7 +221,7 @@ function App() {
           <img
             src={logoImg}
             alt="Orbit Digital"
-            className="h-10 sm:h-16 md:h-24 w-auto object-contain cursor-pointer relative z-10 grayscale hover:grayscale-0 transition-all"
+            className="h-16 sm:h-20 md:h-24 w-auto object-contain cursor-pointer relative z-10 grayscale hover:grayscale-0 transition-all"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           />
         </div>
@@ -318,7 +318,7 @@ function App() {
 
             // УМЕНЬШЕНО: теперь ширина 400px на мобильных и 750px на десктопе.
             // Подправлены отступы (right-[-35%]), чтобы маленькая планета не прилипала к тексту.
-            className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[300px] sm:w-[400px] md:w-[750px] xl:w-[1000px] h-auto pointer-events-none z-0 select-none filter blur-[0.5px]"
+            className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[300px] sm:w-[400px] md:w-[750px] xl:w-[1000px] h-auto pointer-events-none z-0 select-none filter blur-[0.5px] object-contain"
 
             style={{
               maxWidth: 'none',
@@ -330,7 +330,7 @@ function App() {
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none"></div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[0.9] mb-8 md:mb-14 tracking-tight select-none font-sans">
+            <h1 className="text-3xl md:text-5xl lg:text-[10rem] font-black leading-[0.9] mb-8 md:mb-14 tracking-tight select-none font-sans">
               <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] uppercase">ORBIT</span>
               <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-pulse">
@@ -344,43 +344,60 @@ function App() {
         </section>
 
         {/* КРАТКИЙ СПИСОК УСЛУГ - УЛУЧШЕННЫЙ ДИЗАЙН */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="mb-40"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-y border-white/5 bg-white/[0.01] backdrop-blur-sm">
-            {[
-              { label: "01. AI CORE", desc: "Внедрение нейронных сетей и ИИ." },
-              { label: "02. BIG DATA", desc: "Проектирование баз данных." },
-              { label: "03. AUTO SYNC", desc: "Оптимизация бизнес-процессов." }
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`relative py-24 px-8 sm:px-12 group overflow-hidden transition-all duration-500 hover:bg-white/[0.02]
-          ${i !== 2 ? 'md:border-r border-white/5' : ''}`} // Тонкая вертикальная линия между блоками
+        {/* КРАТКИЙ СПИСОК УСЛУГ В НЕОНОВОЙ РАМКЕ */}
+        <section className="mb-40">
+          <section className="mb-40 px-4">
+            {/* БЛОК УСЛУГ: КАРТОЧКИ С ЗАКРУГЛЕННЫМИ УГЛАМИ */}
+            <section className="mb-40 px-4 md:px-0">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={sectionVariants}
+                className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6" // Gap создает расстояние между рамками
               >
-                {/* Световой индикатор сверху при наведении */}
-                <div className="absolute top-0 left-0 w-0 h-[1px] bg-cyan-500/50 transition-all duration-500 group-hover:w-full" />
+                {[
+                  {
+                    label: "01. AI CORE",
+                    desc: "Внедрение нейронных сетей и ИИ.",
+                    color: "text-cyan-400",
+                    shadow: "group-hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]"
+                  },
+                  {
+                    label: "02. BIG DATA",
+                    desc: "Проектирование баз данных.",
+                    color: "text-purple-400",
+                    shadow: "group-hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
+                  },
+                  {
+                    label: "03. AUTO SYNC",
+                    desc: "Оптимизация бизнес-процессов.",
+                    color: "text-blue-400",
+                    shadow: "group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]"
+                  }
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className={`group relative p-6 md:p-8 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-md transition-all duration-500 hover:border-white/20 ${item.shadow}`}
+                  >
+                    {/* Индикатор номера (уменьшен до 9px) */}
+                    <span className={`${item.color} text-[9px] mb-4 block tracking-[0.4em] font-bold uppercase`}>
+                      {item.label}
+                    </span>
 
-                {/* Метка (Label) */}
-                <span className="block text-cyan-500 text-[10px] mb-8 tracking-[0.5em] font-bold uppercase transition-transform duration-300 group-hover:translate-x-1">
-                  {item.label}
-                </span>
+                    {/* Описание (размер уменьшен до text-lg для мобилок и xl для ПК) */}
+                    <p className="text-white text-lg md:text-xl font-medium uppercase leading-snug tracking-tight">
+                      {item.desc}
+                    </p>
 
-                {/* Основной текст */}
-                <p className="text-white text-xl md:text-2xl font-light uppercase tracking-tight leading-tight transition-all duration-300 group-hover:text-cyan-50 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-                  {item.desc}
-                </p>
-
-                {/* Маленький декоративный элемент в углу */}
-                <div className="absolute bottom-4 right-4 w-1 h-1 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-            ))}
-          </div>
-        </motion.section>
+                    {/* Декоративный уголок (как на референсе) */}
+                    <div className="absolute bottom-4 right-4 w-1 h-1 bg-white/20 rounded-full group-hover:bg-cyan-500 transition-colors" />
+                  </div>
+                ))}
+              </motion.div>
+            </section>
+          </section>
+        </section>
         {/* Декоративный разделитель между блоками */}
         <div className="w-full flex justify-center my-20 md:my-32">
           <div className="w-[1px] h-20 md:h-32 bg-gradient-to-b from-cyan-500/50 via-transparent to-transparent" />
@@ -411,7 +428,7 @@ function App() {
             <NeonFrame color="cyan">
               <div className="grid grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-center gap-8 md:gap-16 p-6 md:p-12">
                 <div className="relative overflow-hidden border border-cyan-500/30">
-                  <img src={aiImg} alt="AI Services" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
+                  <img className="max-w-full h-auto hover:scale-105 transition-transform duration-300" src={aiImg} alt="AI Services" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
                 <div className="space-y-4 md:space-y-8 text-left">
@@ -438,7 +455,7 @@ function App() {
                   <div className="text-[10px] md:text-lg text-purple-600 group-hover:text-purple-400 transition-colors">&gt; Data_Process_Run</div>
                 </div>
                 <div className="lg:order-2 relative overflow-hidden border border-purple-500/30">
-                  <img src={dataImg} alt="Data Management" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
+                  <img className="max-w-full h-auto hover:scale-105 transition-transform duration-300" src={dataImg} alt="Data Management" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
               </div>
@@ -449,7 +466,7 @@ function App() {
             <NeonFrame color="blue">
               <div className="grid grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-center gap-8 md:gap-16 p-6 md:p-12">
                 <div className="relative overflow-hidden border border-blue-500/30">
-                  <img src={autoImg} alt="Automation" className="w-full h-48 md:h-auto object-cover group-hover:scale-110 transition-transform duration-[3s] ease-out opacity-80 group-hover:opacity-100" />
+                  <img className="max-w-full h-auto hover:scale-105 transition-transform duration-300" src={autoImg} alt="Automation" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 </div>
                 <div className="space-y-4 md:space-y-8 text-left">
