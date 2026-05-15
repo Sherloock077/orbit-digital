@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Объединяем плагины и базовый путь в один конфиг
+// Конфиг, адаптированный под Vercel
 export default defineConfig({
   plugins: [react()],
-  base: '/orbit-digital/', // Это нужно для корректной работы на GitHub Pages
+  // base: '/orbit-digital/', // УБИРАЕМ ИЛИ ЗАКОММЕНТИРУЕМ ЭТО ДЛЯ VERCEL
   server: {
-    host: true // Чтобы ты мог открывать проект в локальной сети
+    host: true 
   }
 })
