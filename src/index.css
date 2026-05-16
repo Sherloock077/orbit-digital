@@ -32,19 +32,22 @@ body {
    ========================================== */
 
 @media (max-width: 768px) {
-  /* ШАПКА — УВЕЛИЧИВАЕМ */
+  /* ОТСТУП ДЛЯ КОНТЕНТА, ЧТОБЫ ШАПКА НЕ ПЕРЕКРЫВАЛА */
+  main {
+    padding-top: 80px !important;
+  }
+
+  /* ШАПКА */
   header {
     padding-left: 16px !important;
     padding-right: 16px !important;
     height: 70px !important;
   }
   
-  /* Логотип */
   header img {
     height: 40px !important;
   }
   
-  /* Кнопка "Связаться" */
   header button {
     padding: 10px 20px !important;
   }
@@ -81,33 +84,29 @@ body {
     letter-spacing: 0.15em;
   }
   
-  /* Секция "Инженерный Интеллект" — заголовок */
+  /* Секция "Инженерный Интеллект" */
   #about h2 {
     font-size: 28px;
   }
   
-  /* Секция "Инженерный Интеллект" — описание */
   #about .text-xl {
     font-size: 16px;
     line-height: 1.4;
   }
   
-  /* Секция "Инженерный Интеллект" — статус */
   #about .text-xs {
     font-size: 9px;
   }
   
-  /* Бейдж Orbit.Digital / Core */
   #about .text-\[10px\] {
     font-size: 8px;
   }
   
-  /* Текст в карточках услуг */
+  /* Карточки услуг */
   #services .text-\[13px\] {
     font-size: 11px;
   }
   
-  /* Заголовки карточек услуг */
   #services .text-base {
     font-size: 12px;
     letter-spacing: 0.2em;
@@ -116,6 +115,10 @@ body {
 
 /* Очень маленькие телефоны */
 @media (max-width: 480px) {
+  main {
+    padding-top: 70px !important;
+  }
+
   img[alt="Planet Decor"] {
     width: 90px;
     right: -15%;
@@ -134,7 +137,6 @@ body {
     font-size: 14px;
   }
   
-  /* Шапка на маленьких телефонах */
   header {
     height: 60px !important;
   }
