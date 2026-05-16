@@ -162,6 +162,10 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [expandedProduct, setExpandedProduct] = useState(null);
+  
+  // Определяем мобильное устройство
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
 
   const servicesList = [
     {
@@ -299,26 +303,18 @@ function App() {
                 onClick={(e) => handleNavClick(e, item)}
                 className="text-gray-400 hover:text-white transition-all relative group flex items-center px-2 py-1"
               >
-                <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-cyan-500 transition-all duration-300 mr-1.5 text-[14px] font-light">
-                  [
-                </span>
+                <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-cyan-500 transition-all duration-300 mr-1.5 text-[14px] font-light">[</span>
                 <span className="relative">
-                  {item === 'about' ? 'О нас' :
-                    item === 'services' ? 'Направления' :
-                      item === 'products' ? 'Продукты' : 'Партнеры'}
+                  {item === 'about' ? 'О нас' : item === 'services' ? 'Направления' : item === 'products' ? 'Продукты' : 'Партнеры'}
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all duration-300 group-hover:w-full"></span>
                 </span>
-                <span className="opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-cyan-500 transition-all duration-300 ml-1.5 text-[14px] font-light">
-                  ]
-                </span>
+                <span className="opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-cyan-500 transition-all duration-300 ml-1.5 text-[14px] font-light">]</span>
               </a>
             ))}
           </nav>
 
           <button onClick={openModal} className="relative px-6 md:px-8 py-2 md:py-2.5 group transition-all duration-500">
-            <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-sans">
-              Связаться
-            </span>
+            <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-sans">Связаться</span>
             <span className="absolute inset-0 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-sm group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-500"></span>
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
             <span className="absolute right-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
@@ -378,10 +374,9 @@ function App() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-2xl text-gray-400 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8">
-  // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
-</p>
+              // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
+            </p>
           </motion.div>
-
         </section>
 
         {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
@@ -394,19 +389,12 @@ function App() {
           >
             <div className="flex items-center gap-4 mb-3">
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-              <span className="text-cyan-400 font-mono text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-bold animate-pulse">
-                [ Core Capabilities ]
-              </span>
+              <span className="text-cyan-400 font-mono text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-bold animate-pulse">[ Core Capabilities ]</span>
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
             </div>
-
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-sans relative select-none">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
-                Наши
-              </span>{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">
-                направления
-              </span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">направления</span>
             </h2>
             <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
           </motion.div>
@@ -432,39 +420,18 @@ function App() {
                     boxShadow: isHovered ? `0 0 25px ${item.activeColor}33, inset 0 0 15px ${item.activeColor}11` : 'none'
                   }}
                 >
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)`
-                    }}
-                  />
-
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
                   <div className="md:w-5/12 mb-3 md:mb-0 z-10 relative">
-                    <h3
-                      className={`text-base md:text-xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'
-                        }`}
-                      style={{
-                        textShadow: isHovered ? `0 0 20px ${item.activeColor}66` : 'none'
-                      }}
-                    >
+                    <h3 className={`text-base md:text-xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
                       {item.label}
                     </h3>
                   </div>
-
                   <div className="md:w-7/12 z-10 md:pl-6 relative">
-                    <p className={`text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 text-gray-400 ${isHovered ? 'text-gray-100' : 'text-gray-400'
-                      }`}>
+                    <p className={`text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
                       {item.desc}
                     </p>
                   </div>
-
-                  <div
-                    className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100"
-                    style={{
-                      backgroundColor: item.activeColor,
-                      boxShadow: `0 0 10px ${item.activeColor}`
-                    }}
-                  />
+                  <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" style={{ backgroundColor: item.activeColor, boxShadow: `0 0 10px ${item.activeColor}` }} />
                 </div>
               );
             })}
@@ -485,21 +452,14 @@ function App() {
           className="mb-32 md:mb-64 py-16 md:py-24 relative"
         >
           <div className="absolute inset-0 opacity-10 [background-image:linear-gradient(#444_1px,transparent_1px),linear-gradient(90deg,#444_1px,transparent_1px)] [background-size:32px_32px]"></div>
-
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-10 md:gap-12 items-start">
             <div className="flex flex-col gap-4 border-l-2 border-purple-500 pl-6">
-              <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[10px] md:text-[12px]">
-                Orbit.Digital / Core
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-none font-sans uppercase text-left">
-                Инженерный <br /> Интеллект.
-              </h2>
+              <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[10px] md:text-[12px]">Orbit.Digital / Core</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-none font-sans uppercase text-left">Инженерный <br /> Интеллект.</h2>
             </div>
-
             <div className="space-y-6 md:space-y-8">
               <p className="text-xl md:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl">
-                Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки.
-                Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
+                Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
               <div className="text-cyan-400 text-xs md:text-sm uppercase text-left font-mono tracking-widest flex items-center gap-3">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
@@ -509,7 +469,7 @@ function App() {
           </div>
         </motion.section>
 
-        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ (ИЗМЕНЕНА НА ГОРИЗОНТАЛЬНЫЕ КАРТОЧКИ) */}
+        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ — с раскрытием на телефоне */}
         <section id="products" className="mb-32 md:mb-64">
           <motion.div
             initial="hidden"
@@ -517,15 +477,16 @@ function App() {
             viewport={{ once: true, amount: 0.1 }}
             variants={sectionVariants}
           >
-            <h2 className="text-center text-[8px] md:text-[10px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20">
-              // Проекты в разработке
-            </h2>
-
-            {/* Сделали flex-col вместо grid для построчного вывода широких карточек */}
+            <h2 className="text-center text-[8px] md:text-[10px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20">// Проекты в разработке</h2>
             <div className="flex flex-col gap-8 max-w-5xl mx-auto">
               {products.map((item, i) => (
                 <motion.div
                   key={i}
+                  onClick={() => {
+                    if (isMobile) {
+                      setExpandedProduct(expandedProduct === i ? null : i);
+                    }
+                  }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = item.activeColor;
                     e.currentTarget.style.boxShadow = `0 0 25px ${item.activeColor}33`;
@@ -536,29 +497,22 @@ function App() {
                     e.currentTarget.style.boxShadow = "none";
                     e.currentTarget.style.setProperty('--current-accent', 'rgba(255,255,255,0.2)');
                   }}
-                  // md:flex-row располагает картинку и текст бок о бок на десктопе
                   className="group relative border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-stretch"
                 >
-                  {/* Блок картинки: теперь она слева, занимает ровно 40% ширины карточки на десктопе и сохраняет пропорции без обрезки */}
                   <div className="relative w-full md:w-5/12 min-h-[220px] md:min-h-full overflow-hidden bg-black/40 flex items-center justify-center p-4 border-b md:border-b-0 md:border-r border-white/5">
                     <div className="absolute inset-0 z-10 opacity-5 group-hover:opacity-0 transition-opacity duration-500" style={{ backgroundColor: item.activeColor }} />
-                    <img
-                      src={item.img}
-                      alt={item.label}
-                      // object-contain гарантирует, что картинка поместится целиком БЕЗ обрезки
-                      className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100"
-                    />
+                    <img src={item.img} alt={item.label} className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100" />
                   </div>
-
-                  {/* Блок контента: теперь справа, занимает 60% ширины */}
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
-                      <span className={`${item.textColor} text-[10px] md:text-[11px] mb-3 block tracking-[0.4em] font-bold uppercase`}>
-                        {item.label}
-                      </span>
-                      <p className="text-[12px] md:text-[13px] text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line">
-                        {item.desc}
-                      </p>
+                      <span className={`${item.textColor} text-[10px] md:text-[11px] mb-3 block tracking-[0.4em] font-bold uppercase`}>{item.label}</span>
+                      
+                      {/* Описание — на десктопе всегда видно, на телефоне только по клику */}
+                      {(!isMobile || (isMobile && expandedProduct === i)) && (
+                        <p className="text-[12px] md:text-[13px] text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line">
+                          {item.desc}
+                        </p>
+                      )}
                     </div>
 
                     <div className="flex items-center justify-between pt-4 border-t border-white/5">
@@ -566,6 +520,14 @@ function App() {
                         <div className="w-1 h-1 transition-colors duration-500" style={{ backgroundColor: 'var(--current-accent)' }} />
                         <div className="w-4 h-[1px] self-center opacity-20 transition-colors duration-500" style={{ backgroundColor: 'var(--current-accent)' }} />
                       </div>
+                      
+                      {/* Индикатор только на телефоне */}
+                      {isMobile && (
+                        <span className="text-[8px] uppercase tracking-wider text-gray-500 font-mono">
+                          {expandedProduct === i ? '[ закрыть ]' : '[ подробнее ]'}
+                        </span>
+                      )}
+                      
                       <div className="w-1.5 h-1.5 rounded-full transition-all duration-500" style={{ backgroundColor: 'var(--current-accent)', boxShadow: `0 0 10px var(--current-accent)` }} />
                     </div>
                   </div>
@@ -610,28 +572,13 @@ function App() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6" onClick={closeModal}>
             <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)]" onClick={(e) => e.stopPropagation()}>
               <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none">&times;</button>
-
               <h3 className="text-2xl md:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-sans">Связаться с нами</h3>
-
               <form className="space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
                 <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
                 <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
-
-                <input
-                  type="tel"
-                  defaultValue="+7 "
-                  onInput={(e) => {
-                    if (!e.target.value.startsWith('+7 ')) {
-                      e.target.value = '+7 ' + e.target.value.replace(/^\+7\s*/, '');
-                    }
-                  }}
-                  placeholder="Номер телефона"
-                  className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base"
-                  required
-                />
+                <input type="tel" defaultValue="+7 " onInput={(e) => { if (!e.target.value.startsWith('+7 ')) { e.target.value = '+7 ' + e.target.value.replace(/^\+7\s*/, ''); } }} placeholder="Номер телефона" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
                 <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base"></textarea>
-
-                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-none text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-cyan-40 transition-all">Отправить запрос</button>
+                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-none text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
               </form>
             </motion.div>
           </motion.div>

@@ -70,7 +70,7 @@ body {
     opacity: 0.7 !important;
   }
 
-  /* Млечный путь — сильно приглушён */
+  /* Млечный путь — приглушён */
   canvas {
     transform: scale(0.3) translateY(60px);
     transform-origin: top left;
@@ -124,6 +124,47 @@ body {
   #services .text-base {
     font-size: 12px !important;
     letter-spacing: 0.15em !important;
+  }
+
+  /* ========== УЛУЧШЕНИЕ ЧИТАЕМОСТИ ТЕКСТА ========== */
+  
+  /* 1. Ограничиваем ширину текста на телефоне */
+  #products p,
+  #services p,
+  #about p {
+    max-width: 95% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* 2. Увеличиваем межстрочный интервал */
+  #products p,
+  #services p,
+  .text-gray-400 {
+    line-height: 1.65 !important;
+  }
+
+  /* 3. Уменьшаем межбуквенный интервал для длинных текстов */
+  #products .uppercase,
+  #services .uppercase {
+    letter-spacing: 0.02em !important;
+  }
+
+  /* 4. Добавляем визуальные отступы для пунктов списка */
+  #products .whitespace-pre-line {
+    padding-left: 12px !important;
+    border-left: 2px solid rgba(34, 211, 238, 0.3) !important;
+  }
+
+  /* 5. Смягчаем контраст текста */
+  #products .text-gray-400,
+  #services .text-gray-400 {
+    color: #c0c0c0 !important;
+  }
+
+  /* 6. Увеличиваем отступы между абзацами */
+  #products .mb-6 {
+    margin-bottom: 1.75rem !important;
   }
 
   /* Секция "Инженерный Интеллект" */
@@ -184,6 +225,16 @@ body {
 
   #services .text-\[13px\] {
     font-size: 13px !important;
+  }
+  
+  /* Улучшения для маленьких телефонов */
+  #products .whitespace-pre-line {
+    padding-left: 8px !important;
+  }
+  
+  #products p,
+  #services p {
+    max-width: 98% !important;
   }
   
   #about h2 {
