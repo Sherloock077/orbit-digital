@@ -27,7 +27,6 @@ body {
   box-sizing: border-box;
 }
 
-
 /* ==========================================
    АДАПТИВ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ
    ========================================== */
@@ -37,13 +36,15 @@ body {
   main {
     padding-top: 80px !important;
   }
-/* Исправляем обрезание буквы g и других нижних элементов */
-p {
-  line-height: 1.6 !important;
-  padding-top: 0.25rem !important;
-  padding-bottom: 0.25rem !important;
-  overflow: visible !important;
-}
+
+  /* Исправляем обрезание буквы g и других нижних элементов */
+  p {
+    line-height: 1.6 !important;
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+    overflow: visible !important;
+  }
+
   /* Шапка */
   header {
     padding-left: 16px !important;
@@ -64,10 +65,10 @@ p {
     letter-spacing: 0.2em !important;
   }
 
-  /* ПЛАНЕТА — УВЕЛИЧЕННАЯ, НО КРАЙ НЕ ВЫЛЕЗАЕТ */
+  /* Планета */
   img[alt="Planet Decor"] {
-    width: 130px !important;      /* было 110px — увеличили */
-    right: -10% !important;       /* было -8% — сдвинули */
+    width: 130px !important;
+    right: -10% !important;
     top: -6% !important;
     opacity: 1 !important;
   }
@@ -80,16 +81,17 @@ p {
     opacity: 0.7;
   }
 
-  /* Заголовок ORBIT Digital */
+   /* Заголовок ORBIT Digital — БОЛЬШОЙ */
   .text-5xl {
-    font-size: 56px;
+    font-size: 52px !important;
   }
-  
-  /* Подзаголовок */
-  .text-lg {
-    font-size: 12px;
+
+  /* Подзаголовок — увеличили, но он всё ещё меньше заголовка */
+   .text-base {
+    font-size: 13px !important;
     letter-spacing: 0.15em;
   }
+
   
   /* Секция "Инженерный Интеллект" */
   #about h2 {
@@ -111,11 +113,11 @@ p {
   
   /* Карточки услуг */
   #services .text-\[13px\] {
-    font-size: 11px;
+    font-size: 15px !important;
   }
   
   #services .text-base {
-    font-size: 12px;
+    font-size: 13px !important;
     letter-spacing: 0.2em;
   }
 }
@@ -127,13 +129,17 @@ p {
   }
 
   img[alt="Planet Decor"] {
-    width: 100px !important;      /* было 80px — увеличили */
-    right: -12% !important;       /* было -10% — сдвинули */
+    width: 100px !important;
+    right: -12% !important;
     opacity: 1 !important;
   }
   
-  h1 {
-    font-size: 38px;
+  .text-5xl {
+    font-size: 38px !important;
+  }
+  
+  .text-lg {
+    font-size: 14px !important;
   }
   
   #about h2 {
