@@ -21,6 +21,7 @@ body {
   margin: 0;
   background-color: #000000;
   color: #ffffff;
+  overflow-x: hidden;
 }
 
 * {
@@ -34,132 +35,175 @@ body {
 @media (max-width: 768px) {
   /* Отступ для контента */
   main {
-    padding-top: 80px !important;
-  }
-
-  /* Исправляем обрезание буквы g и других нижних элементов */
-  p {
-    line-height: 1.6 !important;
-    padding-top: 0.25rem !important;
-    padding-bottom: 0.25rem !important;
-    overflow: visible !important;
+    padding-top: 70px !important;
   }
 
   /* Шапка */
   header {
     padding-left: 16px !important;
     padding-right: 16px !important;
-    height: 70px !important;
+    height: 65px !important;
   }
   
   header img {
-    height: 40px !important;
+    height: 35px !important;
   }
   
   header button {
-    padding: 10px 20px !important;
+    padding: 8px 16px !important;
+    background: rgba(34, 211, 238, 0.08) !important;
+    border: 1px solid rgba(34, 211, 238, 0.25) !important;
+    border-radius: 40px !important;
   }
   
   header button span {
     font-size: 11px !important;
-    letter-spacing: 0.2em !important;
+    letter-spacing: 0.15em !important;
+    font-weight: 500 !important;
   }
 
   /* Планета */
   img[alt="Planet Decor"] {
-    width: 130px !important;
-    right: -10% !important;
-    top: -6% !important;
-    opacity: 1 !important;
+    width: 100px !important;
+    right: -15% !important;
+    top: -8% !important;
+    opacity: 0.7 !important;
   }
 
-  /* Млечный путь */
+  /* Млечный путь — сильно приглушён */
   canvas {
-    transform: scale(0.3) translateY(50px);
+    transform: scale(0.3) translateY(60px);
     transform-origin: top left;
     width: 117.6%;
-    opacity: 0.7;
+    opacity: 0.2 !important;
   }
 
-   /* Заголовок ORBIT Digital — БОЛЬШОЙ */
+  /* ЗАГОЛОВОК ORBIT Digital */
   .text-5xl {
-    font-size: 53px !important;
+    font-size: 44px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 8px !important;
   }
-
-  /* Подзаголовок — увеличили, но он всё ещё меньше заголовка */
-   .text-base {
-    font-size: 12px !important;
-    letter-spacing: 0.15em;
-  }
-
   
+  h1 span:last-child {
+    font-size: 42px !important;
+    line-height: 1.3 !important;
+    padding-bottom: 6px !important;
+    margin-top: 0 !important;
+    display: inline-block !important;
+  }
+
+  /* ПОДЗАГОЛОВОК — читаемый */
+  .text-base {
+    font-size: 16px !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1.5 !important;
+    font-weight: 400 !important;
+    color: #bbbbbb !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  /* КАРТОЧКИ НАПРАВЛЕНИЙ */
+  #services .flex.flex-col.gap-4 > div {
+    margin-bottom: 16px !important;
+    padding: 16px !important;
+    background: rgba(15, 15, 25, 0.5) !important;
+    border-radius: 14px !important;
+    backdrop-filter: blur(4px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  }
+
+  #services .text-\[13px\] {
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+    font-weight: 500 !important;
+    color: #ddd !important;
+  }
+
+  #services .text-base {
+    font-size: 12px !important;
+    letter-spacing: 0.15em !important;
+  }
+
   /* Секция "Инженерный Интеллект" */
   #about h2 {
-    font-size: 28px;
+    font-size: 24px !important;
   }
   
   #about .text-xl {
-    font-size: 16px;
-    line-height: 1.4;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
   }
   
   #about .text-xs {
-    font-size: 9px;
+    font-size: 8px !important;
   }
   
   #about .text-\[10px\] {
-    font-size: 8px;
+    font-size: 7px !important;
+  }
+
+  /* Отступы между секциями */
+  section {
+    margin-bottom: 40px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
   }
   
-  /* Карточки услуг */
-  #services .text-\[13px\] {
-    font-size: 15px !important;
-  }
-  
-  #services .text-base {
-    font-size: 13px !important;
-    letter-spacing: 0.2em;
+  .my-20 {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
   }
 }
 
-/* Очень маленькие телефоны */
+/* Очень маленькие телефоны (до 480px) */
 @media (max-width: 480px) {
   main {
-    padding-top: 70px !important;
+    padding-top: 60px !important;
   }
 
   img[alt="Planet Decor"] {
-    width: 100px !important;
-    right: -12% !important;
-    opacity: 1 !important;
+    width: 80px !important;
+    right: -18% !important;
+    opacity: 0.5 !important;
   }
   
   .text-5xl {
     font-size: 38px !important;
   }
   
-  .text-lg {
+  h1 span:last-child {
+    font-size: 36px !important;
+  }
+  
+  .text-base {
     font-size: 14px !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  #services .text-\[13px\] {
+    font-size: 13px !important;
   }
   
   #about h2 {
-    font-size: 24px;
+    font-size: 22px !important;
   }
   
   #about .text-xl {
-    font-size: 14px;
+    font-size: 13px !important;
   }
   
   header {
-    height: 60px !important;
+    height: 55px !important;
   }
   
   header img {
-    height: 32px !important;
+    height: 28px !important;
   }
   
   header button {
-    padding: 6px 14px !important;
+    padding: 5px 12px !important;
   }
   
   header button span {
