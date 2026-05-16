@@ -32,12 +32,12 @@ body {
    ========================================== */
 
 @media (max-width: 768px) {
-  /* ОТСТУП ДЛЯ КОНТЕНТА, ЧТОБЫ ШАПКА НЕ ПЕРЕКРЫВАЛА */
+  /* Отступ для контента */
   main {
     padding-top: 80px !important;
   }
 
-  /* ШАПКА */
+  /* Шапка */
   header {
     padding-left: 16px !important;
     padding-right: 16px !important;
@@ -57,12 +57,12 @@ body {
     letter-spacing: 0.2em !important;
   }
 
-  /* Планета */
+  /* ПЛАНЕТА — ВИДНАЯ И НОРМАЛЬНОГО РАЗМЕРА */
   img[alt="Planet Decor"] {
-    width: 120px;
-    right: -10%;
-    top: 0%;
-    opacity: 1;
+    width: 140px !important;
+    right: -15% !important;
+    top: -2% !important;
+    opacity: 0.9 !important;
   }
 
   /* Млечный путь */
@@ -120,9 +120,9 @@ body {
   }
 
   img[alt="Planet Decor"] {
-    width: 90px;
-    right: -15%;
-    opacity: 0.8;
+    width: 100px !important;
+    right: -20% !important;
+    opacity: 0.8 !important;
   }
   
   h1 {
