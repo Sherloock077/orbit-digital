@@ -57,17 +57,17 @@ body {
     letter-spacing: 0.2em !important;
   }
 
-  /* ПЛАНЕТА — ВИДНАЯ И НОРМАЛЬНОГО РАЗМЕРА */
+  /* ПЛАНЕТА — УВЕЛИЧЕННАЯ, НО КРАЙ НЕ ВЫЛЕЗАЕТ */
   img[alt="Planet Decor"] {
-    width: 140px !important;
-    right: -15% !important;
+    width: 130px !important;      /* было 110px — увеличили */
+    right: -10% !important;       /* было -8% — сдвинули */
     top: -2% !important;
-    opacity: 0.9 !important;
+    opacity: 1 !important;
   }
 
   /* Млечный путь */
   canvas {
-    transform: scale(0.85);
+    transform: scale(0.3) translateY(50px);
     transform-origin: top left;
     width: 117.6%;
     opacity: 0.7;
@@ -120,9 +120,9 @@ body {
   }
 
   img[alt="Planet Decor"] {
-    width: 100px !important;
-    right: -20% !important;
-    opacity: 0.8 !important;
+    width: 100px !important;      /* было 80px — увеличили */
+    right: -12% !important;       /* было -10% — сдвинули */
+    opacity: 1 !important;
   }
   
   h1 {
