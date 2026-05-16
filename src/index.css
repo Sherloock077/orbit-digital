@@ -81,7 +81,7 @@ p {
   }
 
   /* Заголовок ORBIT Digital */
-  h1 {
+  .text-5xl {
     font-size: 56px;
   }
   
