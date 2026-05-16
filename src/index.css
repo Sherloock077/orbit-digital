@@ -32,19 +32,122 @@ body {
    ========================================== */
 
 @media (max-width: 768px) {
-  /* Планета */
-  img[alt="Planet Decor"] {
-    width: 120px !important;
-    right: -10% !important;
-    top: 0% !important;
-    opacity: 1 !important;
+  /* ШАПКА — УВЕЛИЧИВАЕМ */
+  header {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    height: 70px !important;
+  }
+  
+  /* Логотип */
+  header img {
+    height: 40px !important;
+  }
+  
+  /* Кнопка "Связаться" */
+  header button {
+    padding: 10px 20px !important;
+  }
+  
+  header button span {
+    font-size: 11px !important;
+    letter-spacing: 0.2em !important;
   }
 
-  /* Млечный путь (галактика на Canvas) */
+  /* Планета */
+  img[alt="Planet Decor"] {
+    width: 120px;
+    right: -10%;
+    top: 0%;
+    opacity: 1;
+  }
+
+  /* Млечный путь */
   canvas {
-    transform: scale(0.85) !important;
-    transform-origin: top left !important;
-    width: 117.6% !important;
-    opacity: 0.7 !important;
+    transform: scale(0.85);
+    transform-origin: top left;
+    width: 117.6%;
+    opacity: 0.7;
+  }
+
+  /* Заголовок ORBIT Digital */
+  h1 {
+    font-size: 48px;
+  }
+  
+  /* Подзаголовок */
+  .text-lg {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+  }
+  
+  /* Секция "Инженерный Интеллект" — заголовок */
+  #about h2 {
+    font-size: 28px;
+  }
+  
+  /* Секция "Инженерный Интеллект" — описание */
+  #about .text-xl {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  
+  /* Секция "Инженерный Интеллект" — статус */
+  #about .text-xs {
+    font-size: 9px;
+  }
+  
+  /* Бейдж Orbit.Digital / Core */
+  #about .text-\[10px\] {
+    font-size: 8px;
+  }
+  
+  /* Текст в карточках услуг */
+  #services .text-\[13px\] {
+    font-size: 11px;
+  }
+  
+  /* Заголовки карточек услуг */
+  #services .text-base {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+}
+
+/* Очень маленькие телефоны */
+@media (max-width: 480px) {
+  img[alt="Planet Decor"] {
+    width: 90px;
+    right: -15%;
+    opacity: 0.8;
+  }
+  
+  h1 {
+    font-size: 38px;
+  }
+  
+  #about h2 {
+    font-size: 24px;
+  }
+  
+  #about .text-xl {
+    font-size: 14px;
+  }
+  
+  /* Шапка на маленьких телефонах */
+  header {
+    height: 60px !important;
+  }
+  
+  header img {
+    height: 32px !important;
+  }
+  
+  header button {
+    padding: 6px 14px !important;
+  }
+  
+  header button span {
+    font-size: 9px !important;
   }
 }
