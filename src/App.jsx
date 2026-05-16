@@ -378,8 +378,8 @@ function App() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-2xl text-gray-400 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8">
-  // Мы создаем технологии на стыке <br /> физической безопасности и цифрового интеллекта.
-            </p>
+  // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
+</p>
           </motion.div>
 
         </section>
