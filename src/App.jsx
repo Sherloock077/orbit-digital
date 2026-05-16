@@ -347,56 +347,54 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* ========== ГЛАВНЫЙ КОНТЕЙНЕР — ИСПРАВЛЕН АДАПТИВ ========== */}
-      <main className="relative z-10 w-full px-4 sm:px-6 md:px-8 pt-20 overflow-x-hidden">
-        
+      <main className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 pt-20 overflow-x-hidden">
         {/* ГЛАВНЫЙ ЭКРАН (HERO) */}
-        <section className="py-16 sm:py-24 md:py-40 lg:py-72 text-center relative overflow-visible">
-          {/* ПЛАНЕТА — ИСПРАВЛЕНА (НЕ ВЫЛЕЗАЕТ ЗА ЭКРАН) */}
+        <section className="py-20 sm:py-32 md:py-72 px-5 sm:px-10 text-center relative overflow-visible">
+          {/* ПЛАНЕТА — адаптивная, но не ломает десктоп */}
           <motion.img
             src={planetImg}
             alt="Planet Decor"
-            initial={{ opacity: 0, x: 100, y: -60 }}
-            animate={{ opacity: 0.6, x: 0, y: 0 }}
+            initial={{ opacity: 0, x: 150, y: -80 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 2.5, ease: "easeOut" }}
-            className="absolute top-[-5%] right-[-40%] sm:right-[-35%] md:right-[-45%] lg:right-[-55%] xl:right-[-60%] w-[120px] sm:w-[180px] md:w-[300px] lg:w-[450px] xl:w-[600px] pointer-events-none select-none hidden sm:block"
+            className="absolute top-[-5%] right-[-55%] sm:right-[-45%] md:right-[-65%] lg:right-[-70%] w-[150px] sm:w-[250px] md:w-[450px] lg:w-[700px] h-auto pointer-events-none z-0 select-none object-contain opacity-60 sm:opacity-100"
             style={{
               maxWidth: 'none',
-              WebkitMaskImage: 'radial-gradient(circle at center, black 70%, transparent 100%)',
-              maskImage: 'radial-gradient(circle at center, black 70%, transparent 100%)'
+              WebkitMaskImage: 'radial-gradient(circle at center, black 85%, transparent 100%)',
+              maskImage: 'radial-gradient(circle at center, black 85%, transparent 100%)'
             }}
           />
 
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] sm:w-[300px] md:w-[400px] h-[250px] sm:h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[10rem] font-black leading-[0.9] mb-6 sm:mb-8 md:mb-14 tracking-tighter select-none font-sans">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[0.9] mb-6 sm:mb-8 md:mb-14 tracking-tighter select-none font-sans">
               <span className="text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] uppercase">ORBIT</span>
               <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
                 Digital
               </span>
             </h1>
-            <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-400 max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto font-light tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] lg:tracking-[0.4em] uppercase leading-relaxed border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-2">
+            <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-gray-400 max-w-xl md:max-w-3xl mx-auto font-light tracking-[0.2em] md:tracking-[0.4em] uppercase leading-relaxed border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm">
               // Мы создаем технологии на стыке <br /> физической безопасности и цифрового интеллекта.
             </p>
           </motion.div>
         </section>
 
         {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
-        <section id="services" className="py-16 sm:py-20 px-2 sm:px-4 max-w-6xl mx-auto scroll-mt-32">
+        <section id="services" className="py-16 sm:py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="relative z-10 flex flex-col items-center text-center mb-12 sm:mb-16 md:mb-24"
           >
-            <div className="flex items-center gap-2 sm:gap-4 mb-3">
-              <div className="w-8 sm:w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-              <span className="text-cyan-400 font-mono text-[8px] sm:text-[9px] md:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] md:tracking-[0.6em] uppercase font-bold animate-pulse">
+            <div className="flex items-center gap-4 mb-3">
+              <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
+              <span className="text-cyan-400 font-mono text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-bold animate-pulse">
                 [ Core Capabilities ]
               </span>
-              <div className="w-8 sm:w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
+              <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
             </div>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tight font-sans relative select-none">
@@ -415,7 +413,7 @@ function App() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={sectionVariants}
-            className="flex flex-col gap-3 sm:gap-4 relative z-10"
+            className="flex flex-col gap-4 relative z-10"
           >
             {servicesList.map((item, i) => {
               const isHovered = hoveredIndex === i;
@@ -425,7 +423,7 @@ function App() {
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => setHoveredIndex(i === hoveredIndex ? null : i)}
-                  className="group relative flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 md:p-8 border border-white/10 bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-in-out overflow-hidden"
+                  className="group relative flex flex-col md:flex-row md:items-center justify-between p-4 sm:p-6 md:p-8 border border-white/10 bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-in-out overflow-hidden"
                   style={{
                     borderColor: isHovered ? item.activeColor : 'rgba(255, 255, 255, 0.1)',
                     boxShadow: isHovered ? `0 0 25px ${item.activeColor}33, inset 0 0 15px ${item.activeColor}11` : 'none'
@@ -438,9 +436,9 @@ function App() {
                     }}
                   />
 
-                  <div className="sm:w-5/12 mb-2 sm:mb-0 z-10 relative">
+                  <div className="md:w-5/12 mb-2 md:mb-0 z-10 relative">
                     <h3
-                      className={`text-xs sm:text-sm md:text-base lg:text-xl font-black font-mono tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-1 sm:group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'
+                      className={`text-sm md:text-base lg:text-xl font-black font-mono tracking-[0.2em] md:tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'
                         }`}
                       style={{
                         textShadow: isHovered ? `0 0 20px ${item.activeColor}66` : 'none'
@@ -450,15 +448,15 @@ function App() {
                     </h3>
                   </div>
 
-                  <div className="sm:w-7/12 z-10 sm:pl-4 md:pl-6 relative">
-                    <p className={`text-[11px] sm:text-xs md:text-[13px] leading-relaxed font-normal sm:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'
+                  <div className="md:w-7/12 z-10 md:pl-6 relative">
+                    <p className={`text-xs sm:text-sm md:text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'
                       }`}>
                       {item.desc}
                     </p>
                   </div>
 
                   <div
-                    className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100"
+                    className="absolute bottom-3 right-3 w-1 h-1 md:w-1.5 md:h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100"
                     style={{
                       backgroundColor: item.activeColor,
                       boxShadow: `0 0 10px ${item.activeColor}`
@@ -470,7 +468,7 @@ function App() {
           </motion.div>
         </section>
 
-        <div className="w-full flex justify-center my-12 sm:my-20 md:my-32">
+        <div className="w-full flex justify-center my-16 sm:my-20 md:my-32">
           <div className="w-[1px] h-16 sm:h-20 md:h-32 bg-gradient-to-b from-cyan-500/50 via-transparent to-transparent" />
         </div>
 
@@ -485,9 +483,9 @@ function App() {
         >
           <div className="absolute inset-0 opacity-10 [background-image:linear-gradient(#444_1px,transparent_1px),linear-gradient(90deg,#444_1px,transparent_1px)] [background-size:32px_32px]"></div>
 
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-8 sm:gap-10 md:gap-12 items-start px-2 sm:px-4">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-8 sm:gap-10 md:gap-12 items-start">
             <div className="flex flex-col gap-3 sm:gap-4 border-l-2 border-purple-500 pl-4 sm:pl-6">
-              <span className="text-purple-500 font-bold tracking-[0.3em] sm:tracking-[0.5em] uppercase text-[8px] sm:text-[10px] md:text-[12px]">
+              <span className="text-purple-500 font-bold tracking-[0.3em] sm:tracking-[0.5em] uppercase text-[10px] md:text-[12px]">
                 Orbit.Digital / Core
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-none font-sans uppercase text-left">
@@ -500,7 +498,7 @@ function App() {
                 Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки.
                 Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
-              <div className="text-cyan-400 text-[10px] sm:text-xs md:text-sm uppercase text-left font-mono tracking-widest flex items-center gap-2 sm:gap-3">
+              <div className="text-cyan-400 text-[10px] sm:text-xs md:text-sm uppercase text-left font-mono tracking-widest flex items-center gap-3">
                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-cyan-400 rounded-full animate-pulse"></span>
                 // СТАТУС: АНАЛИЗ ПОТОКОВ ЗАПУЩЕН. СИСТЕМА АКТИВНА.
               </div>
@@ -516,12 +514,11 @@ function App() {
             viewport={{ once: true, amount: 0.1 }}
             variants={sectionVariants}
           >
-            <h2 className="text-center text-[7px] sm:text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] md:tracking-[0.6em] text-purple-500/60 mb-8 sm:mb-10 md:mb-20">
+            <h2 className="text-center text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20">
               // Проекты в разработке
             </h2>
 
-            {/* УБРАНА FIXED ШИРИНА max-w-5xl */}
-            <div className="flex flex-col gap-6 sm:gap-8 w-full px-1 sm:px-2">
+            <div className="flex flex-col gap-6 sm:gap-8 max-w-5xl mx-auto">
               {products.map((item, i) => (
                 <motion.div
                   key={i}
@@ -538,19 +535,19 @@ function App() {
                   className="group relative border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-stretch"
                 >
                   {/* Блок картинки */}
-                  <div className="relative w-full md:w-5/12 min-h-[200px] sm:min-h-[220px] md:min-h-full overflow-hidden bg-black/40 flex items-center justify-center p-3 sm:p-4 border-b md:border-b-0 md:border-r border-white/5">
+                  <div className="relative w-full md:w-5/12 min-h-[200px] md:min-h-full overflow-hidden bg-black/40 flex items-center justify-center p-4 border-b md:border-b-0 md:border-r border-white/5">
                     <div className="absolute inset-0 z-10 opacity-5 group-hover:opacity-0 transition-opacity duration-500" style={{ backgroundColor: item.activeColor }} />
                     <img
                       src={item.img}
                       alt={item.label}
-                      className="w-full h-auto max-h-[200px] sm:max-h-[240px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100"
+                      className="w-full h-auto max-h-[220px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100"
                     />
                   </div>
 
                   {/* Блок контента */}
-                  <div className="p-4 sm:p-6 md:p-8 flex-1 flex flex-col justify-between">
+                  <div className="p-5 sm:p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
-                      <span className={`${item.textColor} text-[9px] sm:text-[10px] md:text-[11px] mb-2 sm:mb-3 block tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] font-bold uppercase`}>
+                      <span className={`${item.textColor} text-[10px] md:text-[11px] mb-2 sm:mb-3 block tracking-[0.3em] md:tracking-[0.4em] font-bold uppercase`}>
                         {item.label}
                       </span>
                       <p className="text-[11px] sm:text-xs md:text-[13px] text-gray-400 leading-relaxed font-light mb-4 sm:mb-6 uppercase tracking-tight whitespace-pre-line">
@@ -561,7 +558,7 @@ function App() {
                     <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-white/5">
                       <div className="flex gap-1.5">
                         <div className="w-1 h-1 transition-colors duration-500" style={{ backgroundColor: 'var(--current-accent)' }} />
-                        <div className="w-3 sm:w-4 h-[1px] self-center opacity-20 transition-colors duration-500" style={{ backgroundColor: 'var(--current-accent)' }} />
+                        <div className="w-4 h-[1px] self-center opacity-20 transition-colors duration-500" style={{ backgroundColor: 'var(--current-accent)' }} />
                       </div>
                       <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full transition-all duration-500" style={{ backgroundColor: 'var(--current-accent)', boxShadow: `0 0 10px var(--current-accent)` }} />
                     </div>
@@ -574,8 +571,8 @@ function App() {
 
         {/* ПАРТНЕРЫ */}
         <section id="partners" className="mb-24 sm:mb-32 md:mb-48 lg:mb-64">
-          <h2 className="text-center text-[7px] sm:text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-8 sm:mb-10 md:mb-20">// Партнеры</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 px-1 sm:px-2">
+          <h2 className="text-center text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20">// Партнеры</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
             {[1, 2, 3, 4].map((id) => (
               <motion.div
                 key={id}
@@ -585,7 +582,7 @@ function App() {
                 className="h-20 sm:h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000"></div>
-                <span className="text-[#333] group-hover:text-cyan-400 font-bold text-[8px] sm:text-[10px] md:text-xs tracking-widest uppercase relative z-10">Partner_0{id}</span>
+                <span className="text-[#333] group-hover:text-cyan-400 font-bold text-[9px] sm:text-[10px] md:text-xs tracking-widest uppercase relative z-10">Partner_0{id}</span>
               </motion.div>
             ))}
           </div>
@@ -594,8 +591,8 @@ function App() {
 
       {/* ПОДВАЛ */}
       <footer className="border-t border-white/5 py-8 sm:py-10 md:py-16 bg-[#030303] text-center relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 md:gap-10">
-          <p className="text-gray-500 text-[7px] sm:text-[8px] md:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] font-light max-w-[180px] sm:max-w-[200px] md:max-w-none">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 md:gap-10">
+          <p className="text-gray-500 text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light max-w-[200px] md:max-w-none">
             &copy; 2026 Orbit Digital // Технологии для эффективной работы.
           </p>
         </div>
@@ -604,15 +601,15 @@ function App() {
       {/* МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ */}
       <AnimatePresence>
         {isModalOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-3 sm:p-4 md:p-6" onClick={closeModal}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-black border border-cyan-500 p-5 sm:p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)] mx-2 sm:mx-4" onClick={(e) => e.stopPropagation()}>
-              <button onClick={closeModal} className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl sm:text-3xl md:text-3xl focus:outline-none">&times;</button>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6" onClick={closeModal}>
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)] mx-4" onClick={(e) => e.stopPropagation()}>
+              <button onClick={closeModal} className="absolute top-3 right-3 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none">&times;</button>
 
-              <h3 className="text-xl sm:text-2xl md:text-5xl font-black mb-4 sm:mb-5 md:mb-6 text-white tracking-tighter uppercase font-sans">Связаться с нами</h3>
+              <h3 className="text-xl sm:text-2xl md:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-sans">Связаться с нами</h3>
 
-              <form className="space-y-3 sm:space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
-                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-3 sm:p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm sm:text-base" required />
-                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-3 sm:p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm sm:text-base" required />
+              <form className="space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
+                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
+                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
 
                 <input
                   type="tel"
@@ -623,12 +620,12 @@ function App() {
                     }
                   }}
                   placeholder="Номер телефона"
-                  className="w-full bg-white/5 border border-white/10 p-3 sm:p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm sm:text-base"
+                  className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base"
                   required
                 />
-                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-3 sm:p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 resize-none text-sm sm:text-base"></textarea>
+                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base"></textarea>
 
-                <button type="submit" className="w-full bg-cyan-500 text-black py-3 sm:py-4 md:py-6 rounded-none text-[9px] sm:text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
+                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-none text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
               </form>
             </motion.div>
           </motion.div>

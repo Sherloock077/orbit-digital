@@ -1,100 +1,33 @@
 /* ==========================================
-   ПОЛНОСТЬЮ АДАПТИВ ДЛЯ ТЕЛЕФОНОВ
+   АДАПТИВ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ (НЕ ЛОМАЕТ ДЕСКТОП)
    ========================================== */
 
-/* Запрещаем горизонтальный скролл */
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-  position: relative;
-}
-
-/* Все элементы не шире экрана */
-* {
-  max-width: 100vw;
-  box-sizing: border-box;
-}
-
-/* Телефоны (до 768px) */
 @media (max-width: 768px) {
-  /* Убираем фиксированную ширину у main */
-  main {
-    max-width: 100% !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+  /* Убираем горизонтальный скролл на телефоне */
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
   }
   
-  /* Карточки сервисов — в одну колонку, без странных отступов */
-  #services .flex.flex-col.gap-4 > div {
-    flex-direction: column !important;
-    padding: 20px !important;
+  /* Планета меньше и не вылезает */
+  img[alt="Planet Decor"] {
+    opacity: 0.4 !important;
+    right: -30% !important;
+    width: 180px !important;
   }
   
-  #services .md\:w-5\/12 {
-    width: 100% !important;
-    margin-bottom: 12px !important;
-  }
-  
+  /* Карточки услуг на телефоне — текст не мелкий */
+  #services .md\:w-5\/12,
   #services .md\:w-7\/12 {
     width: 100% !important;
-    padding-left: 0 !important;
   }
   
-  /* Секция продуктов — картинка сверху, текст снизу */
-  #products .flex.flex-col.gap-8 > div {
-    flex-direction: column !important;
+  #services .flex.flex-col.gap-4 > div {
+    padding: 16px !important;
   }
   
-  #products .md\:w-5\/12 {
+  /* Карточки продуктов на телефоне */
+  #products .max-w-5xl {
     width: 100% !important;
-  }
-  
-  /* Убираем вылезающую планету */
-  img[alt="Planet Decor"] {
-    right: -30% !important;
-    width: 200px !important;
-    opacity: 0.5;
-  }
-  
-  /* Уменьшаем заголовки */
-  h1 {
-    font-size: 48px !important;
-  }
-  
-  h2 {
-    font-size: 32px !important;
-  }
-  
-  /* Сетка партнёров */
-  #partners .grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important;
-  }
-  
-  /* Отступы для секций */
-  section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-  }
-  
-  /* Модальное окно */
-  .fixed.inset-0.z-110 > div {
-    margin: 16px !important;
-    padding: 24px !important;
-  }
-}
-
-/* Очень маленькие телефоны (до 480px) */
-@media (max-width: 480px) {
-  h1 {
-    font-size: 36px !important;
-  }
-  
-  .text-lg {
-    font-size: 14px !important;
-  }
-  
-  img[alt="Planet Decor"] {
-    display: none !important;
   }
 }
