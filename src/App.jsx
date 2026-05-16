@@ -367,9 +367,12 @@ function App() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[1.2] sm:leading-[1.1] md:leading-[0.9] mb-6 sm:mb-8 md:mb-10 tracking-tighter select-none font-sans text-center">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[1.1] mb-0 sm:mb-1 md:mb-2 tracking-tighter select-none font-sans text-center">
               <span className="text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] uppercase block">ORBIT</span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block mt-0">
+              <span
+                className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block"
+                style={{ lineHeight: 1.3, paddingBottom: '0.2em', marginTop: '-0.15em' }}
+              >
                 Digital
               </span>
             </h1>
