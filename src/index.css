@@ -1,33 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: 'Rubik', sans-serif;
+  --min-font-size: 14px;
+  --max-font-size: 18px;
+  --fluid-font-size: clamp(var(--min-font-size), 2vw, var(--max-font-size));
+}
+
+html {
+  font-size: var(--fluid-font-size);
+}
+
+body {
+  margin: 0;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 /* ==========================================
-   АДАПТИВ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ (НЕ ЛОМАЕТ ДЕСКТОП)
+   АДАПТИВ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ
    ========================================== */
 
 @media (max-width: 768px) {
-  /* Убираем горизонтальный скролл на телефоне */
-  body, html {
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  /* Планета меньше и не вылезает */
+  /* Планета */
   img[alt="Planet Decor"] {
-    opacity: 0.4 !important;
-    right: -30% !important;
-    width: 180px !important;
+    width: 120px !important;
+    right: -10% !important;
+    top: 0% !important;
+    opacity: 1 !important;
   }
-  
-  /* Карточки услуг на телефоне — текст не мелкий */
-  #services .md\:w-5\/12,
-  #services .md\:w-7\/12 {
-    width: 100% !important;
-  }
-  
-  #services .flex.flex-col.gap-4 > div {
-    padding: 16px !important;
-  }
-  
-  /* Карточки продуктов на телефоне */
-  #products .max-w-5xl {
-    width: 100% !important;
+
+  /* Млечный путь (галактика на Canvas) */
+  canvas {
+    transform: scale(0.85) !important;
+    transform-origin: top left !important;
+    width: 117.6% !important;
+    opacity: 0.7 !important;
   }
 }
