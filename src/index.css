@@ -27,6 +27,7 @@ body {
   box-sizing: border-box;
 }
 
+
 /* ==========================================
    АДАПТИВ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ
    ========================================== */
@@ -36,7 +37,13 @@ body {
   main {
     padding-top: 80px !important;
   }
-
+/* Исправляем обрезание буквы g и других нижних элементов */
+p {
+  line-height: 1.6 !important;
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+  overflow: visible !important;
+}
   /* Шапка */
   header {
     padding-left: 16px !important;
@@ -61,7 +68,7 @@ body {
   img[alt="Planet Decor"] {
     width: 130px !important;      /* было 110px — увеличили */
     right: -10% !important;       /* было -8% — сдвинули */
-    top: -2% !important;
+    top: -6% !important;
     opacity: 1 !important;
   }
 

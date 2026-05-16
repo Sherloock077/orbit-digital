@@ -367,17 +367,18 @@ function App() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
-            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.9] mb-10 md:mb-14 tracking-tighter select-none font-sans">
-              <span className="text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] uppercase">ORBIT</span>
-              <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[1.2] sm:leading-[1.1] md:leading-[0.9] mb-6 sm:mb-8 md:mb-10 tracking-tighter select-none font-sans text-center">
+              <span className="text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] uppercase block">ORBIT</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block mt-0">
                 Digital
               </span>
             </h1>
-            <p className="text-lg md:text-2xl text-gray-400 max-w-xl md:max-w-3xl mx-auto font-light tracking-[0.2em] md:tracking-[0.4em] uppercase leading-relaxed border-t border-b border-white/10 py-5 md:py-6 bg-black/20 backdrop-blur-sm">
-              // Мы создаем технологии на стыке <br /> физической безопасности и цифрового интеллекта.
+
+            <p className="text-base sm:text-lg md:text-2xl text-gray-400 max-w-xl md:max-w-3xl mx-auto font-light tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.4em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-2">
+    // Мы создаем технологии на стыке <br /> физической безопасности и цифрового интеллекта.
             </p>
           </motion.div>
+
         </section>
 
         {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
