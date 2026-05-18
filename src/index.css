@@ -29,141 +29,6 @@ body {
 }
 
 /* ==========================================
-   АНИМАЦИЯ ПОЯВЛЕНИЯ СНИЗУ ВВЕРХ (ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ)
-   ========================================== */
-
-@media (max-width: 768px) {
-  /* Ключевые кадры анимации */
-  @keyframes slideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideUpSmall {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideUpText {
-    0% {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes scaleIn {
-    0% {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    100% {
-      opacity: 1;
-      transform: scaleX(1);
-    }
-  }
-
-  /* ВСЕ ЭЛЕМЕНТЫ ИЗНАЧАЛЬНО СКРЫТЫ */
-  #services .group {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  }
-
-  #services .flex.items-center.gap-4 {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-  }
-
-  #services h2 {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  }
-
-  #services .mt-8.w-40 {
-    opacity: 0;
-    transform: scaleX(0);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    transform-origin: center;
-  }
-
-  /* Текст внутри карточек */
-  #services .group h3,
-  #services .group p {
-    opacity: 0;
-    transform: translateY(15px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-  }
-
-  /* КОГДА СЕКЦИЯ ПОЛУЧАЕТ КЛАСС in-view — ЗАПУСКАЕМ АНИМАЦИЮ */
-  #services.in-view .group {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  #services.in-view .flex.items-center.gap-4 {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  #services.in-view h2 {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  #services.in-view .mt-8.w-40 {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-
-  #services.in-view .group h3,
-  #services.in-view .group p {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ЗАДЕРЖКИ ДЛЯ ПЛАВНОЙ ВОЛНЫ */
-  #services.in-view .flex.items-center.gap-4 { transition-delay: 0s; }
-  #services.in-view h2 { transition-delay: 0.05s; }
-  #services.in-view .mt-8.w-40 { transition-delay: 0.1s; }
-  
-  #services.in-view .group:nth-child(1) { transition-delay: 0.05s; }
-  #services.in-view .group:nth-child(2) { transition-delay: 0.12s; }
-  #services.in-view .group:nth-child(3) { transition-delay: 0.19s; }
-  #services.in-view .group:nth-child(4) { transition-delay: 0.26s; }
-  #services.in-view .group:nth-child(5) { transition-delay: 0.33s; }
-
-  /* Задержки для текста внутри карточек */
-  #services.in-view .group:nth-child(1) h3 { transition-delay: 0.08s; }
-  #services.in-view .group:nth-child(1) p { transition-delay: 0.11s; }
-  #services.in-view .group:nth-child(2) h3 { transition-delay: 0.15s; }
-  #services.in-view .group:nth-child(2) p { transition-delay: 0.18s; }
-  #services.in-view .group:nth-child(3) h3 { transition-delay: 0.22s; }
-  #services.in-view .group:nth-child(3) p { transition-delay: 0.25s; }
-  #services.in-view .group:nth-child(4) h3 { transition-delay: 0.29s; }
-  #services.in-view .group:nth-child(4) p { transition-delay: 0.32s; }
-  #services.in-view .group:nth-child(5) h3 { transition-delay: 0.36s; }
-  #services.in-view .group:nth-child(5) p { transition-delay: 0.39s; }
-}
-
-/* ==========================================
    АДАПТИВ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ
    ========================================== */
 
@@ -492,7 +357,7 @@ body {
 
 /* ==========================================
    ИСПРАВЛЕНИЕ ФОРМЫ НА ТЕЛЕФОНАХ
-   С АВТОМАТИЧЕСКИМ ПЕРЕНОСОМ СЛОВ И ОТСТУПАМИ
+   С ПРИНУДИТЕЛЬНЫМИ ОТСТУПАМИ И ПЕРЕНОСОМ СЛОВ
    ========================================== */
 
 @media (max-width: 768px) {
@@ -540,31 +405,29 @@ body {
     box-sizing: border-box !important;
     
     /* ВАЖНО: большой отступ снизу чтобы не наезжало на кнопку */
-    margin-bottom: 40px !important;
+    margin-bottom: 32px !important;
     
     /* Размеры и перенос слов */
     min-height: 100px !important;
     max-height: 150px !important;
     resize: vertical !important;
     
-    /* АВТОМАТИЧЕСКИЙ ПЕРЕНОС СЛОВ */
+    /* Перенос длинных слов */
     word-wrap: break-word !important;
     word-break: break-word !important;
     white-space: pre-wrap !important;
-    overflow-wrap: break-word !important;
     
     /* Удобный шрифт */
     line-height: 1.5 !important;
     font-family: inherit !important;
   }
   
-  /* Плейсхолдер для textarea с переносом */
+  /* Плейсхолдер для textarea */
   form textarea::placeholder {
     font-size: 15px !important;
     color: #aaaaaa !important;
     white-space: pre-wrap !important;
     word-break: break-word !important;
-    overflow-wrap: break-word !important;
   }
   
   /* Плейсхолдеры для полей ввода */
@@ -586,12 +449,9 @@ body {
     letter-spacing: 0.05em !important;
     cursor: pointer !important;
     transition: all 0.2s ease !important;
-    margin-top: 8px !important;
+    margin-top: 4px !important;
     margin-bottom: 20px !important;
     min-height: 54px !important;
-    /* Защита от наложения */
-    position: relative !important;
-    clear: both !important;
   }
   
   /* Эффект при нажатии */
@@ -618,7 +478,7 @@ body {
   }
 }
 
-/* Для очень маленьких телефонов (до 480px) - УСИЛЕННЫЕ ОТСТУПЫ */
+/* Для очень маленьких телефонов (до 480px) */
 @media (max-width: 480px) {
   form label,
   form .text-sm {
@@ -635,10 +495,10 @@ body {
     margin-bottom: 18px !important;
   }
   
-  /* КРИТИЧЕСКИ ВАЖНО: увеличенный отступ для textarea на маленьких телефонах */
+  /* Увеличенный отступ для textarea на маленьких телефонах */
   form textarea {
-    margin-bottom: 45px !important;
-    min-height: 110px !important;
+    margin-bottom: 32px !important;
+    min-height: 100px !important;
   }
   
   /* Увеличенная кнопка для маленьких телефонов */
@@ -646,27 +506,12 @@ body {
   form .submit-button {
     font-size: 17px !important;
     padding: 14px 20px !important;
-    min-height: 52px !important;
-    margin-top: 5px !important;
+    min-height: 50px !important;
   }
   
   form input::placeholder,
   form textarea::placeholder {
     font-size: 14px !important;
-  }
-}
-
-/* ДЛЯ САМЫХ МАЛЕНЬКИХ ТЕЛЕФОНОВ (до 380px) */
-@media (max-width: 380px) {
-  form textarea {
-    margin-bottom: 55px !important;
-    min-height: 120px !important;
-  }
-  
-  form button[type="submit"],
-  form .submit-button {
-    margin-top: 10px !important;
-    padding: 16px 18px !important;
   }
 }
 
@@ -685,7 +530,7 @@ body {
   }
   
   form textarea {
-    margin-bottom: 28px !important;
+    margin-bottom: 24px !important;
     min-height: 80px !important;
   }
   
@@ -694,24 +539,5 @@ body {
     font-size: 16px !important;
     padding: 12px 20px !important;
     min-height: 46px !important;
-  }
-}
-
-/* ==========================================
-   ФОРСИРОВАННОЕ ИСПРАВЛЕНИЕ (САМЫЙ ВЫСОКИЙ ПРИОРИТЕТ)
-   ========================================== */
-@media (max-width: 768px) {
-  /* Гарантированный отступ */
-  .fixed.inset-0 form textarea {
-    margin-bottom: 45px !important;
-    display: block !important;
-  }
-  
-  .fixed.inset-0 form button[type="submit"] {
-    margin-top: 10px !important;
-    display: block !important;
-    position: relative !important;
-    top: auto !important;
-    bottom: auto !important;
   }
 }
