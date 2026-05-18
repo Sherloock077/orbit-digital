@@ -7,11 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import logoImg from './assets/logo.png';
 // ==========================================
 // ⚠️ ПЛАНЕТА (ЛУНА) - ЗАКОММЕНТИРОВАНА ⚠️
-// Чтобы ВЕРНУТЬ планету обратно на сайт:
-// 1. Раскомментируйте строку ниже (удалите // в начале)
-// 2. Найдите в коде секцию "ГЛАВНЫЙ ЭКРАН (HERO)"
-// 3. Там есть закомментированный блок <motion.img ... alt="Planet Decor" />
-// 4. Раскомментируйте его
 // ==========================================
 // import planetImg from './assets/planet.png'; // Планета (временно удалена)
 import orbitImg from './assets/orbit.jpg';
@@ -463,23 +458,6 @@ function App() {
             className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[200px] sm:w-[280px] md:w-[400px] xl:w-[600px] h-auto pointer-events-none z-0 opacity-70"
           />
 
-          {/* ⚠️ ПЛАНЕТА (ЛУНА) - ЗАКОММЕНТИРОВАНА */}
-          {/*
-          <motion.img
-            src={planetImg}
-            alt="Planet Decor"
-            initial={{ opacity: 0, x: 150, y: -80 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 2.5, ease: "easeOut" }}
-            className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[200px] sm:w-[300px] md:w-[500px] xl:w-[800px] h-auto pointer-events-none z-0 select-none filter blur-[0.5px] object-contain"
-            style={{
-              maxWidth: 'none',
-              WebkitMaskImage: 'radial-gradient(circle at center, black 85%, transparent 100%)',
-              maskImage: 'radial-gradient(circle at center, black 85%, transparent 100%)'
-            }}
-          />
-          */}
-
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
@@ -493,20 +471,21 @@ function App() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-2xl text-gray-400 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8">
+            {/* УВЕЛИЧЕННЫЙ СЛОГАН */}
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8">
               // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
             </p>
           </motion.div>
         </section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
+        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ — УВЕЛИЧЕННЫЙ ТЕКСТ */}
         {/* ========================================== */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
           <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
             <div className="flex items-center gap-4 mb-3">
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-              <span className="text-cyan-400 font-mono text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-bold">
+              <span className="text-cyan-400 font-mono text-[10px] md:text-[12px] tracking-[0.6em] uppercase font-bold">
                 [ Core Capabilities ]
               </span>
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
@@ -538,20 +517,20 @@ function App() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none rounded-2xl md:rounded-3xl" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
 
                   <div className="md:w-5/12 mb-3 md:mb-0 z-10 relative">
-                    <h3 className={`text-base md:text-xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
+                    <h3 className={`text-base md:text-xl lg:text-2xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
                       {item.label}
                     </h3>
                   </div>
 
                   <div className="md:w-7/12 z-10 md:pl-6 relative">
-                    <p className={`text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
+                    <p className={`text-sm md:text-base lg:text-lg leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
                       {item.desc}
                     </p>
                   </div>
 
                   <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" style={{ backgroundColor: item.activeColor, boxShadow: `0 0 10px ${item.activeColor}` }} />
 
-                  <div className="absolute top-3 right-3 text-[8px] uppercase tracking-wider text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-mono">
+                  <div className="absolute top-3 right-3 text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-mono">
                     [ подробнее ]
                   </div>
                 </div>
@@ -564,7 +543,9 @@ function App() {
           <div className="w-[1px] h-20 md:h-32 bg-gradient-to-b from-cyan-500/50 via-transparent to-transparent" />
         </div>
 
-        {/* О КОМПАНИИ */}
+        {/* ========================================== */}
+        {/* О КОМПАНИИ — УВЕЛИЧЕННЫЙ ТЕКСТ */}
+        {/* ========================================== */}
         <motion.section
           id="about"
           initial="hidden"
@@ -576,14 +557,14 @@ function App() {
           <div className="absolute inset-0 opacity-10 [background-image:linear-gradient(#444_1px,transparent_1px),linear-gradient(90deg,#444_1px,transparent_1px)] [background-size:32px_32px]"></div>
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-10 md:gap-12 items-start">
             <div className="flex flex-col gap-4 border-l-2 border-purple-500 pl-6">
-              <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[10px] md:text-[12px]">Orbit.Digital / Core</span>
-              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-none font-sans uppercase text-left">Инженерный <br /> Интеллект.</h2>
+              <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[11px] md:text-[13px]">Orbit.Digital / Core</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-sans uppercase text-left">Инженерный <br /> Интеллект.</h2>
             </div>
             <div className="space-y-6 md:space-y-8">
-              <p className="text-xl md:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl">
+              <p className="text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl">
                 Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
-              <div className="text-cyan-400 text-xs md:text-sm uppercase text-left font-mono tracking-widest flex items-center gap-3">
+              <div className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase text-left font-mono tracking-widest flex items-center gap-3">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
                 // СТАТУС: АНАЛИЗ ПОТОКОВ ЗАПУЩЕН. СИСТЕМА АКТИВНА.
               </div>
@@ -591,7 +572,9 @@ function App() {
           </div>
         </motion.section>
 
-        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ */}
+        {/* ========================================== */}
+        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ — УВЕЛИЧЕННЫЙ ТЕКСТ */}
+        {/* ========================================== */}
         <section id="products" className="mb-32 md:mb-64">
           <motion.div
             initial="hidden"
@@ -599,7 +582,7 @@ function App() {
             viewport={{ once: true, amount: 0.1 }}
             variants={sectionVariants}
           >
-            <h2 className="text-center text-[8px] md:text-[10px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20">// Проекты в разработке</h2>
+            <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20">// Проекты в разработке</h2>
             <div className="flex flex-col gap-8 max-w-5xl mx-auto">
               {products.map((item, i) => (
                 <motion.div
@@ -628,10 +611,10 @@ function App() {
                   </div>
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
-                      <span className={`${item.textColor} text-[10px] md:text-[11px] mb-3 block tracking-[0.4em] font-bold uppercase`}>{item.label}</span>
+                      <span className={`${item.textColor} text-[11px] md:text-[13px] lg:text-[14px] mb-3 block tracking-[0.4em] font-bold uppercase`}>{item.label}</span>
 
                       {(!isMobile || (isMobile && expandedProduct === i)) && (
-                        <p className="text-[12px] md:text-[13px] text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line">
+                        <p className="text-sm md:text-base lg:text-lg text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line">
                           {item.desc}
                         </p>
                       )}
@@ -644,7 +627,7 @@ function App() {
                       </div>
 
                       {isMobile && (
-                        <span className="text-[8px] uppercase tracking-wider text-gray-500 font-mono">
+                        <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 font-mono">
                           {expandedProduct === i ? '[ закрыть ]' : '[ подробнее ]'}
                         </span>
                       )}
@@ -660,7 +643,7 @@ function App() {
 
         {/* ПАРТНЕРЫ */}
         <section id="partners" className="mb-32 md:mb-64">
-          <h2 className="text-center text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20">// Партнеры</h2>
+          <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20">// Партнеры</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {[1, 2, 3, 4].map((id) => (
               <motion.div
@@ -671,7 +654,7 @@ function App() {
                 className="h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden rounded-2xl"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000"></div>
-                <span className="text-[#333] group-hover:text-cyan-400 font-bold text-[10px] md:text-xs tracking-widest uppercase relative z-10">Partner_0{id}</span>
+                <span className="text-[#444] group-hover:text-cyan-400 font-bold text-[11px] md:text-sm tracking-widest uppercase relative z-10">Partner_0{id}</span>
               </motion.div>
             ))}
           </div>
@@ -681,7 +664,7 @@ function App() {
       {/* ПОДВАЛ */}
       <footer className="border-t border-white/5 py-10 md:py-16 bg-[#030303] text-center relative z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
-          <p className="text-gray-500 text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light max-w-[200px] md:max-w-none">
+          <p className="text-gray-500 text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light max-w-[200px] md:max-w-none">
             &copy; 2026 Orbit Digital // Технологии для эффективной работы.
           </p>
         </div>
@@ -693,13 +676,13 @@ function App() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6" onClick={closeModal}>
             <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl" onClick={(e) => e.stopPropagation()}>
               <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none">&times;</button>
-              <h3 className="text-2xl md:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-sans">Связаться с нами</h3>
+              <h3 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-sans">Связаться с нами</h3>
               <form className="space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
                 <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
                 <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
                 <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" />
                 <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base"></textarea>
-                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-2xl text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
+                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-2xl text-sm md:text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
               </form>
             </motion.div>
           </motion.div>

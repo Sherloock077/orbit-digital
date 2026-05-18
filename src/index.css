@@ -32,21 +32,64 @@ body {
 /* ==========================================
    ПРИНУДИТЕЛЬНО МЕНЯЕМ ШРИФТ ДЛЯ ВСЕХ ЭЛЕМЕНТОВ
    ========================================== */
-body, header, footer, main, section, div, p, h1, h2, h3, h4, h5, h6,
-span, a, button, input, textarea, form, label, li, ul, ol,
-.font-mono, .font-sans, .font-bold, .font-light, .font-medium,
-.text-base, .text-sm, .text-xs, .text-lg, .text-xl, .text-2xl, .text-3xl,
-.text-4xl, .text-5xl, .text-6xl, .text-7xl, .text-8xl,
-.uppercase, .lowercase, .capitalize,
-.tracking-wide, .tracking-wider, .tracking-widest,
-.leading-tight, .leading-relaxed, .leading-loose {
+body,
+header,
+footer,
+main,
+section,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+a,
+button,
+input,
+textarea,
+form,
+label,
+li,
+ul,
+ol,
+.font-mono,
+.font-sans,
+.font-bold,
+.font-light,
+.font-medium,
+.text-base,
+.text-sm,
+.text-xs,
+.text-lg,
+.text-xl,
+.text-2xl,
+.text-3xl,
+.text-4xl,
+.text-5xl,
+.text-6xl,
+.text-7xl,
+.text-8xl,
+.uppercase,
+.lowercase,
+.capitalize,
+.tracking-wide,
+.tracking-wider,
+.tracking-widest,
+.leading-tight,
+.leading-relaxed,
+.leading-loose {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
 
 /* ==========================================
    УЛУЧШЕНИЕ ЧИТАЕМОСТИ — БОЛЕЕ СВЕТЛЫЙ ТЕКСТ
    ========================================== */
-.text-gray-400, .text-gray-500, .text-slate-400 {
+.text-gray-400,
+.text-gray-500,
+.text-slate-400 {
   color: #d1d5db !important;
 }
 
@@ -63,12 +106,14 @@ span, a, button, input, textarea, form, label, li, ul, ol,
    ========================================== */
 
 @media (max-width: 768px) {
+
   /* Ключевые кадры анимации */
   @keyframes slideUp {
     0% {
       opacity: 0;
       transform: translateY(40px);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -80,6 +125,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
       opacity: 0;
       transform: translateY(20px);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -91,6 +137,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
       opacity: 0;
       transform: translateY(15px);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -102,6 +149,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
       opacity: 0;
       transform: scaleX(0);
     }
+
     100% {
       opacity: 1;
       transform: scaleX(1);
@@ -170,27 +218,78 @@ span, a, button, input, textarea, form, label, li, ul, ol,
   }
 
   /* ЗАДЕРЖКИ ДЛЯ ПЛАВНОЙ ВОЛНЫ */
-  #services.in-view .flex.items-center.gap-4 { transition-delay: 0s; }
-  #services.in-view h2 { transition-delay: 0.05s; }
-  #services.in-view .mt-8.w-40 { transition-delay: 0.1s; }
-  
-  #services.in-view .group:nth-child(1) { transition-delay: 0.05s; }
-  #services.in-view .group:nth-child(2) { transition-delay: 0.12s; }
-  #services.in-view .group:nth-child(3) { transition-delay: 0.19s; }
-  #services.in-view .group:nth-child(4) { transition-delay: 0.26s; }
-  #services.in-view .group:nth-child(5) { transition-delay: 0.33s; }
+  #services.in-view .flex.items-center.gap-4 {
+    transition-delay: 0s;
+  }
+
+  #services.in-view h2 {
+    transition-delay: 0.05s;
+  }
+
+  #services.in-view .mt-8.w-40 {
+    transition-delay: 0.1s;
+  }
+
+  #services.in-view .group:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+
+  #services.in-view .group:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+
+  #services.in-view .group:nth-child(3) {
+    transition-delay: 0.19s;
+  }
+
+  #services.in-view .group:nth-child(4) {
+    transition-delay: 0.26s;
+  }
+
+  #services.in-view .group:nth-child(5) {
+    transition-delay: 0.33s;
+  }
 
   /* Задержки для текста внутри карточек */
-  #services.in-view .group:nth-child(1) h3 { transition-delay: 0.08s; }
-  #services.in-view .group:nth-child(1) p { transition-delay: 0.11s; }
-  #services.in-view .group:nth-child(2) h3 { transition-delay: 0.15s; }
-  #services.in-view .group:nth-child(2) p { transition-delay: 0.18s; }
-  #services.in-view .group:nth-child(3) h3 { transition-delay: 0.22s; }
-  #services.in-view .group:nth-child(3) p { transition-delay: 0.25s; }
-  #services.in-view .group:nth-child(4) h3 { transition-delay: 0.29s; }
-  #services.in-view .group:nth-child(4) p { transition-delay: 0.32s; }
-  #services.in-view .group:nth-child(5) h3 { transition-delay: 0.36s; }
-  #services.in-view .group:nth-child(5) p { transition-delay: 0.39s; }
+  #services.in-view .group:nth-child(1) h3 {
+    transition-delay: 0.08s;
+  }
+
+  #services.in-view .group:nth-child(1) p {
+    transition-delay: 0.11s;
+  }
+
+  #services.in-view .group:nth-child(2) h3 {
+    transition-delay: 0.15s;
+  }
+
+  #services.in-view .group:nth-child(2) p {
+    transition-delay: 0.18s;
+  }
+
+  #services.in-view .group:nth-child(3) h3 {
+    transition-delay: 0.22s;
+  }
+
+  #services.in-view .group:nth-child(3) p {
+    transition-delay: 0.25s;
+  }
+
+  #services.in-view .group:nth-child(4) h3 {
+    transition-delay: 0.29s;
+  }
+
+  #services.in-view .group:nth-child(4) p {
+    transition-delay: 0.32s;
+  }
+
+  #services.in-view .group:nth-child(5) h3 {
+    transition-delay: 0.36s;
+  }
+
+  #services.in-view .group:nth-child(5) p {
+    transition-delay: 0.39s;
+  }
 }
 
 /* ==========================================
@@ -198,6 +297,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
    ========================================== */
 
 @media (max-width: 768px) {
+
   /* Отступ для контента */
   main {
     padding-top: 70px !important;
@@ -209,18 +309,18 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     padding-right: 16px !important;
     height: 65px !important;
   }
-  
+
   header img {
     height: 35px !important;
   }
-  
+
   header button {
     padding: 8px 16px !important;
     background: rgba(34, 211, 238, 0.08) !important;
     border: 1px solid rgba(34, 211, 238, 0.25) !important;
     border-radius: 40px !important;
   }
-  
+
   header button span {
     font-size: 11px !important;
     letter-spacing: 0.15em !important;
@@ -249,7 +349,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     line-height: 1.2 !important;
     margin-bottom: 8px !important;
   }
-  
+
   h1 span:last-child {
     font-size: 42px !important;
     line-height: 1.3 !important;
@@ -296,7 +396,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
   }
 
   /* ========== УЛУЧШЕНИЕ ЧИТАЕМОСТИ ТЕКСТА ========== */
-  
+
   #products p,
   #services p,
   #about p {
@@ -333,17 +433,17 @@ span, a, button, input, textarea, form, label, li, ul, ol,
   #about h2 {
     font-size: 24px !important;
   }
-  
+
   #about .text-xl {
     font-size: 15px !important;
     line-height: 1.6 !important;
     color: #e5e7eb !important;
   }
-  
+
   #about .text-xs {
     font-size: 8px !important;
   }
-  
+
   #about .text-\[10px\] {
     font-size: 7px !important;
   }
@@ -353,7 +453,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     padding-top: 20px !important;
     padding-bottom: 20px !important;
   }
-  
+
   .my-20 {
     margin-top: 20px !important;
     margin-bottom: 20px !important;
@@ -371,15 +471,15 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     right: -18% !important;
     opacity: 0.5 !important;
   }
-  
+
   .text-5xl {
     font-size: 38px !important;
   }
-  
+
   h1 span:last-child {
     font-size: 36px !important;
   }
-  
+
   .text-base {
     font-size: 14px !important;
     letter-spacing: 0.05em !important;
@@ -388,36 +488,36 @@ span, a, button, input, textarea, form, label, li, ul, ol,
   #services .group h3 {
     font-size: 14px !important;
   }
-  
+
   #products .whitespace-pre-line {
     padding-left: 8px !important;
   }
-  
+
   #products p,
   #services p {
     max-width: 98% !important;
   }
-  
+
   #about h2 {
     font-size: 22px !important;
   }
-  
+
   #about .text-xl {
     font-size: 13px !important;
   }
-  
+
   header {
     height: 55px !important;
   }
-  
+
   header img {
     height: 28px !important;
   }
-  
+
   header button {
     padding: 5px 12px !important;
   }
-  
+
   header button span {
     font-size: 9px !important;
   }
@@ -486,7 +586,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     right: 16px;
     background: rgba(34, 211, 238, 0.2);
   }
-  
+
   .scroll-to-top svg {
     width: 20px;
     height: 20px;
@@ -500,7 +600,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     bottom: 12px;
     right: 12px;
   }
-  
+
   .scroll-to-top svg {
     width: 18px;
     height: 18px;
@@ -512,6 +612,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -527,6 +628,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
    ========================================== */
 
 @media (max-width: 768px) {
+
   /* Кнопка "Начать проект" в мобильном меню */
   .fixed.inset-0 button:last-child,
   .fixed.inset-0 .mt-6.md\:mt-10,
@@ -542,13 +644,13 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     color: #000000 !important;
     box-shadow: 0 0 20px rgba(6, 182, 212, 0.3) !important;
   }
-  
+
   /* Эффект при нажатии */
   .fixed.inset-0 button:last-child:active,
   .fixed.inset-0 .bg-cyan-500:active {
     transform: scale(0.97) !important;
   }
-  
+
   /* Ссылки в меню тоже увеличим для удобства */
   .fixed.inset-0 a {
     font-size: 28px !important;
@@ -559,6 +661,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
 
 /* Для очень маленьких телефонов (до 480px) */
 @media (max-width: 480px) {
+
   .fixed.inset-0 button:last-child,
   .fixed.inset-0 .mt-6.md\:mt-10,
   .fixed.inset-0 .bg-cyan-500 {
@@ -566,7 +669,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     padding: 14px 28px !important;
     min-width: 200px !important;
   }
-  
+
   .fixed.inset-0 a {
     font-size: 24px !important;
   }
@@ -577,6 +680,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
    ========================================== */
 
 @media (max-width: 768px) {
+
   /* Блок формы */
   form {
     width: 100% !important;
@@ -585,7 +689,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     flex-direction: column !important;
     gap: 0 !important;
   }
-  
+
   /* Подписи к полям */
   form label,
   form .text-sm,
@@ -596,7 +700,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     display: inline-block !important;
     color: #e5e7eb !important;
   }
-  
+
   /* Все поля ввода */
   form input,
   form select {
@@ -609,7 +713,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     margin-bottom: 20px !important;
     box-sizing: border-box !important;
   }
-  
+
   /* ОСОБЫЕ ПРАВИЛА ДЛЯ TEXTAREA */
   form textarea {
     font-size: 16px !important;
@@ -619,12 +723,12 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     border: 1px solid rgba(34, 211, 238, 0.25) !important;
     width: 100% !important;
     box-sizing: border-box !important;
-    
+
     margin-bottom: 40px !important;
     min-height: 100px !important;
     max-height: 150px !important;
     resize: vertical !important;
-    
+
     word-wrap: break-word !important;
     word-break: break-word !important;
     white-space: pre-wrap !important;
@@ -632,19 +736,19 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     line-height: 1.5 !important;
     font-family: inherit !important;
   }
-  
+
   form textarea::placeholder {
     font-size: 15px !important;
     color: #9ca3af !important;
     white-space: pre-wrap !important;
     word-break: break-word !important;
   }
-  
+
   form input::placeholder {
     font-size: 15px !important;
     color: #9ca3af !important;
   }
-  
+
   /* КНОПКА ОТПРАВКИ */
   form button[type="submit"],
   form .submit-button {
@@ -664,20 +768,20 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     position: relative !important;
     clear: both !important;
   }
-  
+
   form button[type="submit"]:active,
   form .submit-button:active {
     transform: scale(0.98) !important;
     background: rgba(34, 211, 238, 0.2) !important;
   }
-  
+
   form .error-message,
   form .text-red-400 {
     font-size: 13px !important;
     margin-top: -12px !important;
     margin-bottom: 12px !important;
   }
-  
+
   form .success-message,
   form .text-green-400 {
     font-size: 14px !important;
@@ -687,26 +791,27 @@ span, a, button, input, textarea, form, label, li, ul, ol,
 }
 
 @media (max-width: 480px) {
+
   form label,
   form .text-sm {
     font-size: 15px !important;
   }
-  
+
   form input,
   form textarea {
     padding: 12px 14px !important;
     font-size: 15px !important;
   }
-  
+
   form input {
     margin-bottom: 18px !important;
   }
-  
+
   form textarea {
     margin-bottom: 45px !important;
     min-height: 110px !important;
   }
-  
+
   form button[type="submit"],
   form .submit-button {
     font-size: 17px !important;
@@ -714,7 +819,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     min-height: 52px !important;
     margin-top: 5px !important;
   }
-  
+
   form input::placeholder,
   form textarea::placeholder {
     font-size: 14px !important;
@@ -726,7 +831,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     margin-bottom: 55px !important;
     min-height: 120px !important;
   }
-  
+
   form button[type="submit"],
   form .submit-button {
     margin-top: 10px !important;
@@ -740,18 +845,18 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     margin-left: auto !important;
     margin-right: auto !important;
   }
-  
+
   form input,
   form textarea {
     padding: 10px 14px !important;
     margin-bottom: 14px !important;
   }
-  
+
   form textarea {
     margin-bottom: 28px !important;
     min-height: 80px !important;
   }
-  
+
   form button[type="submit"],
   form .submit-button {
     font-size: 16px !important;
@@ -768,7 +873,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     margin-bottom: 45px !important;
     display: block !important;
   }
-  
+
   .fixed.inset-0 form button[type="submit"] {
     margin-top: 10px !important;
     display: block !important;
@@ -787,12 +892,12 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     font-size: 1rem !important;
     line-height: 1.6 !important;
   }
-  
+
   #products .group .text-gray-400 {
     font-size: 0.95rem !important;
     line-height: 1.7 !important;
   }
-  
+
   #about .text-xl {
     font-size: 1.125rem !important;
     line-height: 1.6 !important;
@@ -821,3 +926,220 @@ span, a, button, input, textarea, form, label, li, ul, ol,
 #products .group .text-gray-400 {
   display: block !important;
 }
+
+/* ==========================================
+   УВЕЛИЧЕНИЕ РАЗМЕРА ТЕКСТА НА ДЕСКТОПЕ
+   ========================================== */
+
+@media (min-width: 1024px) {
+
+  /* Заголовки продуктов в "Проекты в разработке" */
+  #products .group span.text-\[10px\].md\:text-\[11px\] {
+    font-size: 1rem !important;
+  }
+
+  /* Описание продуктов (пункты списка) */
+  #products .group .text-gray-400,
+  #products .group .whitespace-pre-line {
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+  }
+
+  /* Заголовки направлений (01. DPI SYSTEMS) */
+  #services .group h3 {
+    font-size: 1.125rem !important;
+  }
+
+  /* Описание направлений (Трафик-менеджмент) */
+  #services .group p {
+    font-size: 1rem !important;
+  }
+
+  /* Текст о компании */
+  #about .text-xl {
+    font-size: 1.125rem !important;
+  }
+}
+
+/* Для больших экранов (1440px+) */
+@media (min-width: 1440px) {
+
+  #products .group .text-gray-400,
+  #products .group .whitespace-pre-line {
+    font-size: 1.125rem !important;
+  }
+
+  #services .group h3 {
+    font-size: 1.25rem !important;
+  }
+
+  #services .group p {
+    font-size: 1.125rem !important;
+  }
+}
+
+/* ==========================================
+   НАСТРОЙКА РАЗМЕРОВ ТЕКСТА НА ДЕСКТОПЕ
+   ========================================== */
+
+/* ⚠️ ИНСТРУКЦИЯ:
+   1. Меняйте цифры в значениях font-size
+   2. Сохраняйте файл
+   3. Обновляйте страницу (Ctrl+Shift+R)
+   4. Смотрите результат
+*/
+
+/* ОСНОВНЫЕ НАСТРОЙКИ ДЛЯ ДЕСКТОПА (ширина экрана > 768px) */
+@media (min-width: 769px) {
+
+  /* ========== 1. СЕКЦИЯ "НАШИ НАПРАВЛЕНИЯ" ========== */
+
+  /* Заголовки карточек: "01. DPI SYSTEMS" */
+  /* Доступные размеры: 16px, 18px, 20px, 22px, 24px */
+  #services .group .md\:w-5\/12 h3,
+  .group h3,
+  h3.text-base.md\:text-xl {
+    font-size: 12px !important;
+  }
+
+  /* Описание направлений: "Трафик-менеджмент" */
+  /* Доступные размеры: 13px, 14px, 15px, 16px, 18px */
+  #services .group p {
+    font-size: 9px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+    line-height: 1.5 !important;
+  }
+
+  /* Заголовок секции: "Наши направления" */
+  /* Доступные размеры: 40px, 44px, 48px, 52px, 56px */
+  #services h2 {
+    font-size: 30px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+
+  /* ========== 2. СЕКЦИЯ "О КОМПАНИИ" ========== */
+
+  /* Заголовок: "Инженерный Интеллект" */
+  /* Доступные размеры: 40px, 44px, 48px, 52px, 56px */
+  #about h2 {
+    font-size: 30px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+
+  /* Основной текст описания компании */
+  /* Доступные размеры: 15px, 16px, 17px, 18px, 20px */
+  #about .text-xl {
+    font-size: 13px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+    line-height: 1.6 !important;
+  }
+
+  /* Текст статуса: "// СТАТУС: АНАЛИЗ ПОТОКОВ ЗАПУЩЕН..." */
+  /* Доступные размеры: 11px, 12px, 13px, 14px */
+  #about .text-cyan-400.text-xs.md\:text-sm {
+    font-size: 11px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+
+  /* ========== 3. СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ" ========== */
+
+  /* Заголовки продуктов: "01. DPI SYSTEMS" */
+  /* Доступные размеры: 14px, 15px, 16px, 17px, 18px */
+  #products .group .font-bold.uppercase,
+  #products .group span.text-\[10px\].md\:text-\[11px\] {
+    font-size: 15px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+    letter-spacing: 0.12em !important;
+  }
+
+  /* Описание продуктов (пункты списка с маркерами) */
+  /* Доступные размеры: 13px, 14px, 15px, 16px, 17px */
+  #products .group .p-6.md\:p-8 .text-gray-400,
+  #products .group .flex-1 .text-gray-400,
+  #products .group .whitespace-pre-line {
+    font-size: 11px !important;
+  }
+
+  /* Кнопка "[ закрыть ]" или "[ подробнее ]" */
+  /* Доступные размеры: 9px, 10px, 11px, 12px */
+  #products .group .text-\[8px\].uppercase {
+    font-size: 10px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+
+  /* ========== 4. ГЛАВНЫЙ ЭКРАН (HERO) ========== */
+
+  /* Слоган под заголовком ORBIT Digital */
+  /* Доступные размеры: 16px, 17px, 18px, 19px, 20px */
+  .text-base.sm\:text-lg.md\:text-2xl {
+    font-size: 15px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+}
+
+/* ========== ДЛЯ БОЛЬШИХ ЭКРАНОВ (1440px и шире) ========== */
+@media (min-width: 1440px) {
+
+  /* Заголовки карточек направлений на широких экранах */
+  #services .group h3 {
+    font-size: 20px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+
+  /* Описание направлений на широких экранах */
+  #services .group p {
+    font-size: 16px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+
+  /* Описание продуктов на широких экранах */
+  #products .group .text-gray-400,
+  #products .group .whitespace-pre-line,
+  #products .group p {
+    font-size: 16px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+
+  /* Текст о компании на широких экранах */
+  #about .text-xl {
+    font-size: 18px !important;
+    /* <- МЕНЯЙТЕ ЭТО ЗНАЧЕНИЕ */
+  }
+}
+
+/* ========== ТАБЛИЦА РЕКОМЕНДУЕМЫХ РАЗМЕРОВ ========== */
+
+/*
+┌────────────────────────────────┬──────────────────────┐
+│           ЭЛЕМЕНТ              │    РЕКОМЕНДУЕМЫЙ      │
+│                                │       РАЗМЕР          │
+├────────────────────────────────┼──────────────────────┤
+│ Заголовки карточек направлений │   18px - 20px        │
+│ Описание направлений           │   14px - 16px        │
+│ Заголовок "Наши направления"   │   44px - 52px        │
+│ Заголовок "Инженерный Интеллект"│  44px - 52px        │
+│ Текст "О компании"             │   16px - 18px        │
+│ Заголовки продуктов            │   15px - 17px        │
+│ Описание продуктов (пункты)    │   14px - 16px        │
+│ Слоган на главном экране       │   16px - 19px        │
+└────────────────────────────────┴──────────────────────┘
+*/
+
+/* ========== ПРИМЕРЫ НАСТРОЕК ========== */
+
+/* 
+   Пример 1: Всё крупно
+   - font-size: 20px для заголовков карточек
+   - font-size: 17px для описания
+   - font-size: 56px для основных заголовков
+
+   Пример 2: Всё компактно
+   - font-size: 16px для заголовков карточек
+   - font-size: 14px для описания
+   - font-size: 40px для основных заголовков
+
+   Пример 3: Акцент на заголовки
+   - font-size: 18px для заголовков карточек
+   - font-size: 14px для описания
+   - font-size: 60px для основных заголовков
+*/
