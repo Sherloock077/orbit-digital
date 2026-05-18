@@ -44,6 +44,21 @@ span, a, button, input, textarea, form, label, li, ul, ol,
 }
 
 /* ==========================================
+   УЛУЧШЕНИЕ ЧИТАЕМОСТИ — БОЛЕЕ СВЕТЛЫЙ ТЕКСТ
+   ========================================== */
+.text-gray-400, .text-gray-500, .text-slate-400 {
+  color: #d1d5db !important;
+}
+
+#services .group p {
+  color: #e5e7eb !important;
+}
+
+#products .group .text-gray-400 {
+  color: #d1d5db !important;
+}
+
+/* ==========================================
    АНИМАЦИЯ ПОЯВЛЕНИЯ СНИЗУ ВВЕРХ (ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ)
    ========================================== */
 
@@ -249,7 +264,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     letter-spacing: 0.08em !important;
     line-height: 1.5 !important;
     font-weight: 400 !important;
-    color: #bbbbbb !important;
+    color: #c0c0c0 !important;
     padding-top: 6px !important;
     padding-bottom: 6px !important;
   }
@@ -270,12 +285,14 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     line-height: 1.4 !important;
     font-weight: 600 !important;
     letter-spacing: 0.02em !important;
+    color: #ffffff !important;
   }
 
   /* Подзаголовок направления (ТРАФИК-МЕНЕДЖМЕНТ) */
   #services .group p {
-    font-size: 11px !important;
+    font-size: 12px !important;
     letter-spacing: 0.12em !important;
+    color: #22d3ee !important;
   }
 
   /* ========== УЛУЧШЕНИЕ ЧИТАЕМОСТИ ТЕКСТА ========== */
@@ -289,9 +306,8 @@ span, a, button, input, textarea, form, label, li, ul, ol,
   }
 
   #products p,
-  #services p,
-  .text-gray-400 {
-    line-height: 1.65 !important;
+  #services p {
+    line-height: 1.7 !important;
   }
 
   #products .uppercase,
@@ -306,7 +322,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
 
   #products .text-gray-400,
   #services .text-gray-400 {
-    color: #c0c0c0 !important;
+    color: #d1d5db !important;
   }
 
   #products .mb-6 {
@@ -320,7 +336,8 @@ span, a, button, input, textarea, form, label, li, ul, ol,
   
   #about .text-xl {
     font-size: 15px !important;
-    line-height: 1.5 !important;
+    line-height: 1.6 !important;
+    color: #e5e7eb !important;
   }
   
   #about .text-xs {
@@ -577,7 +594,7 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     font-weight: 500 !important;
     margin-bottom: 6px !important;
     display: inline-block !important;
-    color: #e0e0e0 !important;
+    color: #e5e7eb !important;
   }
   
   /* Все поля ввода */
@@ -618,14 +635,14 @@ span, a, button, input, textarea, form, label, li, ul, ol,
   
   form textarea::placeholder {
     font-size: 15px !important;
-    color: #aaaaaa !important;
+    color: #9ca3af !important;
     white-space: pre-wrap !important;
     word-break: break-word !important;
   }
   
   form input::placeholder {
     font-size: 15px !important;
-    color: #aaaaaa !important;
+    color: #9ca3af !important;
   }
   
   /* КНОПКА ОТПРАВКИ */
@@ -759,5 +776,48 @@ span, a, button, input, textarea, form, label, li, ul, ol,
     top: auto !important;
     bottom: auto !important;
   }
+}
+
+/* ==========================================
+   ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ЧИТАЕМОСТИ ДЛЯ ДЕСКТОПА
+   ========================================== */
+
+@media (min-width: 1024px) {
+  #services .group p {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
   
+  #products .group .text-gray-400 {
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+  }
+  
+  #about .text-xl {
+    font-size: 1.125rem !important;
+    line-height: 1.6 !important;
+    color: #e5e7eb !important;
+  }
+}
+
+/* ==========================================
+   ПУНКТЫ СПИСКА С НОВОЙ СТРОКИ
+   ========================================== */
+
+#products .group .whitespace-pre-line {
+  white-space: pre-line !important;
+  display: block !important;
+  margin-bottom: 12px !important;
+  padding-left: 20px !important;
+  text-indent: -10px !important;
+}
+
+#products .group p {
+  white-space: normal !important;
+  word-break: break-word !important;
+  line-height: 1.7 !important;
+}
+
+#products .group .text-gray-400 {
+  display: block !important;
 }
