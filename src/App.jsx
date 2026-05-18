@@ -208,6 +208,33 @@ function App() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // ==========================================
+  // Intersection Observer для CSS-анимации
+  // ==========================================
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+      observer.observe(servicesSection);
+    }
+
+    return () => {
+      if (servicesSection) {
+        observer.unobserve(servicesSection);
+      }
+    };
+  }, []);
+
   const servicesList = [
     {
       label: "01. DPI SYSTEMS",
@@ -421,61 +448,33 @@ function App() {
           </motion.div>
         </section>
 
-        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ - БЫСТРАЯ АНИМАЦИЯ КАК НА ПРИМЕРЕ */}
+        {/* ========================================== */}
+        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ - ТОЛЬКО CSS АНИМАЦИЯ */}
+        {/* ========================================== */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24"
-          >
+          <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
             <div className="flex items-center gap-4 mb-3">
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-              <motion.span 
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
-                className="text-cyan-400 font-mono text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-bold"
-              >
+              <span className="text-cyan-400 font-mono text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-bold">
                 [ Core Capabilities ]
-              </motion.span>
+              </span>
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
             </div>
             
-            <motion.h2 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.15 }}
-              className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-sans relative select-none"
-            >
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-sans relative select-none">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">направления</span>
-            </motion.h2>
+            </h2>
             
-            <motion.div 
-              initial={{ opacity: 0, scaleX: 0 }}
-              whileInView={{ opacity: 1, scaleX: 1 }}
-              transition={{ delay: 0.25, duration: 0.4 }}
-              className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)] origin-center"
-            />
-          </motion.div>
+            <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+          </div>
 
           <div className="flex flex-col gap-4 relative z-10">
             {servicesList.map((item, i) => {
               const isHovered = hoveredIndex === i;
               return (
-                <motion.div
+                <div
                   key={i}
-                  custom={i}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ 
-                    delay: i * 0.04, 
-                    duration: 0.3,
-                    ease: "easeOut"
-                  }}
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => setHoveredIndex(i === hoveredIndex ? null : i)}
@@ -488,33 +487,19 @@ function App() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
                   
                   <div className="md:w-5/12 mb-3 md:mb-0 z-10 relative">
-                    <motion.h3 
-                      custom={i}
-                      initial={{ opacity: 0, y: 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.04 + 0.02, duration: 0.25 }}
-                      className={`text-base md:text-xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}
-                    >
+                    <h3 className={`text-base md:text-xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
                       {item.label}
-                    </motion.h3>
+                    </h3>
                   </div>
                   
                   <div className="md:w-7/12 z-10 md:pl-6 relative">
-                    <motion.p 
-                      custom={i}
-                      initial={{ opacity: 0, y: 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.04 + 0.04, duration: 0.25 }}
-                      className={`text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}
-                    >
+                    <p className={`text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
                       {item.desc}
-                    </motion.p>
+                    </p>
                   </div>
                   
                   <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" style={{ backgroundColor: item.activeColor, boxShadow: `0 0 10px ${item.activeColor}` }} />
-                </motion.div>
+                </div>
               );
             })}
           </div>
