@@ -5,7 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 // 1. ИМПОРТЫ СТАТИЧЕСКИХ РЕСУРСОВ (ИЗОБРАЖЕНИЙ)
 // ==========================================
 import logoImg from './assets/logo.png';
-import planetImg from './assets/planet.png';
+// ==========================================
+// ⚠️ ПЛАНЕТА (ЛУНА) - ЗАКОММЕНТИРОВАНА ⚠️
+// Чтобы ВЕРНУТЬ планету обратно на сайт:
+// 1. Раскомментируйте строку ниже (удалите // в начале)
+// 2. Найдите в коде секцию "ГЛАВНЫЙ ЭКРАН (HERO)"
+// 3. Там есть закомментированный блок <motion.img ... alt="Planet Decor" />
+// 4. Раскомментируйте его
+// ==========================================
+// import planetImg from './assets/planet.png'; // Планета (временно удалена)
+import orbitImg from './assets/orbit.jpg';
 import imgBigData from './assets/bigdata.jpg';
 import imgDPI from './assets/DPI.jpg';
 import imgDron from './assets/dron2.jpg';
@@ -33,9 +42,8 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${
-        isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
-      }`}
+      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
       aria-label="Наверх"
     >
       <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6 fill-none stroke-cyan-400 stroke-2">
@@ -196,9 +204,9 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [expandedProduct, setExpandedProduct] = useState(null);
-  
+
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -235,41 +243,64 @@ function App() {
     };
   }, []);
 
+  // ==========================================
+  // Функция для скролла к продукту
+  // ==========================================
+  const scrollToProduct = (index) => {
+    const productElement = document.getElementById(`product-${index}`);
+    if (productElement) {
+      const offset = 100;
+      const elementPosition = productElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const servicesList = [
     {
       label: "01. DPI SYSTEMS",
       desc: "Трафик-менеджмент",
       activeColor: "#ef4444",
-      textColor: "text-red-500"
+      textColor: "text-red-500",
+      productIndex: 0
     },
     {
       label: "02. DRONE TECH",
       desc: "БАС (Беспилотные авиационные системы)",
       activeColor: "#22d3ee",
-      textColor: "text-cyan-400"
+      textColor: "text-cyan-400",
+      productIndex: 1
     },
     {
       label: "03. OSINT INTELLIGENCE",
       desc: "Автоматизированный сбор данных",
       activeColor: "#fbbf24",
-      textColor: "text-amber-400"
+      textColor: "text-amber-400",
+      productIndex: 2
     },
     {
       label: "04. BIG DATA ANALYSIS",
       desc: "Архитектуры хранения терабайтов данных",
       activeColor: "#a855f7",
-      textColor: "text-purple-400"
+      textColor: "text-purple-400",
+      productIndex: 3
     },
     {
       label: "05. CORE OUTSOURCING",
       desc: "Разработка под ключ.",
       activeColor: "#10b981",
-      textColor: "text-emerald-500"
+      textColor: "text-emerald-500",
+      productIndex: 4
     }
   ];
 
   const products = [
     {
+      id: "product-0",
       label: "01. DPI SYSTEMS",
       desc: `• Анализ и управление сетевым трафиком.\n• Разработка систем глубокого анализа пакетов для классификации и приоритизации трафика.\n• Решения для кибербезопасности: обнаружение вторжений (IDS) и предотвращение утечек данных на лету.\n• Оптимизация пропускной способности сетей для крупных корпоративных узлов.`,
       activeColor: "#ef4444",
@@ -277,6 +308,7 @@ function App() {
       img: imgDPI
     },
     {
+      id: "product-1",
       label: "02. DRONE TECH",
       desc: `• Алгоритмы обнаружения дронов по анализу их радиосигналов.\n• Программное подавление (глушение) каналов управления, навигации и телеметрии.\n• Перехват управления дроном: взлом связи, подмена координат и автоматическая посадка.\n• Программное обеспечение для координации систем перехвата и работы с радиолокационными станциями.`,
       activeColor: "#22d3ee",
@@ -284,6 +316,7 @@ function App() {
       img: imgDron
     },
     {
+      id: "product-2",
       label: "03. OSINT INTELLIGENCE",
       desc: `• Автоматизированный сбор и сквозной мониторинг открытых данных.\n• Глубокий анализ потенциальных рисков и угроз безопасности.\n• Выявление и визуализация скрытых взаимосвязей в цифровой среде.\n• Аудит репутации и проверка контрагентов через открытые источники данных.`,
       activeColor: "#fbbf24",
@@ -291,6 +324,7 @@ function App() {
       img: imgOSINT
     },
     {
+      id: "product-3",
       label: "04. BIG DATA ANALYSIS",
       desc: `• Строим надёжные системы для хранения и обработки очень больших объёмов информации (терабайты и больше).\n• Разрабатываем модели прогнозирования и алгоритмы машинного обучения.\n• Делаем понятные дашборды и визуализацию процессов в реальном времени.\n• Находим скрытые закономерности и полезные для бизнеса выводы в любых массивах данных.`,
       activeColor: "#a855f7",
@@ -298,6 +332,7 @@ function App() {
       img: imgBigData
     },
     {
+      id: "product-4",
       label: "05. CORE OUTSOURCING",
       desc: `• Выделенные команды разработчиков с полным техническим сопровождением.\n• Экспертиза в разработке на React, Python и современных веб-технологиях.\n• Полный цикл: архитектура, разработка, тестирование, развёртывание.\n• Прозрачный контроль процессов, код-ревью и постоянная поддержка.`,
       activeColor: "#10b981",
@@ -413,8 +448,23 @@ function App() {
       </AnimatePresence>
 
       <main className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 pt-20">
+        {/* ========================================== */}
         {/* ГЛАВНЫЙ ЭКРАН (HERO) */}
+        {/* ========================================== */}
         <section className="py-20 sm:py-32 md:py-72 px-5 sm:px-10 text-center relative overflow-visible">
+
+          {/* НОВЫЙ СПУТНИК ВМЕСТО ПЛАНЕТЫ */}
+          <motion.img
+            src={orbitImg}
+            alt="Orbit Space Object"
+            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[200px] sm:w-[280px] md:w-[400px] xl:w-[600px] h-auto pointer-events-none z-0 opacity-85"
+          />
+
+          {/* ⚠️ ПЛАНЕТА (ЛУНА) - ЗАКОММЕНТИРОВАНА */}
+          {/*
           <motion.img
             src={planetImg}
             alt="Planet Decor"
@@ -428,6 +478,7 @@ function App() {
               maskImage: 'radial-gradient(circle at center, black 85%, transparent 100%)'
             }}
           />
+          */}
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
@@ -449,7 +500,7 @@ function App() {
         </section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ - ТОЛЬКО CSS АНИМАЦИЯ */}
+        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
         {/* ========================================== */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
           <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
@@ -460,12 +511,12 @@ function App() {
               </span>
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
             </div>
-            
+
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-sans relative select-none">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">направления</span>
             </h2>
-            
+
             <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
           </div>
 
@@ -477,28 +528,32 @@ function App() {
                   key={i}
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={() => setHoveredIndex(i === hoveredIndex ? null : i)}
-                  className="group relative flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 border border-white/10 bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-in-out overflow-hidden"
+                  onClick={() => scrollToProduct(item.productIndex)}
+                  className="group relative flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 border border-white/10 bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-in-out overflow-hidden rounded-2xl md:rounded-3xl"
                   style={{
                     borderColor: isHovered ? item.activeColor : 'rgba(255, 255, 255, 0.1)',
                     boxShadow: isHovered ? `0 0 25px ${item.activeColor}33, inset 0 0 15px ${item.activeColor}11` : 'none'
                   }}
                 >
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
-                  
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none rounded-2xl md:rounded-3xl" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
+
                   <div className="md:w-5/12 mb-3 md:mb-0 z-10 relative">
                     <h3 className={`text-base md:text-xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
                       {item.label}
                     </h3>
                   </div>
-                  
+
                   <div className="md:w-7/12 z-10 md:pl-6 relative">
                     <p className={`text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
                       {item.desc}
                     </p>
                   </div>
-                  
+
                   <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" style={{ backgroundColor: item.activeColor, boxShadow: `0 0 10px ${item.activeColor}` }} />
+
+                  <div className="absolute top-3 right-3 text-[8px] uppercase tracking-wider text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-mono">
+                    [ подробнее ]
+                  </div>
                 </div>
               );
             })}
@@ -549,6 +604,7 @@ function App() {
               {products.map((item, i) => (
                 <motion.div
                   key={i}
+                  id={item.id}
                   onClick={() => {
                     if (isMobile) {
                       setExpandedProduct(expandedProduct === i ? null : i);
@@ -564,16 +620,16 @@ function App() {
                     e.currentTarget.style.boxShadow = "none";
                     e.currentTarget.style.setProperty('--current-accent', 'rgba(255,255,255,0.2)');
                   }}
-                  className="group relative border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-stretch"
+                  className="group relative border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-stretch rounded-2xl md:rounded-3xl"
                 >
-                  <div className="relative w-full md:w-5/12 min-h-[220px] md:min-h-full overflow-hidden bg-black/40 flex items-center justify-center p-4 border-b md:border-b-0 md:border-r border-white/5">
+                  <div className="relative w-full md:w-5/12 min-h-[220px] md:min-h-full overflow-hidden bg-black/40 flex items-center justify-center p-4 border-b md:border-b-0 md:border-r border-white/5 rounded-t-2xl md:rounded-l-3xl md:rounded-t-none">
                     <div className="absolute inset-0 z-10 opacity-5 group-hover:opacity-0 transition-opacity duration-500" style={{ backgroundColor: item.activeColor }} />
                     <img src={item.img} alt={item.label} className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100" />
                   </div>
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
                       <span className={`${item.textColor} text-[10px] md:text-[11px] mb-3 block tracking-[0.4em] font-bold uppercase`}>{item.label}</span>
-                      
+
                       {(!isMobile || (isMobile && expandedProduct === i)) && (
                         <p className="text-[12px] md:text-[13px] text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line">
                           {item.desc}
@@ -586,13 +642,13 @@ function App() {
                         <div className="w-1 h-1 transition-colors duration-500" style={{ backgroundColor: 'var(--current-accent)' }} />
                         <div className="w-4 h-[1px] self-center opacity-20 transition-colors duration-500" style={{ backgroundColor: 'var(--current-accent)' }} />
                       </div>
-                      
+
                       {isMobile && (
                         <span className="text-[8px] uppercase tracking-wider text-gray-500 font-mono">
                           {expandedProduct === i ? '[ закрыть ]' : '[ подробнее ]'}
                         </span>
                       )}
-                      
+
                       <div className="w-1.5 h-1.5 rounded-full transition-all duration-500" style={{ backgroundColor: 'var(--current-accent)', boxShadow: `0 0 10px var(--current-accent)` }} />
                     </div>
                   </div>
@@ -612,7 +668,7 @@ function App() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: id * 0.1, duration: 0.3 }}
-                className="h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden"
+                className="h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden rounded-2xl"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000"></div>
                 <span className="text-[#333] group-hover:text-cyan-400 font-bold text-[10px] md:text-xs tracking-widest uppercase relative z-10">Partner_0{id}</span>
@@ -635,15 +691,15 @@ function App() {
       <AnimatePresence>
         {isModalOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6" onClick={closeModal}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)]" onClick={(e) => e.stopPropagation()}>
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl" onClick={(e) => e.stopPropagation()}>
               <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none">&times;</button>
               <h3 className="text-2xl md:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-sans">Связаться с нами</h3>
               <form className="space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
-                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
-                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
-                <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" />
-                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base"></textarea>
-                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-none text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
+                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
+                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
+                <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" />
+                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base"></textarea>
+                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-2xl text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
               </form>
             </motion.div>
           </motion.div>
