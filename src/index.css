@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css');
 
 @tailwind base;
@@ -7,7 +7,7 @@
 
 :root {
   color-scheme: dark;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --min-font-size: 14px;
   --max-font-size: 18px;
   --fluid-font-size: clamp(var(--min-font-size), 2vw, var(--max-font-size));
@@ -22,10 +22,25 @@ body {
   background-color: #000000;
   color: #ffffff;
   overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* ==========================================
+   ПРИНУДИТЕЛЬНО МЕНЯЕМ ШРИФТ ДЛЯ ВСЕХ ЭЛЕМЕНТОВ
+   ========================================== */
+body, header, footer, main, section, div, p, h1, h2, h3, h4, h5, h6,
+span, a, button, input, textarea, form, label, li, ul, ol,
+.font-mono, .font-sans, .font-bold, .font-light, .font-medium,
+.text-base, .text-sm, .text-xs, .text-lg, .text-xl, .text-2xl, .text-3xl,
+.text-4xl, .text-5xl, .text-6xl, .text-7xl, .text-8xl,
+.uppercase, .lowercase, .capitalize,
+.tracking-wide, .tracking-wider, .tracking-widest,
+.leading-tight, .leading-relaxed, .leading-loose {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
 
 /* ==========================================

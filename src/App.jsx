@@ -460,7 +460,7 @@ function App() {
             initial={{ opacity: 0, scale: 0.8, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[200px] sm:w-[280px] md:w-[400px] xl:w-[600px] h-auto pointer-events-none z-0 opacity-85"
+            className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[200px] sm:w-[280px] md:w-[400px] xl:w-[600px] h-auto pointer-events-none z-0 opacity-70"
           />
 
           {/* ⚠️ ПЛАНЕТА (ЛУНА) - ЗАКОММЕНТИРОВАНА */}
