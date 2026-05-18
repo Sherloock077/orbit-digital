@@ -239,19 +239,28 @@ function App() {
   }, []);
 
   // ==========================================
-  // Функция для скролла к продукту
+  // Функция для скролла к продукту с центрированием
   // ==========================================
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      const offset = 100;
-      const elementPosition = productElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      // Получаем высоту экрана и высоту элемента
+      const windowHeight = window.innerHeight;
+      const elementRect = productElement.getBoundingClientRect();
+      const elementHeight = elementRect.height;
+
+      // Считаем позицию для центрирования
+      const offsetPosition = elementRect.top + window.pageYOffset - (windowHeight / 2) + (elementHeight / 2);
 
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
+
+      // Автоматически раскрываем карточку на телефоне
+      if (isMobile) {
+        setExpandedProduct(index);
+      }
     }
   };
 
@@ -479,7 +488,7 @@ function App() {
         </section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ — УВЕЛИЧЕННЫЙ ТЕКСТ */}
+        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ — С ВОЗМОЖНОСТЬЮ КЛИКА */}
         {/* ========================================== */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
           <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
@@ -507,7 +516,12 @@ function App() {
                   key={i}
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={() => scrollToProduct(item.productIndex)}
+                  onClick={() => {
+                    scrollToProduct(item.productIndex);
+                    // Визуальная обратная связь при клике
+                    setHoveredIndex(i);
+                    setTimeout(() => setHoveredIndex(null), 300);
+                  }}
                   className="group relative flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 border border-white/10 bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-in-out overflow-hidden rounded-2xl md:rounded-3xl"
                   style={{
                     borderColor: isHovered ? item.activeColor : 'rgba(255, 255, 255, 0.1)',
@@ -544,7 +558,7 @@ function App() {
         </div>
 
         {/* ========================================== */}
-        {/* О КОМПАНИИ — УВЕЛИЧЕННЫЙ ТЕКСТ */}
+        {/* О КОМПАНИИ */}
         {/* ========================================== */}
         <motion.section
           id="about"
@@ -573,7 +587,7 @@ function App() {
         </motion.section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ — УВЕЛИЧЕННЫЙ ТЕКСТ */}
+        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ */}
         {/* ========================================== */}
         <section id="products" className="mb-32 md:mb-64">
           <motion.div

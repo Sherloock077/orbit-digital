@@ -29,6 +29,20 @@ body {
 }
 
 /* ==========================================
+   ГЛОБАЛЬНЫЕ УЛУЧШЕНИЯ ЧИТАЕМОСТИ
+   ========================================== */
+
+/* Делаем текст светлее и чётче */
+.text-gray-400, .text-gray-500, .text-slate-400 {
+  color: #d1d5db !important;
+}
+
+/* Увеличиваем межстрочный интервал для всего текста */
+p, li, .text-gray-400 {
+  line-height: 1.6 !important;
+}
+
+/* ==========================================
    АДАПТИВ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ
    ========================================== */
 
@@ -116,16 +130,18 @@ body {
 
   /* Текст внутри карточек - НОМЕР И НАЗВАНИЕ (01. DPI SYSTEMS) */
   #services .group h3 {
-    font-size: 15px !important;
+    font-size: 16px !important;
     line-height: 1.4 !important;
     font-weight: 600 !important;
     letter-spacing: 0.02em !important;
+    color: #ffffff !important;
   }
 
   /* Подзаголовок направления (ТРАФИК-МЕНЕДЖМЕНТ) */
   #services .group p {
-    font-size: 11px !important;
+    font-size: 13px !important;
     letter-spacing: 0.12em !important;
+    color: #22d3ee !important;
   }
 
   /* ========== УЛУЧШЕНИЕ ЧИТАЕМОСТИ ТЕКСТА ========== */
@@ -139,9 +155,8 @@ body {
   }
 
   #products p,
-  #services p,
-  .text-gray-400 {
-    line-height: 1.65 !important;
+  #services p {
+    line-height: 1.7 !important;
   }
 
   #products .uppercase,
@@ -165,12 +180,13 @@ body {
 
   /* Секция "Инженерный Интеллект" */
   #about h2 {
-    font-size: 24px !important;
+    font-size: 28px !important;
   }
   
   #about .text-xl {
-    font-size: 15px !important;
-    line-height: 1.5 !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #dddddd !important;
   }
   
   #about .text-xs {
@@ -190,6 +206,29 @@ body {
   .my-20 {
     margin-top: 20px !important;
     margin-bottom: 20px !important;
+  }
+
+  /* ========================================== */
+  /* УЛУЧШЕНИЯ ДЛЯ КАРТОЧЕК "ПРОЕКТЫ В РАЗРАБОТКЕ" */
+  /* ========================================== */
+  
+  /* Заголовки продуктов */
+  #products .group .font-bold.uppercase {
+    font-size: 16px !important;
+    letter-spacing: 0.1em !important;
+  }
+  
+  /* Основной текст (пункты списка) — САМОЕ ВАЖНОЕ! */
+  #products .group .text-gray-400,
+  #products .group .whitespace-pre-line {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* Кнопка "[ закрыть ]" / "[ подробнее ]" */
+  #products .group .text-\[8px\].uppercase {
+    font-size: 11px !important;
   }
 }
 
@@ -219,7 +258,11 @@ body {
   }
 
   #services .group h3 {
-    font-size: 14px !important;
+    font-size: 15px !important;
+  }
+  
+  #services .group p {
+    font-size: 12px !important;
   }
   
   #products .whitespace-pre-line {
@@ -232,11 +275,11 @@ body {
   }
   
   #about h2 {
-    font-size: 22px !important;
+    font-size: 26px !important;
   }
   
   #about .text-xl {
-    font-size: 13px !important;
+    font-size: 15px !important;
   }
   
   header {
@@ -253,6 +296,12 @@ body {
   
   header button span {
     font-size: 9px !important;
+  }
+  
+  /* На очень маленьких телефонах текст в проектах чуть меньше */
+  #products .group .text-gray-400,
+  #products .group .whitespace-pre-line {
+    font-size: 13px !important;
   }
 }
 
@@ -357,7 +406,6 @@ body {
 
 /* ==========================================
    ИСПРАВЛЕНИЕ ФОРМЫ НА ТЕЛЕФОНАХ
-   С ПРИНУДИТЕЛЬНЫМИ ОТСТУПАМИ И ПЕРЕНОСОМ СЛОВ
    ========================================== */
 
 @media (max-width: 768px) {
@@ -394,7 +442,7 @@ body {
     box-sizing: border-box !important;
   }
   
-  /* ОСОБЫЕ ПРАВИЛА ДЛЯ TEXTAREA - ГЛАВНАЯ ПРОБЛЕМА */
+  /* ОСОБЫЕ ПРАВИЛА ДЛЯ TEXTAREA */
   form textarea {
     font-size: 16px !important;
     padding: 14px 16px !important;
@@ -404,25 +452,19 @@ body {
     width: 100% !important;
     box-sizing: border-box !important;
     
-    /* ВАЖНО: большой отступ снизу чтобы не наезжало на кнопку */
-    margin-bottom: 32px !important;
-    
-    /* Размеры и перенос слов */
+    margin-bottom: 40px !important;
     min-height: 100px !important;
     max-height: 150px !important;
     resize: vertical !important;
     
-    /* Перенос длинных слов */
     word-wrap: break-word !important;
     word-break: break-word !important;
     white-space: pre-wrap !important;
-    
-    /* Удобный шрифт */
+    overflow-wrap: break-word !important;
     line-height: 1.5 !important;
     font-family: inherit !important;
   }
   
-  /* Плейсхолдер для textarea */
   form textarea::placeholder {
     font-size: 15px !important;
     color: #aaaaaa !important;
@@ -430,13 +472,12 @@ body {
     word-break: break-word !important;
   }
   
-  /* Плейсхолдеры для полей ввода */
   form input::placeholder {
     font-size: 15px !important;
     color: #aaaaaa !important;
   }
   
-  /* КНОПКА ОТПРАВКИ - УВЕЛИЧЕННАЯ */
+  /* КНОПКА ОТПРАВКИ */
   form button[type="submit"],
   form .submit-button {
     font-size: 18px !important;
@@ -449,19 +490,19 @@ body {
     letter-spacing: 0.05em !important;
     cursor: pointer !important;
     transition: all 0.2s ease !important;
-    margin-top: 4px !important;
+    margin-top: 8px !important;
     margin-bottom: 20px !important;
     min-height: 54px !important;
+    position: relative !important;
+    clear: both !important;
   }
   
-  /* Эффект при нажатии */
   form button[type="submit"]:active,
   form .submit-button:active {
     transform: scale(0.98) !important;
     background: rgba(34, 211, 238, 0.2) !important;
   }
   
-  /* Сообщения об ошибках */
   form .error-message,
   form .text-red-400 {
     font-size: 13px !important;
@@ -469,7 +510,6 @@ body {
     margin-bottom: 12px !important;
   }
   
-  /* Сообщение об успехе */
   form .success-message,
   form .text-green-400 {
     font-size: 14px !important;
@@ -478,7 +518,6 @@ body {
   }
 }
 
-/* Для очень маленьких телефонов (до 480px) */
 @media (max-width: 480px) {
   form label,
   form .text-sm {
@@ -495,18 +534,17 @@ body {
     margin-bottom: 18px !important;
   }
   
-  /* Увеличенный отступ для textarea на маленьких телефонах */
   form textarea {
-    margin-bottom: 32px !important;
-    min-height: 100px !important;
+    margin-bottom: 45px !important;
+    min-height: 110px !important;
   }
   
-  /* Увеличенная кнопка для маленьких телефонов */
   form button[type="submit"],
   form .submit-button {
     font-size: 17px !important;
     padding: 14px 20px !important;
-    min-height: 50px !important;
+    min-height: 52px !important;
+    margin-top: 5px !important;
   }
   
   form input::placeholder,
@@ -515,7 +553,19 @@ body {
   }
 }
 
-/* Для горизонтальной ориентации */
+@media (max-width: 380px) {
+  form textarea {
+    margin-bottom: 55px !important;
+    min-height: 120px !important;
+  }
+  
+  form button[type="submit"],
+  form .submit-button {
+    margin-top: 10px !important;
+    padding: 16px 18px !important;
+  }
+}
+
 @media (max-width: 896px) and (orientation: landscape) {
   form {
     max-width: 80% !important;
@@ -530,7 +580,7 @@ body {
   }
   
   form textarea {
-    margin-bottom: 24px !important;
+    margin-bottom: 28px !important;
     min-height: 80px !important;
   }
   
