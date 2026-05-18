@@ -356,7 +356,8 @@ body {
 }
 
 /* ==========================================
-   ИСПРАВЛЕНИЕ ФОРМЫ НА ТЕЛЕФОНАХ (УВЕЛИЧЕННАЯ КНОПКА)
+   ИСПРАВЛЕНИЕ ФОРМЫ НА ТЕЛЕФОНАХ
+   С ПРИНУДИТЕЛЬНЫМИ ОТСТУПАМИ И ПЕРЕНОСОМ СЛОВ
    ========================================== */
 
 @media (max-width: 768px) {
@@ -366,6 +367,7 @@ body {
     padding: 8px 0 !important;
     display: flex !important;
     flex-direction: column !important;
+    gap: 0 !important;
   }
   
   /* Подписи к полям */
@@ -381,7 +383,6 @@ body {
   
   /* Все поля ввода */
   form input,
-  form textarea,
   form select {
     font-size: 16px !important;
     padding: 14px 16px !important;
@@ -393,17 +394,44 @@ body {
     box-sizing: border-box !important;
   }
   
-  /* ОСОБЫЕ ПРАВИЛА ДЛЯ TEXTAREA */
+  /* ОСОБЫЕ ПРАВИЛА ДЛЯ TEXTAREA - ГЛАВНАЯ ПРОБЛЕМА */
   form textarea {
+    font-size: 16px !important;
+    padding: 14px 16px !important;
+    border-radius: 12px !important;
+    background: rgba(20, 20, 30, 0.8) !important;
+    border: 1px solid rgba(34, 211, 238, 0.25) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    
+    /* ВАЖНО: большой отступ снизу чтобы не наезжало на кнопку */
+    margin-bottom: 32px !important;
+    
+    /* Размеры и перенос слов */
     min-height: 100px !important;
     max-height: 150px !important;
-    margin-bottom: 28px !important;
     resize: vertical !important;
+    
+    /* Перенос длинных слов */
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: pre-wrap !important;
+    
+    /* Удобный шрифт */
+    line-height: 1.5 !important;
+    font-family: inherit !important;
   }
   
-  /* Плейсхолдеры */
-  form input::placeholder,
+  /* Плейсхолдер для textarea */
   form textarea::placeholder {
+    font-size: 15px !important;
+    color: #aaaaaa !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+  
+  /* Плейсхолдеры для полей ввода */
+  form input::placeholder {
     font-size: 15px !important;
     color: #aaaaaa !important;
   }
@@ -421,7 +449,7 @@ body {
     letter-spacing: 0.05em !important;
     cursor: pointer !important;
     transition: all 0.2s ease !important;
-    margin-top: 8px !important;
+    margin-top: 4px !important;
     margin-bottom: 20px !important;
     min-height: 54px !important;
   }
@@ -461,11 +489,16 @@ body {
   form textarea {
     padding: 12px 14px !important;
     font-size: 15px !important;
+  }
+  
+  form input {
     margin-bottom: 18px !important;
   }
   
+  /* Увеличенный отступ для textarea на маленьких телефонах */
   form textarea {
-    margin-bottom: 24px !important;
+    margin-bottom: 32px !important;
+    min-height: 100px !important;
   }
   
   /* Увеличенная кнопка для маленьких телефонов */
@@ -497,7 +530,8 @@ body {
   }
   
   form textarea {
-    margin-bottom: 20px !important;
+    margin-bottom: 24px !important;
+    min-height: 80px !important;
   }
   
   form button[type="submit"],
