@@ -249,21 +249,23 @@ function App() {
       const elementRect = productElement.getBoundingClientRect();
       const elementHeight = elementRect.height;
 
-      // Считаем позицию для центрирования
-      const offsetPosition = elementRect.top + window.pageYOffset - (windowHeight / 2) + (elementHeight / 2);
+      // Считаем позицию для идеального центрирования
+      let offsetPosition = elementRect.top + window.pageYOffset - (windowHeight / 2) + (elementHeight / 2);
+
+      // Дополнительный отступ для шапки (65px)
+      offsetPosition = offsetPosition - 30;
 
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
 
-      // Автоматически раскрываем карточку на телефоне
+      // Раскрываем карточку на телефоне
       if (isMobile) {
         setExpandedProduct(index);
       }
     }
   };
-
   const servicesList = [
     {
       label: "01. DPI SYSTEMS",

@@ -32,36 +32,28 @@ body {
    ГЛОБАЛЬНЫЕ УЛУЧШЕНИЯ ЧИТАЕМОСТИ
    ========================================== */
 
-/* Делаем текст светлее и чётче */
 .text-gray-400, .text-gray-500, .text-slate-400 {
   color: #d1d5db !important;
 }
 
-/* Увеличиваем межстрочный интервал для всего текста */
 p, li, .text-gray-400 {
   line-height: 1.6 !important;
 }
 
 /* ==========================================
-   АДАПТИВ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ
+   ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ (ширина ≤ 768px)
    ========================================== */
 
 @media (max-width: 768px) {
-  /* Отступ для контента */
-  main {
-    padding-top: 70px !important;
-  }
+  main { padding-top: 70px !important; }
 
-  /* Шапка */
   header {
     padding-left: 16px !important;
     padding-right: 16px !important;
     height: 65px !important;
   }
   
-  header img {
-    height: 35px !important;
-  }
+  header img { height: 35px !important; }
   
   header button {
     padding: 8px 16px !important;
@@ -76,7 +68,6 @@ p, li, .text-gray-400 {
     font-weight: 500 !important;
   }
 
-  /* Планета */
   img[alt="Planet Decor"] {
     width: 100px !important;
     right: -15% !important;
@@ -84,7 +75,6 @@ p, li, .text-gray-400 {
     opacity: 0.7 !important;
   }
 
-  /* Млечный путь — приглушён */
   canvas {
     transform: scale(0.3) translateY(60px);
     transform-origin: top left;
@@ -94,29 +84,29 @@ p, li, .text-gray-400 {
 
   /* ЗАГОЛОВОК ORBIT Digital */
   .text-5xl {
-    font-size: 44px !important;
-    line-height: 1.2 !important;
-    margin-bottom: 8px !important;
+    font-size: 72px !important;
+    line-height: 1.05 !important;
+    margin-bottom: 20px !important;
   }
   
   h1 span:last-child {
-    font-size: 42px !important;
-    line-height: 1.3 !important;
-    padding-bottom: 6px !important;
-    margin-top: 0 !important;
-    display: inline-block !important;
+    font-size: 64px !important;
+    line-height: 1.1 !important;
+    padding-bottom: 10px !important;
+    margin-top: -8px !important;
   }
 
-  /* ПОДЗАГОЛОВОК — читаемый */
+  /* ПОДЗАГОЛОВОК - мелкий, акцентный */
   .text-base {
-    font-size: 16px !important;
-    letter-spacing: 0.08em !important;
+    font-size: 13px !important;
+    letter-spacing: 0.1em !important;
     line-height: 1.5 !important;
     font-weight: 400 !important;
-    color: #bbbbbb !important;
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
+    color: #aaaaaa !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
   }
+
 
   /* КАРТОЧКИ НАПРАВЛЕНИЙ */
   #services .group {
@@ -128,7 +118,6 @@ p, li, .text-gray-400 {
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
   }
 
-  /* Текст внутри карточек - НОМЕР И НАЗВАНИЕ (01. DPI SYSTEMS) */
   #services .group h3 {
     font-size: 16px !important;
     line-height: 1.4 !important;
@@ -137,171 +126,133 @@ p, li, .text-gray-400 {
     color: #ffffff !important;
   }
 
-  /* Подзаголовок направления (ТРАФИК-МЕНЕДЖМЕНТ) */
   #services .group p {
     font-size: 13px !important;
     letter-spacing: 0.12em !important;
     color: #22d3ee !important;
   }
 
-  /* ========== УЛУЧШЕНИЕ ЧИТАЕМОСТИ ТЕКСТА ========== */
-  
-  #products p,
-  #services p,
-  #about p {
-    max-width: 95% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  #products p,
-  #services p {
-    line-height: 1.7 !important;
-  }
-
-  #products .uppercase,
-  #services .uppercase {
-    letter-spacing: 0.02em !important;
-  }
-
-  #products .whitespace-pre-line {
-    padding-left: 12px !important;
-    border-left: 2px solid rgba(34, 211, 238, 0.3) !important;
-  }
-
-  #products .text-gray-400,
-  #services .text-gray-400 {
-    color: #c0c0c0 !important;
-  }
-
-  #products .mb-6 {
-    margin-bottom: 1.75rem !important;
-  }
+  /* УЛУЧШЕНИЕ ЧИТАЕМОСТИ */
+  #products p, #services p, #about p { max-width: 95% !important; margin: 0 auto !important; }
+  #products p, #services p { line-height: 1.7 !important; }
+  #products .uppercase, #services .uppercase { letter-spacing: 0.02em !important; }
+  #products .whitespace-pre-line { padding-left: 12px !important; border-left: 2px solid rgba(34, 211, 238, 0.3) !important; }
+  #products .text-gray-400, #services .text-gray-400 { color: #c0c0c0 !important; }
+  #products .mb-6 { margin-bottom: 1.75rem !important; }
 
   /* Секция "Инженерный Интеллект" */
-  #about h2 {
-    font-size: 28px !important;
-  }
-  
-  #about .text-xl {
-    font-size: 16px !important;
-    line-height: 1.6 !important;
-    color: #dddddd !important;
-  }
-  
-  #about .text-xs {
-    font-size: 8px !important;
-  }
-  
-  #about .text-\[10px\] {
-    font-size: 7px !important;
-  }
+  #about h2 { font-size: 28px !important; }
+  #about .text-xl { font-size: 16px !important; line-height: 1.6 !important; color: #dddddd !important; }
+  #about .text-xs { font-size: 8px !important; }
+  #about .text-\[10px\] { font-size: 7px !important; }
 
-  section {
-    margin-bottom: 40px !important;
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
-  }
-  
-  .my-20 {
-    margin-top: 20px !important;
-    margin-bottom: 20px !important;
-  }
+  section { margin-bottom: 40px !important; padding-top: 20px !important; padding-bottom: 20px !important; }
+  .my-20 { margin-top: 20px !important; margin-bottom: 20px !important; }
 
-  /* ========================================== */
-  /* УЛУЧШЕНИЯ ДЛЯ КАРТОЧЕК "ПРОЕКТЫ В РАЗРАБОТКЕ" */
-  /* ========================================== */
-  
-  /* Заголовки продуктов */
-  #products .group .font-bold.uppercase {
-    font-size: 16px !important;
-    letter-spacing: 0.1em !important;
-  }
-  
-  /* Основной текст (пункты списка) — САМОЕ ВАЖНОЕ! */
+  /* КАРТОЧКИ "ПРОЕКТЫ В РАЗРАБОТКЕ" */
+  #products .group .font-bold.uppercase { font-size: 16px !important; letter-spacing: 0.1em !important; }
   #products .group .text-gray-400,
-  #products .group .whitespace-pre-line {
-    font-size: 14px !important;
-    line-height: 1.65 !important;
-    color: #e0e0e0 !important;
-  }
-  
-  /* Кнопка "[ закрыть ]" / "[ подробнее ]" */
-  #products .group .text-\[8px\].uppercase {
-    font-size: 11px !important;
-  }
+  #products .group .whitespace-pre-line { font-size: 14px !important; line-height: 1.65 !important; color: #e0e0e0 !important; }
+  #products .group .text-\[8px\].uppercase { font-size: 11px !important; }
 }
 
-/* Очень маленькие телефоны (до 480px) */
+/* ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ (до 480px) */
 @media (max-width: 480px) {
-  main {
-    padding-top: 60px !important;
-  }
+  main { padding-top: 60px !important; }
+  img[alt="Planet Decor"] { width: 80px !important; right: -18% !important; opacity: 0.5 !important; }
+  .text-5xl { font-size: 38px !important; }
+  h1 span:last-child { font-size: 36px !important; }
+  .text-base { font-size: 14px !important; letter-spacing: 0.05em !important; }
+  #services .group h3 { font-size: 15px !important; }
+  #services .group p { font-size: 12px !important; }
+  #products .whitespace-pre-line { padding-left: 8px !important; }
+  #products p, #services p { max-width: 98% !important; }
+  #about h2 { font-size: 26px !important; }
+  #about .text-xl { font-size: 15px !important; }
+  header { height: 55px !important; }
+  header img { height: 28px !important; }
+  header button { padding: 5px 12px !important; }
+  header button span { font-size: 9px !important; }
+  #products .group .text-gray-400,
+  #products .group .whitespace-pre-line { font-size: 13px !important; }
+}
 
-  img[alt="Planet Decor"] {
-    width: 80px !important;
-    right: -18% !important;
-    opacity: 0.5 !important;
-  }
-  
+/* ==========================================
+   ТОЛЬКО ДЛЯ ДЕСКТОПА (ширина ≥ 769px)
+   ========================================== */
+
+@media (min-width: 769px) {
+
+  /* ЗАГОЛОВОК ORBIT Digital */
   .text-5xl {
-    font-size: 38px !important;
+    font-size: 80px !important;
+    line-height: 1.2 !important;
   }
   
   h1 span:last-child {
-    font-size: 36px !important;
-  }
-  
-  .text-base {
-    font-size: 14px !important;
-    letter-spacing: 0.05em !important;
+    font-size: 70px !important;
+    line-height: 1.3 !important;
   }
 
+  /* ПОДЗАГОЛОВОК */
+  .text-base {
+    font-size: 20px !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1.5 !important;
+    color: #cccccc !important;
+  }
+
+  /* ЗАГОЛОВОК "НАШИ НАПРАВЛЕНИЯ" */
+  #services h2 {
+    font-size: 56px !important;
+  }
+
+  /* ЗАГОЛОВКИ КАРТОЧЕК (01. DPI SYSTEMS) */
   #services .group h3 {
-    font-size: 15px !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
   }
-  
+
+  /* ОПИСАНИЕ КАРТОЧЕК (Трафик-менеджмент) */
   #services .group p {
-    font-size: 12px !important;
+    font-size: 18px !important;
+    color: #22d3ee !important;
   }
-  
-  #products .whitespace-pre-line {
-    padding-left: 8px !important;
-  }
-  
-  #products p,
-  #services p {
-    max-width: 98% !important;
-  }
-  
+
+  /* ЗАГОЛОВОК "ИНЖЕНЕРНЫЙ ИНТЕЛЛЕКТ" */
   #about h2 {
-    font-size: 26px !important;
+    font-size: 56px !important;
   }
-  
+
+  /* ТЕКСТ "О КОМПАНИИ" */
   #about .text-xl {
-    font-size: 15px !important;
+    font-size: 20px !important;
+    line-height: 1.6 !important;
+    color: #dddddd !important;
   }
-  
-  header {
-    height: 55px !important;
+
+  /* ЗАГОЛОВКИ ПРОДУКТОВ */
+  #products .group .font-bold.uppercase {
+    font-size: 18px !important;
+    letter-spacing: 0.1em !important;
   }
-  
-  header img {
-    height: 28px !important;
-  }
-  
-  header button {
-    padding: 5px 12px !important;
-  }
-  
-  header button span {
-    font-size: 9px !important;
-  }
-  
-  /* На очень маленьких телефонах текст в проектах чуть меньше */
+
+  /* ОПИСАНИЕ ПРОДУКТОВ (ПУНКТЫ СПИСКА) */
   #products .group .text-gray-400,
   #products .group .whitespace-pre-line {
-    font-size: 13px !important;
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+    color: #d1d5db !important;
+  }
+
+  /* СТАТУС */
+  #about .text-cyan-400.text-xs.md\:text-sm {
+    font-size: 14px !important;
+  }
+
+  /* ПАРТНЁРЫ */
+  #partners span {
+    font-size: 14px !important;
   }
 }
 
@@ -330,86 +281,26 @@ p, li, .text-gray-400 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.scroll-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-}
+.scroll-to-top.visible { opacity: 1; visibility: visible; }
+.scroll-to-top:hover { background: rgba(34, 211, 238, 0.3); transform: scale(1.08); border-color: rgba(34, 211, 238, 0.7); }
+.scroll-to-top:active { transform: scale(0.95); }
+.scroll-to-top svg { width: 24px; height: 24px; fill: none; stroke: #22d3ee; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
+.scroll-to-top:hover svg { transform: translateY(-2px); }
 
-.scroll-to-top:hover {
-  background: rgba(34, 211, 238, 0.3);
-  transform: scale(1.08);
-  border-color: rgba(34, 211, 238, 0.7);
-}
-
-.scroll-to-top:active {
-  transform: scale(0.95);
-}
-
-.scroll-to-top svg {
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: #22d3ee;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.2s ease;
-}
-
-.scroll-to-top:hover svg {
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .scroll-to-top {
-    width: 44px;
-    height: 44px;
-    bottom: 16px;
-    right: 16px;
-    background: rgba(34, 211, 238, 0.2);
-  }
-  
-  .scroll-to-top svg {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .scroll-to-top {
-    width: 40px;
-    height: 40px;
-    bottom: 12px;
-    right: 12px;
-  }
-  
-  .scroll-to-top svg {
-    width: 18px;
-    height: 18px;
-  }
-}
+@media (max-width: 768px) { .scroll-to-top { width: 44px; height: 44px; bottom: 16px; right: 16px; background: rgba(34, 211, 238, 0.2); } .scroll-to-top svg { width: 20px; height: 20px; } }
+@media (max-width: 480px) { .scroll-to-top { width: 40px; height: 40px; bottom: 12px; right: 12px; } .scroll-to-top svg { width: 18px; height: 18px; } }
 
 @keyframes fadeInUpBtn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.scroll-to-top.visible {
-  animation: fadeInUpBtn 0.3s ease-out;
-}
+.scroll-to-top.visible { animation: fadeInUpBtn 0.3s ease-out; }
 
 /* ==========================================
    ИСПРАВЛЕНИЕ ФОРМЫ НА ТЕЛЕФОНАХ
    ========================================== */
 
 @media (max-width: 768px) {
-  /* Блок формы */
   form {
     width: 100% !important;
     padding: 8px 0 !important;
@@ -418,10 +309,7 @@ p, li, .text-gray-400 {
     gap: 0 !important;
   }
   
-  /* Подписи к полям */
-  form label,
-  form .text-sm,
-  form .text-gray-400 {
+  form label, form .text-sm, form .text-gray-400 {
     font-size: 16px !important;
     font-weight: 500 !important;
     margin-bottom: 6px !important;
@@ -429,9 +317,7 @@ p, li, .text-gray-400 {
     color: #e0e0e0 !important;
   }
   
-  /* Все поля ввода */
-  form input,
-  form select {
+  form input, form select {
     font-size: 16px !important;
     padding: 14px 16px !important;
     border-radius: 12px !important;
@@ -442,7 +328,6 @@ p, li, .text-gray-400 {
     box-sizing: border-box !important;
   }
   
-  /* ОСОБЫЕ ПРАВИЛА ДЛЯ TEXTAREA */
   form textarea {
     font-size: 16px !important;
     padding: 14px 16px !important;
@@ -451,12 +336,10 @@ p, li, .text-gray-400 {
     border: 1px solid rgba(34, 211, 238, 0.25) !important;
     width: 100% !important;
     box-sizing: border-box !important;
-    
     margin-bottom: 40px !important;
     min-height: 100px !important;
     max-height: 150px !important;
     resize: vertical !important;
-    
     word-wrap: break-word !important;
     word-break: break-word !important;
     white-space: pre-wrap !important;
@@ -465,21 +348,10 @@ p, li, .text-gray-400 {
     font-family: inherit !important;
   }
   
-  form textarea::placeholder {
-    font-size: 15px !important;
-    color: #aaaaaa !important;
-    white-space: pre-wrap !important;
-    word-break: break-word !important;
-  }
+  form textarea::placeholder { font-size: 15px !important; color: #aaaaaa !important; white-space: pre-wrap !important; word-break: break-word !important; }
+  form input::placeholder { font-size: 15px !important; color: #aaaaaa !important; }
   
-  form input::placeholder {
-    font-size: 15px !important;
-    color: #aaaaaa !important;
-  }
-  
-  /* КНОПКА ОТПРАВКИ */
-  form button[type="submit"],
-  form .submit-button {
+  form button[type="submit"], form .submit-button {
     font-size: 18px !important;
     padding: 16px 24px !important;
     width: 100% !important;
@@ -497,97 +369,34 @@ p, li, .text-gray-400 {
     clear: both !important;
   }
   
-  form button[type="submit"]:active,
-  form .submit-button:active {
+  form button[type="submit"]:active, form .submit-button:active {
     transform: scale(0.98) !important;
     background: rgba(34, 211, 238, 0.2) !important;
   }
   
-  form .error-message,
-  form .text-red-400 {
-    font-size: 13px !important;
-    margin-top: -12px !important;
-    margin-bottom: 12px !important;
-  }
-  
-  form .success-message,
-  form .text-green-400 {
-    font-size: 14px !important;
-    padding: 10px !important;
-    text-align: center !important;
-  }
+  form .error-message, form .text-red-400 { font-size: 13px !important; margin-top: -12px !important; margin-bottom: 12px !important; }
+  form .success-message, form .text-green-400 { font-size: 14px !important; padding: 10px !important; text-align: center !important; }
+  .fixed.inset-0 form textarea { margin-bottom: 45px !important; display: block !important; }
+  .fixed.inset-0 form button[type="submit"] { margin-top: 10px !important; display: block !important; position: relative !important; top: auto !important; bottom: auto !important; }
 }
 
 @media (max-width: 480px) {
-  form label,
-  form .text-sm {
-    font-size: 15px !important;
-  }
-  
-  form input,
-  form textarea {
-    padding: 12px 14px !important;
-    font-size: 15px !important;
-  }
-  
-  form input {
-    margin-bottom: 18px !important;
-  }
-  
-  form textarea {
-    margin-bottom: 45px !important;
-    min-height: 110px !important;
-  }
-  
-  form button[type="submit"],
-  form .submit-button {
-    font-size: 17px !important;
-    padding: 14px 20px !important;
-    min-height: 52px !important;
-    margin-top: 5px !important;
-  }
-  
-  form input::placeholder,
-  form textarea::placeholder {
-    font-size: 14px !important;
-  }
+  form label, form .text-sm { font-size: 15px !important; }
+  form input, form textarea { padding: 12px 14px !important; font-size: 15px !important; }
+  form input { margin-bottom: 18px !important; }
+  form textarea { margin-bottom: 45px !important; min-height: 110px !important; }
+  form button[type="submit"], form .submit-button { font-size: 17px !important; padding: 14px 20px !important; min-height: 52px !important; margin-top: 5px !important; }
+  form input::placeholder, form textarea::placeholder { font-size: 14px !important; }
 }
 
 @media (max-width: 380px) {
-  form textarea {
-    margin-bottom: 55px !important;
-    min-height: 120px !important;
-  }
-  
-  form button[type="submit"],
-  form .submit-button {
-    margin-top: 10px !important;
-    padding: 16px 18px !important;
-  }
+  form textarea { margin-bottom: 55px !important; min-height: 120px !important; }
+  form button[type="submit"], form .submit-button { margin-top: 10px !important; padding: 16px 18px !important; }
 }
 
 @media (max-width: 896px) and (orientation: landscape) {
-  form {
-    max-width: 80% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-  
-  form input,
-  form textarea {
-    padding: 10px 14px !important;
-    margin-bottom: 14px !important;
-  }
-  
-  form textarea {
-    margin-bottom: 28px !important;
-    min-height: 80px !important;
-  }
-  
-  form button[type="submit"],
-  form .submit-button {
-    font-size: 16px !important;
-    padding: 12px 20px !important;
-    min-height: 46px !important;
-  }
+  form { max-width: 80% !important; margin-left: auto !important; margin-right: auto !important; }
+  form input, form textarea { padding: 10px 14px !important; margin-bottom: 14px !important; }
+  form textarea { margin-bottom: 28px !important; min-height: 80px !important; }
+  form button[type="submit"], form .submit-button { font-size: 16px !important; padding: 12px 20px !important; min-height: 46px !important; }
 }
