@@ -491,8 +491,57 @@ body {
 }
 
 /* ==========================================
+   УВЕЛИЧЕННАЯ КНОПКА "НАЧАТЬ ПРОЕКТ" В МОБИЛЬНОМ МЕНЮ
+   ========================================== */
+
+@media (max-width: 768px) {
+  /* Кнопка "Начать проект" в мобильном меню */
+  .fixed.inset-0 button:last-child,
+  .fixed.inset-0 .mt-6.md\:mt-10,
+  .fixed.inset-0 .bg-cyan-500 {
+    font-size: 18px !important;
+    padding: 16px 32px !important;
+    min-width: 220px !important;
+    width: auto !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    background: #06b6d4 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3) !important;
+  }
+  
+  /* Эффект при нажатии */
+  .fixed.inset-0 button:last-child:active,
+  .fixed.inset-0 .bg-cyan-500:active {
+    transform: scale(0.97) !important;
+  }
+  
+  /* Ссылки в меню тоже увеличим для удобства */
+  .fixed.inset-0 a {
+    font-size: 28px !important;
+    padding: 12px 20px !important;
+    display: inline-block !important;
+  }
+}
+
+/* Для очень маленьких телефонов (до 480px) */
+@media (max-width: 480px) {
+  .fixed.inset-0 button:last-child,
+  .fixed.inset-0 .mt-6.md\:mt-10,
+  .fixed.inset-0 .bg-cyan-500 {
+    font-size: 16px !important;
+    padding: 14px 28px !important;
+    min-width: 200px !important;
+  }
+  
+  .fixed.inset-0 a {
+    font-size: 24px !important;
+  }
+}
+
+/* ==========================================
    ИСПРАВЛЕНИЕ ФОРМЫ НА ТЕЛЕФОНАХ
-   С АВТОМАТИЧЕСКИМ ПЕРЕНОСОМ СЛОВ И ОТСТУПАМИ
    ========================================== */
 
 @media (max-width: 768px) {
@@ -529,7 +578,7 @@ body {
     box-sizing: border-box !important;
   }
   
-  /* ОСОБЫЕ ПРАВИЛА ДЛЯ TEXTAREA - ГЛАВНАЯ ПРОБЛЕМА */
+  /* ОСОБЫЕ ПРАВИЛА ДЛЯ TEXTAREA */
   form textarea {
     font-size: 16px !important;
     padding: 14px 16px !important;
@@ -539,41 +588,32 @@ body {
     width: 100% !important;
     box-sizing: border-box !important;
     
-    /* ВАЖНО: большой отступ снизу чтобы не наезжало на кнопку */
     margin-bottom: 40px !important;
-    
-    /* Размеры и перенос слов */
     min-height: 100px !important;
     max-height: 150px !important;
     resize: vertical !important;
     
-    /* АВТОМАТИЧЕСКИЙ ПЕРЕНОС СЛОВ */
     word-wrap: break-word !important;
     word-break: break-word !important;
     white-space: pre-wrap !important;
     overflow-wrap: break-word !important;
-    
-    /* Удобный шрифт */
     line-height: 1.5 !important;
     font-family: inherit !important;
   }
   
-  /* Плейсхолдер для textarea с переносом */
   form textarea::placeholder {
     font-size: 15px !important;
     color: #aaaaaa !important;
     white-space: pre-wrap !important;
     word-break: break-word !important;
-    overflow-wrap: break-word !important;
   }
   
-  /* Плейсхолдеры для полей ввода */
   form input::placeholder {
     font-size: 15px !important;
     color: #aaaaaa !important;
   }
   
-  /* КНОПКА ОТПРАВКИ - УВЕЛИЧЕННАЯ */
+  /* КНОПКА ОТПРАВКИ */
   form button[type="submit"],
   form .submit-button {
     font-size: 18px !important;
@@ -589,19 +629,16 @@ body {
     margin-top: 8px !important;
     margin-bottom: 20px !important;
     min-height: 54px !important;
-    /* Защита от наложения */
     position: relative !important;
     clear: both !important;
   }
   
-  /* Эффект при нажатии */
   form button[type="submit"]:active,
   form .submit-button:active {
     transform: scale(0.98) !important;
     background: rgba(34, 211, 238, 0.2) !important;
   }
   
-  /* Сообщения об ошибках */
   form .error-message,
   form .text-red-400 {
     font-size: 13px !important;
@@ -609,7 +646,6 @@ body {
     margin-bottom: 12px !important;
   }
   
-  /* Сообщение об успехе */
   form .success-message,
   form .text-green-400 {
     font-size: 14px !important;
@@ -618,7 +654,6 @@ body {
   }
 }
 
-/* Для очень маленьких телефонов (до 480px) - УСИЛЕННЫЕ ОТСТУПЫ */
 @media (max-width: 480px) {
   form label,
   form .text-sm {
@@ -635,13 +670,11 @@ body {
     margin-bottom: 18px !important;
   }
   
-  /* КРИТИЧЕСКИ ВАЖНО: увеличенный отступ для textarea на маленьких телефонах */
   form textarea {
     margin-bottom: 45px !important;
     min-height: 110px !important;
   }
   
-  /* Увеличенная кнопка для маленьких телефонов */
   form button[type="submit"],
   form .submit-button {
     font-size: 17px !important;
@@ -656,7 +689,6 @@ body {
   }
 }
 
-/* ДЛЯ САМЫХ МАЛЕНЬКИХ ТЕЛЕФОНОВ (до 380px) */
 @media (max-width: 380px) {
   form textarea {
     margin-bottom: 55px !important;
@@ -670,7 +702,6 @@ body {
   }
 }
 
-/* Для горизонтальной ориентации */
 @media (max-width: 896px) and (orientation: landscape) {
   form {
     max-width: 80% !important;
@@ -698,10 +729,9 @@ body {
 }
 
 /* ==========================================
-   ФОРСИРОВАННОЕ ИСПРАВЛЕНИЕ (САМЫЙ ВЫСОКИЙ ПРИОРИТЕТ)
+   ФОРСИРОВАННОЕ ИСПРАВЛЕНИЕ ДЛЯ ФОРМЫ
    ========================================== */
 @media (max-width: 768px) {
-  /* Гарантированный отступ */
   .fixed.inset-0 form textarea {
     margin-bottom: 45px !important;
     display: block !important;
