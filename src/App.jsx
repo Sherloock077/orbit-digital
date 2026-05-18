@@ -13,7 +13,40 @@ import imgOSINT from './assets/OSINT.jpg';
 import imgOutsorcing from './assets/outsorcing.jpg';
 
 // ==========================================
-// 2. КОМПОНЕНТ: ИНТЕРАКТИВНЫЙ КОСМИЧЕСКИЙ ФОН (HTML5 CANVAS)
+// 2. КОМПОНЕНТ: КНОПКА "НАВЕРХ"
+// ==========================================
+const ScrollToTop = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${
+        isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+      }`}
+      aria-label="Наверх"
+    >
+      <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6 fill-none stroke-cyan-400 stroke-2">
+        <path d="M12 19V5M5 12l7-7 7 7" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+  );
+};
+
+// ==========================================
+// 3. КОМПОНЕНТ: ИНТЕРАКТИВНЫЙ КОСМИЧЕСКИЙ ФОН (HTML5 CANVAS)
 // ==========================================
 const SpaceBackground = () => {
   const canvasRef = useRef(null);
@@ -156,7 +189,7 @@ const SpaceBackground = () => {
 };
 
 // ==========================================
-// 3. ОСНОВНОЙ КОМПОНЕНТ ПРИЛОЖЕНИЯ (APP)
+// 4. ОСНОВНОЙ КОМПОНЕНТ ПРИЛОЖЕНИЯ (APP)
 // ==========================================
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -164,8 +197,16 @@ function App() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [expandedProduct, setExpandedProduct] = useState(null);
   
-  // Определяем мобильное устройство
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const servicesList = [
     {
@@ -274,13 +315,14 @@ function App() {
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+      transition: { duration: 0.5, ease: "easeOut" }
     }
   };
 
   return (
     <div className="min-h-screen bg-black text-[#BBBBBB] font-mono selection:bg-cyan-500/30 overflow-x-hidden relative">
       <SpaceBackground />
+      <ScrollToTop />
 
       {/* ШАПКА САЙТА */}
       <header className="fixed top-0 left-0 w-full z-[100] px-4 md:px-16 h-20 md:h-28 flex items-center justify-between border-b border-cyan-500/20 backdrop-blur-xl bg-black/60">
@@ -379,38 +421,61 @@ function App() {
           </motion.div>
         </section>
 
-        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
+        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ - БЫСТРАЯ АНИМАЦИЯ КАК НА ПРИМЕРЕ */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
             className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24"
           >
             <div className="flex items-center gap-4 mb-3">
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-              <span className="text-cyan-400 font-mono text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-bold animate-pulse">[ Core Capabilities ]</span>
+              <motion.span 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="text-cyan-400 font-mono text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-bold"
+              >
+                [ Core Capabilities ]
+              </motion.span>
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-sans relative select-none">
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.15 }}
+              className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-sans relative select-none"
+            >
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">направления</span>
-            </h2>
-            <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+            </motion.h2>
+            
+            <motion.div 
+              initial={{ opacity: 0, scaleX: 0 }}
+              whileInView={{ opacity: 1, scaleX: 1 }}
+              transition={{ delay: 0.25, duration: 0.4 }}
+              className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)] origin-center"
+            />
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={sectionVariants}
-            className="flex flex-col gap-4 relative z-10"
-          >
+          <div className="flex flex-col gap-4 relative z-10">
             {servicesList.map((item, i) => {
               const isHovered = hoveredIndex === i;
               return (
-                <div
+                <motion.div
                   key={i}
+                  custom={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ 
+                    delay: i * 0.04, 
+                    duration: 0.3,
+                    ease: "easeOut"
+                  }}
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => setHoveredIndex(i === hoveredIndex ? null : i)}
@@ -421,21 +486,38 @@ function App() {
                   }}
                 >
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
+                  
                   <div className="md:w-5/12 mb-3 md:mb-0 z-10 relative">
-                    <h3 className={`text-base md:text-xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
+                    <motion.h3 
+                      custom={i}
+                      initial={{ opacity: 0, y: 8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.04 + 0.02, duration: 0.25 }}
+                      className={`text-base md:text-xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}
+                    >
                       {item.label}
-                    </h3>
+                    </motion.h3>
                   </div>
+                  
                   <div className="md:w-7/12 z-10 md:pl-6 relative">
-                    <p className={`text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
+                    <motion.p 
+                      custom={i}
+                      initial={{ opacity: 0, y: 8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.04 + 0.04, duration: 0.25 }}
+                      className={`text-[13px] leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}
+                    >
                       {item.desc}
-                    </p>
+                    </motion.p>
                   </div>
+                  
                   <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" style={{ backgroundColor: item.activeColor, boxShadow: `0 0 10px ${item.activeColor}` }} />
-                </div>
+                </motion.div>
               );
             })}
-          </motion.div>
+          </div>
         </section>
 
         <div className="w-full flex justify-center my-20 md:my-32">
@@ -469,7 +551,7 @@ function App() {
           </div>
         </motion.section>
 
-        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ — с раскрытием на телефоне */}
+        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ */}
         <section id="products" className="mb-32 md:mb-64">
           <motion.div
             initial="hidden"
@@ -507,7 +589,6 @@ function App() {
                     <div>
                       <span className={`${item.textColor} text-[10px] md:text-[11px] mb-3 block tracking-[0.4em] font-bold uppercase`}>{item.label}</span>
                       
-                      {/* Описание — на десктопе всегда видно, на телефоне только по клику */}
                       {(!isMobile || (isMobile && expandedProduct === i)) && (
                         <p className="text-[12px] md:text-[13px] text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line">
                           {item.desc}
@@ -521,7 +602,6 @@ function App() {
                         <div className="w-4 h-[1px] self-center opacity-20 transition-colors duration-500" style={{ backgroundColor: 'var(--current-accent)' }} />
                       </div>
                       
-                      {/* Индикатор только на телефоне */}
                       {isMobile && (
                         <span className="text-[8px] uppercase tracking-wider text-gray-500 font-mono">
                           {expandedProduct === i ? '[ закрыть ]' : '[ подробнее ]'}
@@ -546,7 +626,7 @@ function App() {
                 key={id}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: id * 0.1 }}
+                transition={{ delay: id * 0.1, duration: 0.3 }}
                 className="h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000"></div>
@@ -576,7 +656,7 @@ function App() {
               <form className="space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
                 <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
                 <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
-                <input type="tel" defaultValue="+7 " onInput={(e) => { if (!e.target.value.startsWith('+7 ')) { e.target.value = '+7 ' + e.target.value.replace(/^\+7\s*/, ''); } }} placeholder="Номер телефона" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
+                <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 text-sm md:text-base" />
                 <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-none text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base"></textarea>
                 <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-none text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
               </form>

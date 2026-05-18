@@ -105,7 +105,7 @@ body {
   }
 
   /* КАРТОЧКИ НАПРАВЛЕНИЙ */
-  #services .flex.flex-col.gap-4 > div {
+  #services .group {
     margin-bottom: 16px !important;
     padding: 16px !important;
     background: rgba(15, 15, 25, 0.5) !important;
@@ -114,21 +114,22 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
   }
 
-  #services .text-\[13px\] {
-    font-size: 14px !important;
-    line-height: 1.45 !important;
-    font-weight: 500 !important;
-    color: #ddd !important;
+  /* Текст внутри карточек - НОМЕР И НАЗВАНИЕ (01. DPI SYSTEMS) */
+  #services .group h3 {
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
   }
 
-  #services .text-base {
-    font-size: 12px !important;
-    letter-spacing: 0.15em !important;
+  /* Подзаголовок направления (ТРАФИК-МЕНЕДЖМЕНТ) */
+  #services .group p {
+    font-size: 11px !important;
+    letter-spacing: 0.12em !important;
   }
 
   /* ========== УЛУЧШЕНИЕ ЧИТАЕМОСТИ ТЕКСТА ========== */
   
-  /* 1. Ограничиваем ширину текста на телефоне */
   #products p,
   #services p,
   #about p {
@@ -137,32 +138,27 @@ body {
     margin-right: auto !important;
   }
 
-  /* 2. Увеличиваем межстрочный интервал */
   #products p,
   #services p,
   .text-gray-400 {
     line-height: 1.65 !important;
   }
 
-  /* 3. Уменьшаем межбуквенный интервал для длинных текстов */
   #products .uppercase,
   #services .uppercase {
     letter-spacing: 0.02em !important;
   }
 
-  /* 4. Добавляем визуальные отступы для пунктов списка */
   #products .whitespace-pre-line {
     padding-left: 12px !important;
     border-left: 2px solid rgba(34, 211, 238, 0.3) !important;
   }
 
-  /* 5. Смягчаем контраст текста */
   #products .text-gray-400,
   #services .text-gray-400 {
     color: #c0c0c0 !important;
   }
 
-  /* 6. Увеличиваем отступы между абзацами */
   #products .mb-6 {
     margin-bottom: 1.75rem !important;
   }
@@ -185,7 +181,6 @@ body {
     font-size: 7px !important;
   }
 
-  /* Отступы между секциями */
   section {
     margin-bottom: 40px !important;
     padding-top: 20px !important;
@@ -223,11 +218,10 @@ body {
     letter-spacing: 0.05em !important;
   }
 
-  #services .text-\[13px\] {
-    font-size: 13px !important;
+  #services .group h3 {
+    font-size: 14px !important;
   }
   
-  /* Улучшения для маленьких телефонов */
   #products .whitespace-pre-line {
     padding-left: 8px !important;
   }
@@ -259,5 +253,218 @@ body {
   
   header button span {
     font-size: 9px !important;
+  }
+}
+
+/* ==========================================
+   КНОПКА "НАВЕРХ" (SCROLL TO TOP)
+   ========================================== */
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background: rgba(34, 211, 238, 0.15);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top:hover {
+  background: rgba(34, 211, 238, 0.3);
+  transform: scale(1.08);
+  border-color: rgba(34, 211, 238, 0.7);
+}
+
+.scroll-to-top:active {
+  transform: scale(0.95);
+}
+
+.scroll-to-top svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #22d3ee;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.scroll-to-top:hover svg {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    width: 44px;
+    height: 44px;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(34, 211, 238, 0.2);
+  }
+  
+  .scroll-to-top svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top {
+    width: 40px;
+    height: 40px;
+    bottom: 12px;
+    right: 12px;
+  }
+  
+  .scroll-to-top svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@keyframes fadeInUpBtn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-to-top.visible {
+  animation: fadeInUpBtn 0.3s ease-out;
+}
+
+/* ==========================================
+   ИСПРАВЛЕНИЕ ФОРМЫ НА ТЕЛЕФОНАХ
+   ========================================== */
+
+@media (max-width: 768px) {
+  form {
+    width: 100% !important;
+    padding: 8px 0 !important;
+  }
+  
+  form label,
+  form .text-sm,
+  form .text-gray-400 {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    margin-bottom: 6px !important;
+    display: inline-block !important;
+    color: #e0e0e0 !important;
+  }
+  
+  form input,
+  form textarea,
+  form select {
+    font-size: 16px !important;
+    padding: 12px 14px !important;
+    border-radius: 12px !important;
+    background: rgba(20, 20, 30, 0.8) !important;
+    border: 1px solid rgba(34, 211, 238, 0.25) !important;
+    width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+  
+  form input::placeholder,
+  form textarea::placeholder {
+    font-size: 15px !important;
+    color: #aaaaaa !important;
+  }
+  
+  form button[type="submit"],
+  form .submit-button {
+    font-size: 16px !important;
+    padding: 14px 20px !important;
+    width: 100% !important;
+    background: rgba(34, 211, 238, 0.12) !important;
+    border: 1px solid rgba(34, 211, 238, 0.4) !important;
+    border-radius: 40px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.03em !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  form button[type="submit"]:active,
+  form .submit-button:active {
+    transform: scale(0.98) !important;
+    background: rgba(34, 211, 238, 0.2) !important;
+  }
+  
+  form .error-message,
+  form .text-red-400 {
+    font-size: 13px !important;
+    margin-top: -12px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  form .success-message,
+  form .text-green-400 {
+    font-size: 14px !important;
+    padding: 10px !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  form label,
+  form .text-sm {
+    font-size: 15px !important;
+  }
+  
+  form input,
+  form textarea {
+    padding: 10px 12px !important;
+    font-size: 15px !important;
+  }
+  
+  form button[type="submit"] {
+    padding: 12px 16px !important;
+    font-size: 15px !important;
+  }
+  
+  form input::placeholder,
+  form textarea::placeholder {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 896px) and (orientation: landscape) {
+  form {
+    max-width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  form input,
+  form textarea {
+    padding: 8px 12px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  form button[type="submit"] {
+    padding: 10px 16px !important;
   }
 }
