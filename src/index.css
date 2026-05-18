@@ -32,11 +32,15 @@ body {
    ГЛОБАЛЬНЫЕ УЛУЧШЕНИЯ ЧИТАЕМОСТИ
    ========================================== */
 
-.text-gray-400, .text-gray-500, .text-slate-400 {
+.text-gray-400,
+.text-gray-500,
+.text-slate-400 {
   color: #d1d5db !important;
 }
 
-p, li, .text-gray-400 {
+p,
+li,
+.text-gray-400 {
   line-height: 1.6 !important;
 }
 
@@ -45,23 +49,27 @@ p, li, .text-gray-400 {
    ========================================== */
 
 @media (max-width: 768px) {
-  main { padding-top: 70px !important; }
+  main {
+    padding-top: 70px !important;
+  }
 
   header {
     padding-left: 16px !important;
     padding-right: 16px !important;
     height: 65px !important;
   }
-  
-  header img { height: 35px !important; }
-  
+
+  header img {
+    height: 35px !important;
+  }
+
   header button {
     padding: 8px 16px !important;
     background: rgba(34, 211, 238, 0.08) !important;
     border: 1px solid rgba(34, 211, 238, 0.25) !important;
     border-radius: 40px !important;
   }
-  
+
   header button span {
     font-size: 11px !important;
     letter-spacing: 0.15em !important;
@@ -82,32 +90,34 @@ p, li, .text-gray-400 {
     opacity: 0.2 !important;
   }
 
-  /* УВЕЛИЧЕННЫЙ ЗАГОЛОВОК НА ТЕЛЕФОНЕ */
+  /* ЗАГОЛОВОК ORBIT Digital */
   .text-5xl {
+    font-size: 76px !important;
+    line-height: 1.05 !important;
+    margin-bottom: 20px !important;
+  }
+
+  h1 span:last-child {
     font-size: 68px !important;
     line-height: 1.1 !important;
-    margin-bottom: 16px !important;
-  }
-  
-  h1 span:last-child {
-    font-size: 60px !important;
-    line-height: 1.15 !important;
-    padding-bottom: 8px !important;
-    margin-top: -6px !important;
+    padding-bottom: 10px !important;
+    margin-top: -8px !important;
     display: inline-block !important;
   }
 
-  /* ПОДЗАГОЛОВОК — БОЛЕЕ КОМПАКТНЫЙ */
+  /* ===== ПОДЗАГОЛОВОК - УВЕЛИЧЕННЫЙ ===== */
   .text-base {
     font-size: 20px !important;
-    letter-spacing: 0.08em !important;
+    /* ← УВЕЛИЧИЛ */
+    letter-spacing: 0.05em !important;
     line-height: 1.5 !important;
     font-weight: 400 !important;
-    color: #bbbbbb !important;
-    padding-top: 8px !important;
-    padding-bottom: 12px !important;
+    color: #cccccc !important;
+    padding-top: 16px !important;
+    padding-bottom: 20px !important;
   }
 
+  /* КАРТОЧКИ НАПРАВЛЕНИЙ */
   #services .group {
     margin-bottom: 16px !important;
     padding: 16px !important;
@@ -131,46 +141,81 @@ p, li, .text-gray-400 {
     color: #22d3ee !important;
   }
 
-  #products p, #services p, #about p { max-width: 95% !important; margin: 0 auto !important; }
-  #products p, #services p { line-height: 1.7 !important; }
-  #products .uppercase, #services .uppercase { letter-spacing: 0.02em !important; }
-  #products .whitespace-pre-line { padding-left: 12px !important; border-left: 2px solid rgba(34, 211, 238, 0.3) !important; }
-  #products .text-gray-400, #services .text-gray-400 { color: #c0c0c0 !important; }
-  #products .mb-6 { margin-bottom: 1.75rem !important; }
+  #products p,
+  #services p,
+  #about p {
+    max-width: 95% !important;
+    margin: 0 auto !important;
+  }
 
-  #about h2 { font-size: 28px !important; }
-  #about .text-xl { font-size: 16px !important; line-height: 1.6 !important; color: #dddddd !important; }
-  #about .text-xs { font-size: 8px !important; }
-  #about .text-\[10px\] { font-size: 7px !important; }
+  #products p,
+  #services p {
+    line-height: 1.7 !important;
+  }
 
-  section { margin-bottom: 40px !important; padding-top: 20px !important; padding-bottom: 20px !important; }
-  .my-20 { margin-top: 20px !important; margin-bottom: 20px !important; }
+  #products .uppercase,
+  #services .uppercase {
+    letter-spacing: 0.02em !important;
+  }
 
-  #products .group .font-bold.uppercase { font-size: 16px !important; letter-spacing: 0.1em !important; }
+  #products .whitespace-pre-line {
+    padding-left: 12px !important;
+    border-left: 2px solid rgba(34, 211, 238, 0.3) !important;
+  }
+
+  #products .text-gray-400,
+  #services .text-gray-400 {
+    color: #c0c0c0 !important;
+  }
+
+  #products .mb-6 {
+    margin-bottom: 1.75rem !important;
+  }
+
+  #about h2 {
+    font-size: 28px !important;
+  }
+
+  #about .text-xl {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #dddddd !important;
+  }
+
+  #about .text-xs {
+    font-size: 8px !important;
+  }
+
+  #about .text-\[10px\] {
+    font-size: 7px !important;
+  }
+
+  section {
+    margin-bottom: 40px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .my-20 {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+  }
+
+  #products .group .font-bold.uppercase {
+    font-size: 16px !important;
+    letter-spacing: 0.1em !important;
+  }
+
   #products .group .text-gray-400,
-  #products .group .whitespace-pre-line { font-size: 14px !important; line-height: 1.65 !important; color: #e0e0e0 !important; }
-  #products .group .text-\[8px\].uppercase { font-size: 11px !important; }
-}
+  #products .group .whitespace-pre-line {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+    color: #e0e0e0 !important;
+  }
 
-/* ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ (до 480px) */
-@media (max-width: 480px) {
-  main { padding-top: 60px !important; }
-  img[alt="Planet Decor"] { width: 80px !important; right: -18% !important; opacity: 0.5 !important; }
-  .text-5xl { font-size: 58px !important; }
-  h1 span:last-child { font-size: 52px !important; }
-  .text-base { font-size: 13px !important; letter-spacing: 0.05em !important; }
-  #services .group h3 { font-size: 15px !important; }
-  #services .group p { font-size: 12px !important; }
-  #products .whitespace-pre-line { padding-left: 8px !important; }
-  #products p, #services p { max-width: 98% !important; }
-  #about h2 { font-size: 26px !important; }
-  #about .text-xl { font-size: 15px !important; }
-  header { height: 55px !important; }
-  header img { height: 28px !important; }
-  header button { padding: 5px 12px !important; }
-  header button span { font-size: 9px !important; }
-  #products .group .text-gray-400,
-  #products .group .whitespace-pre-line { font-size: 13px !important; }
+  #products .group .text-\[8px\].uppercase {
+    font-size: 11px !important;
+  }
 }
 
 /* ==========================================
@@ -183,7 +228,7 @@ p, li, .text-gray-400 {
     font-size: 80px !important;
     line-height: 1.2 !important;
   }
-  
+
   h1 span:last-child {
     font-size: 70px !important;
     line-height: 1.3 !important;
@@ -266,20 +311,80 @@ p, li, .text-gray-400 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.scroll-to-top.visible { opacity: 1; visibility: visible; }
-.scroll-to-top:hover { background: rgba(34, 211, 238, 0.3); transform: scale(1.08); border-color: rgba(34, 211, 238, 0.7); }
-.scroll-to-top:active { transform: scale(0.95); }
-.scroll-to-top svg { width: 24px; height: 24px; fill: none; stroke: #22d3ee; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
-.scroll-to-top:hover svg { transform: translateY(-2px); }
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
 
-@media (max-width: 768px) { .scroll-to-top { width: 44px; height: 44px; bottom: 16px; right: 16px; background: rgba(34, 211, 238, 0.2); } .scroll-to-top svg { width: 20px; height: 20px; } }
-@media (max-width: 480px) { .scroll-to-top { width: 40px; height: 40px; bottom: 12px; right: 12px; } .scroll-to-top svg { width: 18px; height: 18px; } }
+.scroll-to-top:hover {
+  background: rgba(34, 211, 238, 0.3);
+  transform: scale(1.08);
+  border-color: rgba(34, 211, 238, 0.7);
+}
+
+.scroll-to-top:active {
+  transform: scale(0.95);
+}
+
+.scroll-to-top svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #22d3ee;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.scroll-to-top:hover svg {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    width: 44px;
+    height: 44px;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(34, 211, 238, 0.2);
+  }
+
+  .scroll-to-top svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top {
+    width: 40px;
+    height: 40px;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .scroll-to-top svg {
+    width: 18px;
+    height: 18px;
+  }
+}
 
 @keyframes fadeInUpBtn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.scroll-to-top.visible { animation: fadeInUpBtn 0.3s ease-out; }
+
+.scroll-to-top.visible {
+  animation: fadeInUpBtn 0.3s ease-out;
+}
 
 /* ==========================================
    ИСПРАВЛЕНИЕ ФОРМЫ НА ТЕЛЕФОНАХ
@@ -293,16 +398,19 @@ p, li, .text-gray-400 {
     flex-direction: column !important;
     gap: 0 !important;
   }
-  
-  form label, form .text-sm, form .text-gray-400 {
+
+  form label,
+  form .text-sm,
+  form .text-gray-400 {
     font-size: 16px !important;
     font-weight: 500 !important;
     margin-bottom: 6px !important;
     display: inline-block !important;
     color: #e0e0e0 !important;
   }
-  
-  form input, form select {
+
+  form input,
+  form select {
     font-size: 16px !important;
     padding: 14px 16px !important;
     border-radius: 12px !important;
@@ -312,7 +420,7 @@ p, li, .text-gray-400 {
     margin-bottom: 20px !important;
     box-sizing: border-box !important;
   }
-  
+
   form textarea {
     font-size: 16px !important;
     padding: 14px 16px !important;
@@ -332,11 +440,21 @@ p, li, .text-gray-400 {
     line-height: 1.5 !important;
     font-family: inherit !important;
   }
-  
-  form textarea::placeholder { font-size: 15px !important; color: #aaaaaa !important; white-space: pre-wrap !important; word-break: break-word !important; }
-  form input::placeholder { font-size: 15px !important; color: #aaaaaa !important; }
-  
-  form button[type="submit"], form .submit-button {
+
+  form textarea::placeholder {
+    font-size: 15px !important;
+    color: #aaaaaa !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+
+  form input::placeholder {
+    font-size: 15px !important;
+    color: #aaaaaa !important;
+  }
+
+  form button[type="submit"],
+  form .submit-button {
     font-size: 18px !important;
     padding: 16px 24px !important;
     width: 100% !important;
@@ -353,35 +471,112 @@ p, li, .text-gray-400 {
     position: relative !important;
     clear: both !important;
   }
-  
-  form button[type="submit"]:active, form .submit-button:active {
+
+  form button[type="submit"]:active,
+  form .submit-button:active {
     transform: scale(0.98) !important;
     background: rgba(34, 211, 238, 0.2) !important;
   }
-  
-  form .error-message, form .text-red-400 { font-size: 13px !important; margin-top: -12px !important; margin-bottom: 12px !important; }
-  form .success-message, form .text-green-400 { font-size: 14px !important; padding: 10px !important; text-align: center !important; }
-  .fixed.inset-0 form textarea { margin-bottom: 45px !important; display: block !important; }
-  .fixed.inset-0 form button[type="submit"] { margin-top: 10px !important; display: block !important; position: relative !important; top: auto !important; bottom: auto !important; }
+
+  form .error-message,
+  form .text-red-400 {
+    font-size: 13px !important;
+    margin-top: -12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  form .success-message,
+  form .text-green-400 {
+    font-size: 14px !important;
+    padding: 10px !important;
+    text-align: center !important;
+  }
+
+  .fixed.inset-0 form textarea {
+    margin-bottom: 45px !important;
+    display: block !important;
+  }
+
+  .fixed.inset-0 form button[type="submit"] {
+    margin-top: 10px !important;
+    display: block !important;
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
 }
 
 @media (max-width: 480px) {
-  form label, form .text-sm { font-size: 15px !important; }
-  form input, form textarea { padding: 12px 14px !important; font-size: 15px !important; }
-  form input { margin-bottom: 18px !important; }
-  form textarea { margin-bottom: 45px !important; min-height: 110px !important; }
-  form button[type="submit"], form .submit-button { font-size: 17px !important; padding: 14px 20px !important; min-height: 52px !important; margin-top: 5px !important; }
-  form input::placeholder, form textarea::placeholder { font-size: 14px !important; }
+
+  form label,
+  form .text-sm {
+    font-size: 15px !important;
+  }
+
+  form input,
+  form textarea {
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+  }
+
+  form input {
+    margin-bottom: 18px !important;
+  }
+
+  form textarea {
+    margin-bottom: 45px !important;
+    min-height: 110px !important;
+  }
+
+  form button[type="submit"],
+  form .submit-button {
+    font-size: 17px !important;
+    padding: 14px 20px !important;
+    min-height: 52px !important;
+    margin-top: 5px !important;
+  }
+
+  form input::placeholder,
+  form textarea::placeholder {
+    font-size: 14px !important;
+  }
 }
 
 @media (max-width: 380px) {
-  form textarea { margin-bottom: 55px !important; min-height: 120px !important; }
-  form button[type="submit"], form .submit-button { margin-top: 10px !important; padding: 16px 18px !important; }
+  form textarea {
+    margin-bottom: 55px !important;
+    min-height: 120px !important;
+  }
+
+  form button[type="submit"],
+  form .submit-button {
+    margin-top: 10px !important;
+    padding: 16px 18px !important;
+  }
 }
 
 @media (max-width: 896px) and (orientation: landscape) {
-  form { max-width: 80% !important; margin-left: auto !important; margin-right: auto !important; }
-  form input, form textarea { padding: 10px 14px !important; margin-bottom: 14px !important; }
-  form textarea { margin-bottom: 28px !important; min-height: 80px !important; }
-  form button[type="submit"], form .submit-button { font-size: 16px !important; padding: 12px 20px !important; min-height: 46px !important; }
+  form {
+    max-width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  form input,
+  form textarea {
+    padding: 10px 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  form textarea {
+    margin-bottom: 28px !important;
+    min-height: 80px !important;
+  }
+
+  form button[type="submit"],
+  form .submit-button {
+    font-size: 16px !important;
+    padding: 12px 20px !important;
+    min-height: 46px !important;
+  }
 }
