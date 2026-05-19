@@ -33,9 +33,8 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${
-        isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
-      }`}
+      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
       aria-label="Наверх"
     >
       <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6 fill-none stroke-cyan-400 stroke-2">
@@ -247,20 +246,29 @@ function App() {
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      // Задержка для корректного расчёта позиции после всех рендеров
-      setTimeout(() => {
+      // Функция для выполнения скролла
+      const performScroll = () => {
         const rect = productElement.getBoundingClientRect();
         const absoluteTop = rect.top + window.scrollY;
-        // Высота шапки на телефоне и десктопе
         const headerHeight = window.innerWidth <= 768 ? 65 : 80;
-        // Небольшой дополнительный отступ для идеального позиционирования
         const offsetPosition = absoluteTop - headerHeight - 10;
-        
+
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
         });
-      }, 50);
+      };
+
+      // Проверяем, загружена ли страница
+      if (document.readyState === 'complete') {
+        // Страница загружена, можно скроллить
+        setTimeout(performScroll, 100);
+      } else {
+        // Ждём полной загрузки страницы
+        window.addEventListener('load', () => {
+          setTimeout(performScroll, 100);
+        });
+      }
     }
 
     if (isMobile) {
