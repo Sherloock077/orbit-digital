@@ -486,8 +486,8 @@ function App() {
                 Digital
               </span>
             </h1>
-            <p className="custom-subtitle text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8 font-['Inter',system-ui,sans-serif]">
-              // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
+            <p className="hero-subtitle custom-subtitle text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8 font-['Inter',system-ui,sans-serif]">
+  // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
             </p>
           </motion.div>
         </section>
@@ -499,13 +499,13 @@ function App() {
           <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
             <div className="flex items-center gap-4 mb-3">
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-              <span className="text-cyan-400 font-['Inter',system-ui,sans-serif] text-[10px] md:text-[12px] tracking-[0.6em] uppercase font-bold">
+              <span className="services-badge text-cyan-400 font-['Inter',system-ui,sans-serif] text-[10px] md:text-[12px] tracking-[0.6em] uppercase font-bold">
                 [ Core Capabilities ]
               </span>
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
             </div>
 
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-['Inter',system-ui,sans-serif] relative select-none">
+            <h2 className="services-heading text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-['Inter',system-ui,sans-serif] relative select-none">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">направления</span>
             </h2>
@@ -526,7 +526,7 @@ function App() {
                     setHoveredIndex(i);
                     setTimeout(() => setHoveredIndex(null), 300);
                   }}
-                  className="group relative flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 border border-white/10 bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-in-out overflow-hidden rounded-2xl md:rounded-3xl"
+                  className="service-card group relative flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 border border-white/10 bg-black/30 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-in-out overflow-hidden rounded-2xl md:rounded-3xl"
                   style={{
                     borderColor: isHovered ? item.activeColor : 'rgba(255, 255, 255, 0.1)',
                     boxShadow: isHovered ? `0 0 25px ${item.activeColor}33, inset 0 0 15px ${item.activeColor}11` : 'none'
@@ -535,13 +535,14 @@ function App() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none rounded-2xl md:rounded-3xl" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
 
                   <div className="md:w-5/12 mb-3 md:mb-0 z-10 relative">
-                    <h3 className={`text-base md:text-xl lg:text-2xl font-black font-['Inter',system-ui,sans-serif] tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
+                    {/* 👇👇👇 ДОБАВЛЕН КЛАСС services-card-title 👇👇👇 */}
+                    <h3 className={`services-card-title text-base md:text-xl lg:text-2xl font-black font-['Inter',system-ui,sans-serif] tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
                       {item.label}
                     </h3>
                   </div>
 
                   <div className="md:w-7/12 z-10 md:pl-6 relative">
-                    <p className={`text-sm md:text-base lg:text-lg leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 font-['Inter',system-ui,sans-serif] ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
+                    <p className={`services-card-desc text-sm md:text-base lg:text-lg leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 font-['Inter',system-ui,sans-serif] ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
                       {item.desc}
                     </p>
                   </div>
@@ -559,7 +560,6 @@ function App() {
         <div className="w-full flex justify-center my-20 md:my-32">
           <div className="w-[1px] h-20 md:h-32 bg-gradient-to-b from-cyan-500/50 via-transparent to-transparent" />
         </div>
-
         {/* ========================================== */}
         {/* СЕКЦИЯ: О КОМПАНИИ */}
         {/* ========================================== */}
@@ -580,14 +580,14 @@ function App() {
             </div>
 
             <div className="space-y-6 md:space-y-8">
-              <p className="text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl font-['Inter',system-ui,sans-serif]">
+              <p className="about-text text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl font-['Inter',system-ui,sans-serif]">
                 Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
 
               <div className="flex items-start gap-3">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mt-1.5 flex-shrink-0"></span>
                 <div className="flex flex-col gap-1">
-                  
+
                 </div>
               </div>
             </div>
