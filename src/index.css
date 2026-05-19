@@ -649,3 +649,7 @@ li,
 #products .group {
   scroll-margin-top: 70px;
 }
+/* Добавьте в самый конец CSS файла */
+[id^="product-"] {
+  scroll-margin-top: 70px;
+}

@@ -245,32 +245,16 @@ function App() {
   // ==================== ИСПРАВЛЕННЫЙ СКРОЛЛ К ПРОДУКТУ (С ЗАДЕРЖКОЙ) ====================
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
-    if (productElement) {
-      const performScroll = () => {
-        const rect = productElement.getBoundingClientRect();
-        const absoluteTop = rect.top + window.scrollY;
-        const headerHeight = window.innerWidth <= 768 ? 65 : 80;
-        // Уменьшил отступ для первого скролла
-        const offsetPosition = absoluteTop - headerHeight;
+  if (productElement) {
+    // Используем встроенный браузерный метод
+    productElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      };
-
-      // Первый вызов - быстрый
-      performScroll();
-
-      // Второй вызов - через 100ms для корректировки
-      setTimeout(performScroll, 100);
-
-      // Третий вызов - через 300ms для страховки (решает проблему с изображениями)
-      setTimeout(performScroll, 300);
-    }
-
-    if (isMobile) {
-      setExpandedProduct(index);
+  if (isMobile) {
+    setExpandedProduct(index);
     }
   };
 
