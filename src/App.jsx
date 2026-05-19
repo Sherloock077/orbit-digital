@@ -33,8 +33,9 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
+      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${
+        isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+      }`}
       aria-label="Наверх"
     >
       <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6 fill-none stroke-cyan-400 stroke-2">
@@ -51,8 +52,18 @@ const SpaceBackground = () => {
   const canvasRef = useRef(null);
   const targetScrollRotation = useRef(0);
   const currentScrollRotation = useRef(0);
+  
+  // 👇 ДЛЯ ОТДЕЛЬНЫХ НАСТРОЕК НА ТЕЛЕФОНЕ
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // 👇 ОТСЛЕЖИВАЕМ РАЗМЕР ЭКРАНА
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const handleScroll = () => {
       targetScrollRotation.current = window.scrollY * 0.003;
     };
@@ -73,6 +84,7 @@ const SpaceBackground = () => {
     };
 
     const initSpace = () => {
+      // ==================== ТУННЕЛЬНЫЕ ЗВЁЗДЫ ====================
       tunnelStars = [];
       for (let i = 0; i < 400; i++) {
         tunnelStars.push({
@@ -83,29 +95,31 @@ const SpaceBackground = () => {
         });
       }
 
-      // ⭐⭐⭐ СТАТИЧНЫЕ ЗВЁЗДЫ - УВЕЛИЧЕНО ДО 600 ⭐⭐⭐
+      // ==================== СТАТИЧНЫЕ ЗВЁЗДЫ ====================
       staticStars = [];
-      for (let i = 0; i < 600; i++) {
+      const starCount = isMobile ? 400 : 600;
+      for (let i = 0; i < starCount; i++) {
         staticStars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 1.2 + 0.4,
-          opacity: Math.random(),
-          blink: Math.random() * 0.012 + 0.003
+          size: Math.random() * 0.8 + 0.2,
+          opacity: Math.random() * 0.6,
+          blink: Math.random() * 0.006 + 0.002
         });
       }
 
-      // ГАЛАКТИКА (МЛЕЧНЫЙ ПУТЬ) - БЕЗ ИЗМЕНЕНИЙ
+      // ==================== МЛЕЧНЫЙ ПУТЬ ====================
       galaxyStars = [];
       const branches = 5;
-      for (let i = 0; i < 400; i++) {
+      const galaxyCount = isMobile ? 150 : 400;
+      for (let i = 0; i < galaxyCount; i++) {
         const dist = Math.random() * 200 + 40;
         const angle = (i % branches) * ((Math.PI * 2) / branches) + (dist * 0.04);
         galaxyStars.push({
           dist: dist,
           angle: angle,
-          size: Math.random() * 1.5 + 0.8,
-          opacity: Math.random() * 0.4 + 0.3,
+          size: Math.random() * 1.2 + 0.6,
+          opacity: Math.random() * 0.25 + 0.15,
           color: i % 3 === 0 ? '#b4d2ff' : i % 2 === 0 ? '#ffffff' : '#ffd2b4'
         });
       }
@@ -118,6 +132,7 @@ const SpaceBackground = () => {
       ctx.fillStyle = 'black';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      // ==================== ТУННЕЛЬНЫЕ ЗВЁЗДЫ ====================
       const constantSpeed = 2;
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
       ctx.lineWidth = 1;
@@ -144,27 +159,30 @@ const SpaceBackground = () => {
         s.pz = s.z;
       });
 
+      // ==================== СТАТИЧНЫЕ ЗВЁЗДЫ ====================
       ctx.globalAlpha = 1;
       staticStars.forEach(p => {
         p.opacity += p.blink;
-        if (p.opacity > 1 || p.opacity < 0.1) p.blink *= -1;
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+        if (p.opacity > 0.6 || p.opacity < 0.1) p.blink *= -1;
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 0.7})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
       });
 
+      // ==================== МЛЕЧНЫЙ ПУТЬ ====================
       const gCenterX = canvas.width * 0.12;
       const gCenterY = canvas.height * 0.32;
+      
       galaxyStars.forEach(s => {
         const currentAngle = s.angle + currentScrollRotation.current;
         const x = gCenterX + Math.cos(currentAngle) * s.dist;
         const y = gCenterY + Math.sin(currentAngle) * s.dist * 0.6;
 
-        ctx.shadowBlur = 4;
+        ctx.shadowBlur = 2;
         ctx.shadowColor = s.color;
         ctx.fillStyle = s.color;
-        ctx.globalAlpha = s.opacity;
+        ctx.globalAlpha = s.opacity * 0.6;
 
         ctx.beginPath();
         ctx.arc(x, y, s.size, 0, Math.PI * 2);
@@ -182,9 +200,10 @@ const SpaceBackground = () => {
     return () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', checkMobile);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isMobile]);
 
   return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />;
 };
@@ -193,13 +212,14 @@ const SpaceBackground = () => {
 // 4. ОСНОВНОЙ КОМПОНЕНТ ПРИЛОЖЕНИЯ (APP)
 // ==========================================
 function App() {
+  // ==================== СОСТОЯНИЯ ====================
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [expandedProduct, setExpandedProduct] = useState(null);
-
   const [isMobile, setIsMobile] = useState(false);
 
+  // ==================== ОПРЕДЕЛЕНИЕ ТЕЛЕФОНА ====================
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -209,9 +229,7 @@ function App() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // ==========================================
-  // Intersection Observer для CSS-анимации
-  // ==========================================
+  // ==================== Intersection Observer ДЛЯ АНИМАЦИИ ====================
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -236,9 +254,7 @@ function App() {
     };
   }, []);
 
-  // ==========================================
-  // Функция для скролла к продукту с центрированием
-  // ==========================================
+  // ==================== СКРОЛЛ К ПРОДУКТУ ====================
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
@@ -260,6 +276,7 @@ function App() {
     }
   };
 
+  // ==================== ДАННЫЕ ДЛЯ СЕКЦИИ "НАШИ НАПРАВЛЕНИЯ" ====================
   const servicesList = [
     {
       label: "01. DPI SYSTEMS",
@@ -298,6 +315,7 @@ function App() {
     }
   ];
 
+  // ==================== ДАННЫЕ ДЛЯ СЕКЦИИ "ПРОЕКТЫ В РАЗРАБОТКЕ" ====================
   const products = [
     {
       id: "product-0",
@@ -341,6 +359,7 @@ function App() {
     }
   ];
 
+  // ==================== НАСТРОЙКА РАЗМЕРА ШРИФТА ====================
   useEffect(() => {
     const dpr = window.devicePixelRatio || 1;
     const baseFontSize = 16;
@@ -348,6 +367,7 @@ function App() {
     document.documentElement.style.fontSize = `${adjustedFontSize}px`;
   }, []);
 
+  // ==================== ОТКРЫТИЕ/ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ====================
   const openModal = () => {
     setIsModalOpen(true);
     setIsMobileMenuOpen(false);
@@ -359,6 +379,7 @@ function App() {
     document.body.style.overflow = 'auto';
   };
 
+  // ==================== НАВИГАЦИЯ ПО ЯКОРЯМ ====================
   const handleNavClick = (e, id) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
@@ -371,6 +392,7 @@ function App() {
     }
   };
 
+  // ==================== АНИМАЦИИ ДЛЯ СЕКЦИЙ ====================
   const sectionVariants = {
     hidden: { opacity: 0, scale: 0.95, filter: "blur(10px)" },
     visible: {
@@ -381,13 +403,20 @@ function App() {
     }
   };
 
+  // ==================== ОСНОВНАЯ ВЁРСТКА ====================
   return (
     <div className="min-h-screen bg-black text-[#BBBBBB] font-['Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif] selection:bg-cyan-500/30 overflow-x-hidden relative">
+      
+      {/* КОСМИЧЕСКИЙ ФОН */}
       <SpaceBackground />
+      
+      {/* КНОПКА "НАВЕРХ" */}
       <ScrollToTop />
 
-      {/* ШАПКА САЙТА */}
+      {/* ==================== ШАПКА САЙТА (HEADER) ==================== */}
       <header className="fixed top-0 left-0 w-full z-[100] px-4 md:px-16 h-20 md:h-28 flex items-center justify-between border-b border-cyan-500/20 backdrop-blur-xl bg-black/60">
+        
+        {/* ЛОГОТИП */}
         <div className="flex-shrink-0 relative group">
           <div className="absolute inset-0 bg-cyan-500 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
           <img
@@ -398,6 +427,7 @@ function App() {
           />
         </div>
 
+        {/* НАВИГАЦИЯ (ДЕСКТОП) */}
         <div className="flex items-center gap-4 md:gap-10">
           <nav className="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-[0.4em] font-medium font-['Inter',system-ui,sans-serif]">
             {['about', 'services', 'products', 'partners'].map((item) => (
@@ -417,6 +447,7 @@ function App() {
             ))}
           </nav>
 
+          {/* КНОПКА "СВЯЗАТЬСЯ" */}
           <button onClick={openModal} className="relative px-6 md:px-8 py-2 md:py-2.5 group transition-all duration-500">
             <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-['Inter',system-ui,sans-serif]">Связаться</span>
             <span className="absolute inset-0 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-sm group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-500"></span>
@@ -424,6 +455,7 @@ function App() {
             <span className="absolute right-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
           </button>
 
+          {/* КНОПКА МОБИЛЬНОГО МЕНЮ (БУРГЕР) */}
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden flex flex-col gap-2 p-2 focus:outline-none group">
             <span className={`h-[1px] bg-cyan-400 transition-all duration-300 ${isMobileMenuOpen ? 'w-6 rotate-45 translate-y-2.5' : 'w-8 group-hover:w-6'}`}></span>
             <span className={`h-[1px] bg-cyan-400 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : 'w-8 group-hover:w-4'}`}></span>
@@ -432,11 +464,13 @@ function App() {
         </div>
       </header>
 
-      {/* МОБИЛЬНОЕ МЕНЮ */}
+      {/* ==================== МОБИЛЬНОЕ МЕНЮ (АНТИМАЦИЯ) ==================== */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
             className="fixed inset-0 z-[45] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:gap-12 font-['Inter',system-ui,sans-serif]"
           >
             <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">О компании</a>
@@ -447,13 +481,15 @@ function App() {
         )}
       </AnimatePresence>
 
+      {/* ==================== ОСНОВНОЙ КОНТЕНТ ==================== */}
       <main className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 pt-20">
+        
         {/* ========================================== */}
         {/* ГЛАВНЫЙ ЭКРАН (HERO) */}
         {/* ========================================== */}
         <section className="py-20 sm:py-32 md:py-72 px-5 sm:px-10 text-center relative overflow-visible">
 
-          {/* СПУТНИК */}
+          {/* СПУТНИК (ДЕКОРАТИВНЫЙ) */}
           <motion.img
             src={orbitImg}
             alt="Orbit Space Object"
@@ -463,11 +499,16 @@ function App() {
             className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[200px] sm:w-[280px] md:w-[400px] xl:w-[600px] h-auto pointer-events-none z-0 opacity-70"
           />
 
+          {/* РАЗМЫТОЕ ПЯТНО (ДЕКОР) */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
+            
+            {/* ЗАГОЛОВОК "ORBIT" */}
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[1.1] mb-0 sm:mb-1 md:mb-2 tracking-tighter select-none font-['Inter',system-ui,sans-serif] text-center">
               <span className="text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] uppercase block">ORBIT</span>
+              
+              {/* ЗАГОЛОВОК "Digital" (ГРАДИЕНТ) */}
               <span
                 className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block font-['Inter',system-ui,sans-serif]"
                 style={{ lineHeight: 1.3, paddingBottom: '0.2em', marginTop: '-0.15em' }}
@@ -476,7 +517,7 @@ function App() {
               </span>
             </h1>
 
-            {/* УВЕЛИЧЕННЫЙ СЛОГАН */}
+            {/* ПОДЗАГОЛОВОК (СЛОГАН) */}
             <p className="custom-subtitle text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8 font-['Inter',system-ui,sans-serif]">
               // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
             </p>
@@ -487,6 +528,8 @@ function App() {
         {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
         {/* ========================================== */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
+          
+          {/* ЗАГОЛОВОК СЕКЦИИ */}
           <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
             <div className="flex items-center gap-4 mb-3">
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
@@ -504,6 +547,7 @@ function App() {
             <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
           </div>
 
+          {/* СПИСОК НАПРАВЛЕНИЙ (КАРТОЧКИ) */}
           <div className="flex flex-col gap-4 relative z-10">
             {servicesList.map((item, i) => {
               const isHovered = hoveredIndex === i;
@@ -538,7 +582,6 @@ function App() {
                   </div>
 
                   <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" style={{ backgroundColor: item.activeColor, boxShadow: `0 0 10px ${item.activeColor}` }} />
-
                   <div className="absolute top-3 right-3 text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-['Inter',system-ui,sans-serif]">
                     [ подробнее ]
                   </div>
@@ -548,12 +591,13 @@ function App() {
           </div>
         </section>
 
+        {/* РАЗДЕЛИТЕЛЬНАЯ ЛИНИЯ */}
         <div className="w-full flex justify-center my-20 md:my-32">
           <div className="w-[1px] h-20 md:h-32 bg-gradient-to-b from-cyan-500/50 via-transparent to-transparent" />
         </div>
 
         {/* ========================================== */}
-        {/* О КОМПАНИИ */}
+        {/* СЕКЦИЯ: О КОМПАНИИ */}
         {/* ========================================== */}
         <motion.section
           id="about"
@@ -564,26 +608,23 @@ function App() {
           className="mb-32 md:mb-64 py-16 md:py-24 relative"
         >
           <div className="absolute inset-0 opacity-10 [background-image:linear-gradient(#444_1px,transparent_1px),linear-gradient(90deg,#444_1px,transparent_1px)] [background-size:32px_32px]"></div>
+          
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-10 md:gap-12 items-start">
+            
             <div className="flex flex-col gap-4 border-l-2 border-purple-500 pl-6">
               <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[11px] md:text-[13px] font-['Inter',system-ui,sans-serif]">Orbit.Digital / Core</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-['Inter',system-ui,sans-serif] uppercase text-left">Инженерный <br /> Интеллект.</h2>
             </div>
+            
             <div className="space-y-6 md:space-y-8">
               <p className="text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl font-['Inter',system-ui,sans-serif]">
                 Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
-              {/* СТАТУС - ИСПРАВЛЕННАЯ ВЕРСИЯ БЕЗ НАЛОЖЕНИЯ */}
+              
+              {/* СТАТУС (ДВЕ СТРОКИ, БЕЗ НАЛОЖЕНИЯ) */}
               <div className="flex items-start gap-3">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mt-1.5 flex-shrink-0"></span>
-                <div className="flex flex-col gap-1">
-                  <span className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter',system-ui,sans-serif]">
-                    // СТАТУС: АНАЛИЗ ПОТОКОВ ЗАПУЩЕН.
-                  </span>
-                  <span className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter',system-ui,sans-serif]">
-                    СИСТЕМА АКТИВНА.
-                  </span>
-                </div>
+        
               </div>
             </div>
           </div>
@@ -600,6 +641,7 @@ function App() {
             variants={sectionVariants}
           >
             <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Проекты в разработке</h2>
+            
             <div className="flex flex-col gap-8 max-w-5xl mx-auto">
               {products.map((item, i) => (
                 <motion.div
@@ -626,9 +668,13 @@ function App() {
                     <div className="absolute inset-0 z-10 opacity-5 group-hover:opacity-0 transition-opacity duration-500" style={{ backgroundColor: item.activeColor }} />
                     <img src={item.img} alt={item.label} className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100" />
                   </div>
+                  
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
-                      <span className={`${item.textColor} text-[11px] md:text-[13px] lg:text-[14px] mb-3 block tracking-[0.4em] font-bold uppercase font-['Inter',system-ui,sans-serif]`}>{item.label}</span>
+                      {/* 👇👇👇 ИЗМЕНЕНО: ДОБАВЛЕН КЛАСС product-title 👇👇👇 */}
+                      <span className={`${item.textColor} product-title mb-3 block tracking-[0.4em] font-bold uppercase font-['Inter',system-ui,sans-serif]`}>
+                        {item.label}
+                      </span>
 
                       {(!isMobile || (isMobile && expandedProduct === i)) && (
                         <p className="text-sm md:text-base lg:text-lg text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line font-['Inter',system-ui,sans-serif]">
@@ -658,7 +704,9 @@ function App() {
           </motion.div>
         </section>
 
-        {/* ПАРТНЕРЫ */}
+        {/* ========================================== */}
+        {/* СЕКЦИЯ: ПАРТНЕРЫ */}
+        {/* ========================================== */}
         <section id="partners" className="mb-32 md:mb-64">
           <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Партнеры</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -678,7 +726,7 @@ function App() {
         </section>
       </main>
 
-      {/* ПОДВАЛ */}
+      {/* ==================== ПОДВАЛ (FOOTER) ==================== */}
       <footer className="border-t border-white/5 py-10 md:py-16 bg-[#030303] text-center relative z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
           <p className="text-gray-500 text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light max-w-[200px] md:max-w-none font-['Inter',system-ui,sans-serif]">
@@ -687,13 +735,26 @@ function App() {
         </div>
       </footer>
 
-      {/* МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ */}
+      {/* ==================== МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ ==================== */}
       <AnimatePresence>
         {isModalOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6" onClick={closeModal}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl" onClick={(e) => e.stopPropagation()}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6"
+            onClick={closeModal}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl"
+              onClick={(e) => e.stopPropagation()}
+            >
               <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none font-['Inter',system-ui,sans-serif]">&times;</button>
               <h3 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif]">Связаться с нами</h3>
+              
               <form className="space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
                 <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base font-['Inter',system-ui,sans-serif]" required />
                 <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base font-['Inter',system-ui,sans-serif]" required />

@@ -29,6 +29,32 @@ body {
 }
 
 /* ==========================================
+   КЛАСС ДЛЯ ЗАГОЛОВКОВ ПРОДУКТОВ (01. DPI SYSTEMS и т.д.)
+   ========================================== */
+
+/* Базовые стили для всех устройств */
+.product-title {
+  font-size: 20px !important;      /* ← ОСНОВНОЙ РАЗМЕР ЗАГОЛОВКОВ ПРОДУКТОВ */
+  letter-spacing: 0.1em !important;
+}
+
+/* ДЛЯ ТЕЛЕФОНОВ (ширина ≤ 768px) */
+@media (max-width: 768px) {
+  .product-title {
+    font-size: 18px !important;    /* ← РАЗМЕР ЗАГОЛОВКОВ ПРОДУКТОВ НА ТЕЛЕФОНЕ */
+    letter-spacing: 0.08em !important;
+  }
+}
+
+/* ДЛЯ ДЕСКТОПА (ширина ≥ 769px) */
+@media (min-width: 769px) {
+  .product-title {
+    font-size: 24px !important;    /* ← РАЗМЕР ЗАГОЛОВКОВ ПРОДУКТОВ НА ДЕСКТОПЕ */
+    letter-spacing: 0.12em !important;
+  }
+}
+
+/* ==========================================
    ГЛОБАЛЬНЫЕ УЛУЧШЕНИЯ ЧИТАЕМОСТИ
    ========================================== */
 
@@ -50,34 +76,52 @@ li,
 
 /* 
 
-=== ГЛАВНЫЙ ЭКРАН (HERO) ===
-• .text-5xl - слово "ORBIT"
-• h1 span:last-child - слово "Digital"
-• .custom-subtitle - подзаголовок "// Мы создаем технологии..."
+┌─────────────────────────────────────────────────────────────────────┐
+│  ГЛАВНЫЙ ЭКРАН (HERO)                                              │
+├─────────────────────────────────────────────────────────────────────┤
+│  .text-5xl              → слово "ORBIT"                             │
+│  h1 span:last-child     → слово "Digital"                           │
+│  .custom-subtitle       → подзаголовок "// Мы создаем технологии..." │
+└─────────────────────────────────────────────────────────────────────┘
 
-=== СЕКЦИЯ "НАШИ НАПРАВЛЕНИЯ" ===
-• #services .flex.items-center.gap-4 span - текст "[ Core Capabilities ]"
-• #services h2 - заголовок "Наши направления"
-• #services .group h3 - текст "01. DPI SYSTEMS"
-• #services .group p - описание "Трафик-менеджмент"
+┌─────────────────────────────────────────────────────────────────────┐
+│  СЕКЦИЯ "НАШИ НАПРАВЛЕНИЯ"                                         │
+├─────────────────────────────────────────────────────────────────────┤
+│  #services .flex.items-center.gap-4 span → текст "[ Core Capabilities ]" │
+│  #services h2                          → заголовок "Наши направления" │
+│  #services .group h3                   → текст "01. DPI SYSTEMS"      │
+│  #services .group p                    → описание "Трафик-менеджмент" │
+└─────────────────────────────────────────────────────────────────────┘
 
-=== СЕКЦИЯ "О КОМПАНИИ" ===
-• #about .text-purple-500.font-bold - "Orbit.Digital / Core"
-• #about h2 - "Инженерный Интеллект"
-• #about .text-lg.md\:text-xl.lg\:text-2xl - основной абзац
-• #about .text-cyan-400 - статус текст
+┌─────────────────────────────────────────────────────────────────────┐
+│  СЕКЦИЯ "О КОМПАНИИ"                                               │
+├─────────────────────────────────────────────────────────────────────┤
+│  #about .text-purple-500.font-bold → "Orbit.Digital / Core"         │
+│  #about h2                        → "Инженерный Интеллект"          │
+│  #about .text-lg.md\:text-xl...   → основной абзац                  │
+│  #about .text-cyan-400            → статус текст                    │
+└─────────────────────────────────────────────────────────────────────┘
 
-=== СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ" ===
-• #products h2 - "// Проекты в разработке"
-• #products .group .font-bold.uppercase - "01. DPI SYSTEMS"
-• #products .group .text-gray-400 - описание с bullet points
+┌─────────────────────────────────────────────────────────────────────┐
+│  СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ"                                     │
+├─────────────────────────────────────────────────────────────────────┤
+│  #products h2                        → "// Проекты в разработке"    │
+│  .product-title                      → "01. DPI SYSTEMS" (ОТДЕЛЬНЫЙ КЛАСС) │
+│  #products .group .text-gray-400     → описание с bullet points      │
+└─────────────────────────────────────────────────────────────────────┘
 
-=== ПАРТНЕРЫ ===
-• #partners h2 - "// Партнеры"
-• #partners span - "Partner_01"
+┌─────────────────────────────────────────────────────────────────────┐
+│  ПАРТНЕРЫ                                                          │
+├─────────────────────────────────────────────────────────────────────┤
+│  #partners h2   → "// Партнеры"                                     │
+│  #partners span → "Partner_01"                                      │
+└─────────────────────────────────────────────────────────────────────┘
 
-=== ПОДВАЛ ===
-• footer p - копирайт
+┌─────────────────────────────────────────────────────────────────────┐
+│  ПОДВАЛ                                                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  footer p → копирайт                                                │
+└─────────────────────────────────────────────────────────────────────┘
 
 */
 
@@ -127,35 +171,35 @@ li,
 
   /* ========== ЗВЁЗДНЫЙ ФОН ========== */
   canvas {
-    transform: scale(0.3) translateY(60px);
-    transform-origin: top left;
-    width: 117.6%;
-    opacity: 0.8 !important;
+    transform: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0.7 !important;
   }
 
   /* ========================================== */
   /* ========== ГЛАВНЫЙ ЭКРАН (HERO) ========== */
   /* ========================================== */
 
-  /* ЗАГОЛОВОК "ORBIT" — ПЕРВАЯ СТРОКА */
+  /* 📌 ЗАГОЛОВОК "ORBIT" — ПЕРВАЯ СТРОКА */
   .text-5xl {
-    font-size: 100px !important;  /* ← МЕНЯЙТЕ 100 ДЛЯ РАЗМЕРА ORBIT */
+    font-size: 100px !important;      /* ← МЕНЯЙТЕ ЭТО ЧИСЛО ДЛЯ РАЗМЕРА "ORBIT" */
     line-height: 1.05 !important;
     margin-bottom: 20px !important;
   }
 
-  /* ЗАГОЛОВОК "Digital" — ВТОРАЯ СТРОКА */
+  /* 📌 ЗАГОЛОВОК "Digital" — ВТОРАЯ СТРОКА */
   h1 span:last-child {
-    font-size: 100px !important;  /* ← МЕНЯЙТЕ 100 ДЛЯ РАЗМЕРА Digital */
+    font-size: 100px !important;      /* ← МЕНЯЙТЕ ЭТО ЧИСЛО ДЛЯ РАЗМЕРА "Digital" */
     line-height: 1.1 !important;
     padding-bottom: 10px !important;
     margin-top: -8px !important;
     display: inline-block !important;
   }
 
-  /* ПОДЗАГОЛОВОК — текст "// Мы создаем технологии..." */
+  /* 📌 ПОДЗАГОЛОВОК — текст "// Мы создаем технологии..." */
   .custom-subtitle {
-    font-size: 17px !important;  /* ← МЕНЯЙТЕ 17 ДЛЯ РАЗМЕРА ПОДЗАГОЛОВКА */
+    font-size: 17px !important;       /* ← МЕНЯЙТЕ ЭТО ЧИСЛО ДЛЯ РАЗМЕРА ПОДЗАГОЛОВКА */
     line-height: 1.4 !important;
     letter-spacing: 0.05em !important;
   }
@@ -164,9 +208,9 @@ li,
   /* ========== СЕКЦИЯ "НАШИ НАПРАВЛЕНИЯ" ========== */
   /* ========================================== */
 
-  /* ТЕКСТ "[ Core Capabilities ]" */
+  /* 📌 ТЕКСТ "[ Core Capabilities ]" */
   #services .flex.items-center.gap-4 span {
-    font-size: 11px !important;  /* ← РАЗМЕР Core Capabilities */
+    font-size: 11px !important;       /* ← РАЗМЕР "Core Capabilities" */
     letter-spacing: 0.4em !important;
   }
 
@@ -175,9 +219,9 @@ li,
     width: 30px !important;
   }
 
-  /* ЗАГОЛОВОК "НАШИ НАПРАВЛЕНИЯ" */
+  /* 📌 ЗАГОЛОВОК "НАШИ НАПРАВЛЕНИЯ" */
   #services h2 {
-    font-size: 36px !important;  /* ← РАЗМЕР ЗАГОЛОВКА "Наши направления" */
+    font-size: 36px !important;       /* ← РАЗМЕР ЗАГОЛОВКА "Наши направления" */
     line-height: 1.3 !important;
     padding: 7px 0 !important;
     overflow: visible !important;
@@ -206,18 +250,18 @@ li,
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
   }
 
-  /* ТЕКСТ "01. DPI SYSTEMS" — ЗАГОЛОВОК КАРТОЧКИ */
+  /* 📌 ТЕКСТ "01. DPI SYSTEMS" — ЗАГОЛОВОК КАРТОЧКИ */
   #services .group h3 {
-    font-size: 15px !important;  /* ← РАЗМЕР "01. DPI SYSTEMS" */
+    font-size: 15px !important;       /* ← РАЗМЕР "01. DPI SYSTEMS" в секции направлений */
     line-height: 1.4 !important;
     font-weight: 600 !important;
     letter-spacing: 0.02em !important;
     color: #ffffff !important;
   }
 
-  /* ТЕКСТ "Трафик-менеджмент" — ОПИСАНИЕ КАРТОЧКИ */
+  /* 📌 ТЕКСТ "Трафик-менеджмент" — ОПИСАНИЕ КАРТОЧКИ */
   #services .group p {
-    font-size: 13px !important;  /* ← РАЗМЕР ОПИСАНИЯ */
+    font-size: 13px !important;       /* ← РАЗМЕР ОПИСАНИЯ в секции направлений */
     letter-spacing: 0.12em !important;
     color: #22d3ee !important;
   }
@@ -258,25 +302,25 @@ li,
   /* ========== СЕКЦИЯ "О КОМПАНИИ" ========== */
   /* ========================================== */
 
-  /* Orbit.Digital / Core */
+  /* 📌 Orbit.Digital / Core */
   #about .text-purple-500.font-bold {
-    font-size: 14px !important;  /* ← РАЗМЕР "Orbit.Digital / Core" */
+    font-size: 12px !important;       /* ← РАЗМЕР "Orbit.Digital / Core" */
   }
 
-  /* ЗАГОЛОВОК "Инженерный Интеллект" */
+  /* 📌 ЗАГОЛОВОК "Инженерный Интеллект" */
   #about h2 {
-    font-size: 32px !important;  /* ← РАЗМЕР "Инженерный Интеллект" */
+    font-size: 28px !important;       /* ← РАЗМЕР "Инженерный Интеллект" */
   }
 
-  /* ОСНОВНОЙ ТЕКСТ ОПИСАНИЯ */
+  /* 📌 ОСНОВНОЙ ТЕКСТ ОПИСАНИЯ */
   #about .text-lg.md\:text-xl.lg\:text-2xl {
-    font-size: 18px !important;  /* ← РАЗМЕР ОСНОВНОГО ТЕКСТА */
+    font-size: 16px !important;       /* ← РАЗМЕР ОСНОВНОГО ТЕКСТА О КОМПАНИИ */
     line-height: 1.6 !important;
   }
 
-  /* ТЕКСТ СТАТУСА */
+  /* 📌 ТЕКСТ СТАТУСА */
   #about .text-xs.sm\:text-sm.md\:text-base {
-    font-size: 14px !important;  /* ← РАЗМЕР СТАТУСА */
+    font-size: 14px !important;       /* ← РАЗМЕР СТАТУСА */
     margin-top: 20px !important;
     margin-bottom: 20px !important;
     display: block !important;
@@ -290,25 +334,54 @@ li,
     gap: 20px !important;
   }
 
-  /* ========== ДРУГИЕ ЭЛЕМЕНТЫ ========== */
+  /* ========================================== */
+  /* ========== СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ" ========== */
+  /* ========================================== */
 
-  /* Раздел "Проекты в разработке" */
-  #products .group .font-bold.uppercase {
-    font-size: 16px !important;  /* ← РАЗМЕР "01. DPI SYSTEMS" в продуктах */
-    letter-spacing: 0.1em !important;
+  /* 📌 ЗАГОЛОВОК "// Проекты в разработке" */
+  #products h2 {
+    font-size: 23px !important;       /* ← РАЗМЕР ЗАГОЛОВКА "// Проекты в разработке" */
+    letter-spacing: 0.6em !important;
   }
 
-  /* ТЕКСТ В КАРТОЧКАХ "ПРОЕКТЫ В РАЗРАБОТКЕ" */
+  /* 📌 ЗАГОЛОВКИ ПРОДУКТОВ - ИСПОЛЬЗУЮТ КЛАСС .product-title (смотри в начале файла) */
+  /* Сейчас .product-title на телефоне: 18px */
+
+  /* 📌 ОПИСАНИЕ В КАРТОЧКАХ (с bullet points) */
   #products .group .text-gray-400,
   #products .group .whitespace-pre-line {
-    font-size: 14px !important;  /* ← РАЗМЕР ОПИСАНИЯ В ПРОДУКТАХ */
+    font-size: 14px !important;       /* ← РАЗМЕР ОПИСАНИЯ В ПРОДУКТАХ */
     line-height: 1.65 !important;
     color: #e0e0e0 !important;
   }
 
-  /* Кнопка "[ закрыть ]" / "[ подробнее ]" */
+  /* 📌 Кнопка "[ закрыть ]" / "[ подробнее ]" */
   #products .group .text-\[8px\].uppercase {
     font-size: 11px !important;
+  }
+
+  /* ========================================== */
+  /* ========== ПАРТНЕРЫ ========== */
+  /* ========================================== */
+
+  /* 📌 ЗАГОЛОВОК "// Партнеры" */
+  #partners h2 {
+    font-size: 11px !important;       /* ← РАЗМЕР "// Партнеры" */
+    letter-spacing: 0.4em !important;
+  }
+
+  /* 📌 ТЕКСТ "Partner_01" */
+  #partners span {
+    font-size: 11px !important;       /* ← РАЗМЕР "Partner_01" */
+  }
+
+  /* ========================================== */
+  /* ========== ПОДВАЛ ========== */
+  /* ========================================== */
+
+  /* 📌 КОПИРАЙТ */
+  footer p {
+    font-size: 9px !important;        /* ← РАЗМЕР ТЕКСТА В ПОДВАЛЕ */
   }
 
   /* ОТСТУПЫ МЕЖДУ СЕКЦИЯМИ */
@@ -332,15 +405,15 @@ li,
 
 @media (min-width: 769px) {
 
-  /* ЗАГОЛОВОК "ORBIT" на десктопе */
+  /* 📌 ЗАГОЛОВОК "ORBIT" на десктопе */
   .text-5xl {
-    font-size: 80px !important;  /* ← РАЗМЕР ORBIT на десктопе */
+    font-size: 100px !important;       /* ← РАЗМЕР "ORBIT" на десктопе */
     line-height: 1.2 !important;
   }
 
-  /* ЗАГОЛОВОК "Digital" на десктопе */
+  /* 📌 ЗАГОЛОВОК "Digital" на десктопе */
   h1 span:last-child {
-    font-size: 70px !important;  /* ← РАЗМЕР Digital на десктопе */
+    font-size: 100px !important;       /* ← РАЗМЕР "Digital" на десктопе */
     line-height: 1.3 !important;
   }
 
@@ -352,61 +425,69 @@ li,
     color: #cccccc !important;
   }
 
-  /* ТЕКСТ "[ Core Capabilities ]" на десктопе */
+  /* 📌 ТЕКСТ "[ Core Capabilities ]" на десктопе */
   #services .flex.items-center.gap-4 span {
     font-size: 12px !important;
     letter-spacing: 0.4em !important;
   }
 
-  /* Заголовок "Наши направления" на десктопе */
+  /* 📌 Заголовок "Наши направления" на десктопе */
   #services h2 {
-    font-size: 56px !important;
+    font-size: 38px !important;
   }
 
-  /* Текст "01. DPI SYSTEMS" на десктопе */
+  /* 📌 Текст "01. DPI SYSTEMS" на десктопе */
   #services .group h3 {
-    font-size: 22px !important;
+    font-size: 15px !important;
     font-weight: 700 !important;
   }
 
-  /* Текст "Трафик-менеджмент" на десктопе */
+  /* 📌 Текст "Трафик-менеджмент" на десктопе */
   #services .group p {
-    font-size: 18px !important;
+    font-size: 16px !important;
     color: #22d3ee !important;
   }
 
-  /* Заголовок "Инженерный Интеллект" на десктопе */
+  /* 📌 Заголовок "Инженерный Интеллект" на десктопе */
   #about h2 {
-    font-size: 56px !important;
+    font-size: 32px !important;
   }
 
-  /* Основной текст "О компании" на десктопе */
+  /* 📌 Основной текст "О компании" на десктопе */
   #about .text-xl {
-    font-size: 20px !important;
+    font-size: 22px !important;
     line-height: 1.6 !important;
     color: #dddddd !important;
   }
 
-  /* Заголовки продуктов */
-  #products .group .font-bold.uppercase {
-    font-size: 18px !important;
-    letter-spacing: 0.1em !important;
+  /* 📌 Заголовок "// Проекты в разработке" на десктопе */
+  #products h2 {
+    font-size: 22px !important;
+    letter-spacing: 0.6em !important;
   }
 
-  /* Описание продуктов на десктопе */
+  /* 📌 Заголовки продуктов на десктопе (используют класс .product-title) */
+  /* Сейчас .product-title на десктопе: 24px */
+
+  /* 📌 Описание продуктов на десктопе */
   #products .group .text-gray-400,
   #products .group .whitespace-pre-line {
-    font-size: 16px !important;
+    font-size: 14px !important;
     line-height: 1.7 !important;
     color: #d1d5db !important;
   }
 
-  /* Статус на десктопе */
+  /* 📌 Статус на десктопе */
   #about .text-cyan-400.text-xs.md\:text-sm {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 
-  /* Партнёры на десктопе */
+  /* 📌 Партнёры на десктопе */
+  #partners h2 {
+    font-size: 18px !important;
+    letter-spacing: 0.6em !important;
+  }
+  
   #partners span {
     font-size: 14px !important;
   }
@@ -475,6 +556,7 @@ li,
     right: 16px;
     background: rgba(34, 211, 238, 0.2);
   }
+
   .scroll-to-top svg {
     width: 20px;
     height: 20px;
@@ -488,6 +570,7 @@ li,
     bottom: 12px;
     right: 12px;
   }
+
   .scroll-to-top svg {
     width: 18px;
     height: 18px;
@@ -499,6 +582,7 @@ li,
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -628,17 +712,17 @@ li,
     top: auto !important;
     bottom: auto !important;
   }
-  
+
   /* ДОПОЛНИТЕЛЬНОЕ ИСПРАВЛЕНИЕ ДЛЯ МОДАЛЬНОГО ОКНА */
   .fixed.inset-0 form {
     gap: 16px !important;
   }
-  
+
   .fixed.inset-0 form input,
   .fixed.inset-0 form textarea {
     margin-bottom: 0 !important;
   }
-  
+
   .fixed.inset-0 form button[type="submit"] {
     margin-top: 20px !important;
     margin-bottom: 10px !important;
