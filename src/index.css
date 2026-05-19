@@ -648,7 +648,7 @@ li,
 @media (max-width: 768px) {
   /* Пункты меню: О компании, Услуги, Продукты */
   .fixed.inset-0.z-\[45\].bg-black\/95 a {
-    font-size: 40px !important;      /* ← УВЕЛИЧЬТЕ ЭТО ЧИСЛО (было ~28px) */
+    font-size: 28px !important;      /* ← УВЕЛИЧЬТЕ ЭТО ЧИСЛО (было ~28px) */
     font-weight: 900 !important;
     letter-spacing: -0.02em !important;
   }

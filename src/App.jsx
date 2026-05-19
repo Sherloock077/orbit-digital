@@ -587,12 +587,7 @@ function App() {
               <div className="flex items-start gap-3">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mt-1.5 flex-shrink-0"></span>
                 <div className="flex flex-col gap-1">
-                  <span className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter',system-ui,sans-serif]">
-                    // СТАТУС: АНАЛИЗ ПОТОКОВ ЗАПУЩЕН.
-                  </span>
-                  <span className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter',system-ui,sans-serif]">
-                    СИСТЕМА АКТИВНА.
-                  </span>
+                  
                 </div>
               </div>
             </div>
