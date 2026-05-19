@@ -33,8 +33,9 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
+      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${
+        isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+      }`}
       aria-label="Наверх"
     >
       <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6 fill-none stroke-cyan-400 stroke-2">
@@ -242,29 +243,28 @@ function App() {
     };
   }, []);
 
-  // ==================== ИСПРАВЛЕННЫЙ СКРОЛЛ К ПРОДУКТУ ====================
+  // ==================== ИСПРАВЛЕННЫЙ СКРОЛЛ К ПРОДУКТУ (С ЗАДЕРЖКОЙ) ====================
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      // 1. Получаем абсолютную позицию элемента от ВЕРХА ДОКУМЕНТА
-      const elementPosition = productElement.getBoundingClientRect().top + window.scrollY;
+      // Задержка для корректного расчёта позиции после всех рендеров
+      setTimeout(() => {
+        const rect = productElement.getBoundingClientRect();
+        const absoluteTop = rect.top + window.scrollY;
+        // Высота шапки на телефоне и десктопе
+        const headerHeight = window.innerWidth <= 768 ? 65 : 80;
+        // Небольшой дополнительный отступ для идеального позиционирования
+        const offsetPosition = absoluteTop - headerHeight - 10;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }, 50);
+    }
 
-      // 2. Задаем отступ от верха окна для шапки (чтобы карточка не уходила под неё)
-      const headerHeight = 80; // Проверьте вашу высоту шапки, возможно, 70 или 100
-
-      // 3. Вычисляем целевую позицию скролла
-      const offsetPosition = elementPosition - headerHeight;
-
-      // 4. Плавно скроллим к рассчитанной позиции
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-
-      // 5. Для мобильной версии раскрываем карточку
-      if (isMobile) {
-        setExpandedProduct(index);
-      }
+    if (isMobile) {
+      setExpandedProduct(index);
     }
   };
 
@@ -462,7 +462,7 @@ function App() {
       <main className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 pt-20">
 
         {/* ========================================== */}
-        {/* ГЛАВНЫЙ ЭКРАН (HERO) - ПОДНЯТ ВВЕРХ */}
+        {/* ГЛАВНЫЙ ЭКРАН (HERO) */}
         {/* ========================================== */}
         <section className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center py-16 text-center relative overflow-visible" style={{ minHeight: 'calc(100vh - 80px)', marginTop: '-40px' }}>
           <motion.img
