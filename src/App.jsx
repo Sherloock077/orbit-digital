@@ -246,20 +246,22 @@ function App() {
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      // АБСОЛЮТНАЯ ПОЗИЦИЯ ЭЛЕМЕНТА ОТ ВЕРХА ДОКУМЕНТА
+      // 1. Получаем абсолютную позицию элемента от ВЕРХА ДОКУМЕНТА
       const elementPosition = productElement.getBoundingClientRect().top + window.scrollY;
 
-      // ВЫСОТА ШАПКИ (учитываем, чтобы карточка не уходила под неё)
-      const headerHeight = 80;
+      // 2. Задаем отступ от верха окна для шапки (чтобы карточка не уходила под неё)
+      const headerHeight = 80; // Проверьте вашу высоту шапки, возможно, 70 или 100
 
-      // ИТОГОВАЯ ПОЗИЦИЯ ДЛЯ СКРОЛЛА
+      // 3. Вычисляем целевую позицию скролла
       const offsetPosition = elementPosition - headerHeight;
 
+      // 4. Плавно скроллим к рассчитанной позиции
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
 
+      // 5. Для мобильной версии раскрываем карточку
       if (isMobile) {
         setExpandedProduct(index);
       }
