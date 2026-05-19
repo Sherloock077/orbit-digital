@@ -245,16 +245,24 @@ function App() {
   // ==================== ИСПРАВЛЕННЫЙ СКРОЛЛ К ПРОДУКТУ (С ЗАДЕРЖКОЙ) ====================
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
-  if (productElement) {
-    // Используем встроенный браузерный метод
-    productElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  }
+    if (productElement) {
+      // Функция скролла
+      const scrollNow = () => {
+        productElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      };
 
-  if (isMobile) {
-    setExpandedProduct(index);
+      // Вызываем сразу
+      scrollNow();
+
+      // И ещё раз через 100ms для корректировки (убирает накопленный сдвиг)
+      setTimeout(scrollNow, 100);
+    }
+
+    if (isMobile) {
+      setExpandedProduct(index);
     }
   };
 
