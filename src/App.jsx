@@ -33,9 +33,8 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${
-        isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
-      }`}
+      className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[1000] w-10 h-10 md:w-12 md:h-12 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md hover:bg-cyan-500/40 hover:scale-110 active:scale-95 ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
       aria-label="Наверх"
     >
       <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6 fill-none stroke-cyan-400 stroke-2">
@@ -52,7 +51,7 @@ const SpaceBackground = () => {
   const canvasRef = useRef(null);
   const targetScrollRotation = useRef(0);
   const currentScrollRotation = useRef(0);
-  
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -165,7 +164,7 @@ const SpaceBackground = () => {
 
       const gCenterX = canvas.width * 0.12;
       const gCenterY = canvas.height * 0.32;
-      
+
       galaxyStars.forEach(s => {
         const currentAngle = s.angle + currentScrollRotation.current;
         const x = gCenterX + Math.cos(currentAngle) * s.dist;
@@ -247,14 +246,15 @@ function App() {
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      const rect = productElement.getBoundingClientRect();
-      const scrollTop = window.scrollY || window.pageYOffset;
-      const windowHeight = window.innerHeight;
-      const elementHeight = rect.height;
-      
-      // Верх картинки оказывается вверху экрана + небольшой отступ
-      const offsetPosition = scrollTop + rect.top - 80;
-      
+      // АБСОЛЮТНАЯ ПОЗИЦИЯ ЭЛЕМЕНТА ОТ ВЕРХА ДОКУМЕНТА
+      const elementPosition = productElement.getBoundingClientRect().top + window.scrollY;
+
+      // ВЫСОТА ШАПКИ (учитываем, чтобы карточка не уходила под неё)
+      const headerHeight = 80;
+
+      // ИТОГОВАЯ ПОЗИЦИЯ ДЛЯ СКРОЛЛА
+      const offsetPosition = elementPosition - headerHeight;
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -389,7 +389,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black text-[#BBBBBB] font-['Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif] selection:bg-cyan-500/30 overflow-x-hidden relative">
-      
+
       <SpaceBackground />
       <ScrollToTop />
 
@@ -458,7 +458,7 @@ function App() {
 
       {/* ==================== ОСНОВНОЙ КОНТЕНТ ==================== */}
       <main className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 pt-20">
-        
+
         {/* ========================================== */}
         {/* ГЛАВНЫЙ ЭКРАН (HERO) - ПОДНЯТ ВВЕРХ */}
         {/* ========================================== */}
@@ -572,18 +572,18 @@ function App() {
           className="mb-32 md:mb-64 py-16 md:py-24 relative"
         >
           <div className="absolute inset-0 opacity-10 [background-image:linear-gradient(#444_1px,transparent_1px),linear-gradient(90deg,#444_1px,transparent_1px)] [background-size:32px_32px]"></div>
-          
+
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-10 md:gap-12 items-start">
             <div className="flex flex-col gap-4 border-l-2 border-purple-500 pl-6">
               <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[11px] md:text-[13px] font-['Inter',system-ui,sans-serif]">Orbit.Digital / Core</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-['Inter',system-ui,sans-serif] uppercase text-left">Инженерный <br /> Интеллект.</h2>
             </div>
-            
+
             <div className="space-y-6 md:space-y-8">
               <p className="text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl font-['Inter',system-ui,sans-serif]">
                 Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
-              
+
               <div className="flex items-start gap-3">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mt-1.5 flex-shrink-0"></span>
                 <div className="flex flex-col gap-1">
@@ -610,7 +610,7 @@ function App() {
             variants={sectionVariants}
           >
             <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Проекты в разработке</h2>
-            
+
             <div className="flex flex-col gap-8 max-w-5xl mx-auto">
               {products.map((item, i) => (
                 <motion.div
@@ -637,7 +637,7 @@ function App() {
                     <div className="absolute inset-0 z-10 opacity-5 group-hover:opacity-0 transition-opacity duration-500" style={{ backgroundColor: item.activeColor }} />
                     <img src={item.img} alt={item.label} className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100" />
                   </div>
-                  
+
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
                       <span className={`${item.textColor} product-title mb-3 block tracking-[0.4em] font-bold uppercase font-['Inter',system-ui,sans-serif]`}>
@@ -722,7 +722,7 @@ function App() {
             >
               <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none font-['Inter',system-ui,sans-serif]">&times;</button>
               <h3 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif] text-center">Связаться с нами</h3>
-              
+
               <form className="flex flex-col gap-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
                 <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" required />
                 <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" required />
