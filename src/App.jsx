@@ -83,17 +83,19 @@ const SpaceBackground = () => {
         });
       }
 
+      // ⭐⭐⭐ СТАТИЧНЫЕ ЗВЁЗДЫ - УВЕЛИЧЕНО ДО 600 ⭐⭐⭐
       staticStars = [];
-      for (let i = 0; i < 400; i++) {
+      for (let i = 0; i < 600; i++) {
         staticStars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 0.8 + 0.2,
+          size: Math.random() * 1.2 + 0.4,
           opacity: Math.random(),
-          blink: Math.random() * 0.008 + 0.002
+          blink: Math.random() * 0.012 + 0.003
         });
       }
 
+      // ГАЛАКТИКА (МЛЕЧНЫЙ ПУТЬ) - БЕЗ ИЗМЕНЕНИЙ
       galaxyStars = [];
       const branches = 5;
       for (let i = 0; i < 400; i++) {
@@ -573,6 +575,15 @@ function App() {
               </p>
               {/* СТАТУС - ИСПРАВЛЕННАЯ ВЕРСИЯ БЕЗ НАЛОЖЕНИЯ */}
               <div className="flex items-start gap-3">
+                <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mt-1.5 flex-shrink-0"></span>
+                <div className="flex flex-col gap-1">
+                  <span className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter',system-ui,sans-serif]">
+                    // СТАТУС: АНАЛИЗ ПОТОКОВ ЗАПУЩЕН.
+                  </span>
+                  <span className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter',system-ui,sans-serif]">
+                    СИСТЕМА АКТИВНА.
+                  </span>
+                </div>
               </div>
             </div>
           </div>

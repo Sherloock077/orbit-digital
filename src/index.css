@@ -45,6 +45,43 @@ li,
 }
 
 /* ==========================================
+   РУКОВОДСТВО ПО РЕДАКТИРОВАНИЮ ТЕКСТА
+   ========================================== */
+
+/* 
+
+=== ГЛАВНЫЙ ЭКРАН (HERO) ===
+• .text-5xl - слово "ORBIT"
+• h1 span:last-child - слово "Digital"
+• .custom-subtitle - подзаголовок "// Мы создаем технологии..."
+
+=== СЕКЦИЯ "НАШИ НАПРАВЛЕНИЯ" ===
+• #services .flex.items-center.gap-4 span - текст "[ Core Capabilities ]"
+• #services h2 - заголовок "Наши направления"
+• #services .group h3 - текст "01. DPI SYSTEMS"
+• #services .group p - описание "Трафик-менеджмент"
+
+=== СЕКЦИЯ "О КОМПАНИИ" ===
+• #about .text-purple-500.font-bold - "Orbit.Digital / Core"
+• #about h2 - "Инженерный Интеллект"
+• #about .text-lg.md\:text-xl.lg\:text-2xl - основной абзац
+• #about .text-cyan-400 - статус текст
+
+=== СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ" ===
+• #products h2 - "// Проекты в разработке"
+• #products .group .font-bold.uppercase - "01. DPI SYSTEMS"
+• #products .group .text-gray-400 - описание с bullet points
+
+=== ПАРТНЕРЫ ===
+• #partners h2 - "// Партнеры"
+• #partners span - "Partner_01"
+
+=== ПОДВАЛ ===
+• footer p - копирайт
+
+*/
+
+/* ==========================================
    ==========================================
    ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ (ширина ≤ 768px)
    ==========================================
@@ -102,14 +139,14 @@ li,
 
   /* ЗАГОЛОВОК "ORBIT" — ПЕРВАЯ СТРОКА */
   .text-5xl {
-    font-size: 100px !important;
+    font-size: 100px !important;  /* ← МЕНЯЙТЕ 100 ДЛЯ РАЗМЕРА ORBIT */
     line-height: 1.05 !important;
     margin-bottom: 20px !important;
   }
 
   /* ЗАГОЛОВОК "Digital" — ВТОРАЯ СТРОКА */
   h1 span:last-child {
-    font-size: 100px !important;
+    font-size: 100px !important;  /* ← МЕНЯЙТЕ 100 ДЛЯ РАЗМЕРА Digital */
     line-height: 1.1 !important;
     padding-bottom: 10px !important;
     margin-top: -8px !important;
@@ -118,7 +155,7 @@ li,
 
   /* ПОДЗАГОЛОВОК — текст "// Мы создаем технологии..." */
   .custom-subtitle {
-    font-size: 17px !important;
+    font-size: 17px !important;  /* ← МЕНЯЙТЕ 17 ДЛЯ РАЗМЕРА ПОДЗАГОЛОВКА */
     line-height: 1.4 !important;
     letter-spacing: 0.05em !important;
   }
@@ -129,7 +166,7 @@ li,
 
   /* ТЕКСТ "[ Core Capabilities ]" */
   #services .flex.items-center.gap-4 span {
-    font-size: 11px !important;
+    font-size: 11px !important;  /* ← РАЗМЕР Core Capabilities */
     letter-spacing: 0.4em !important;
   }
 
@@ -140,7 +177,7 @@ li,
 
   /* ЗАГОЛОВОК "НАШИ НАПРАВЛЕНИЯ" */
   #services h2 {
-    font-size: 36px !important;
+    font-size: 36px !important;  /* ← РАЗМЕР ЗАГОЛОВКА "Наши направления" */
     line-height: 1.3 !important;
     padding: 7px 0 !important;
     overflow: visible !important;
@@ -171,7 +208,7 @@ li,
 
   /* ТЕКСТ "01. DPI SYSTEMS" — ЗАГОЛОВОК КАРТОЧКИ */
   #services .group h3 {
-    font-size: 15px !important;
+    font-size: 15px !important;  /* ← РАЗМЕР "01. DPI SYSTEMS" */
     line-height: 1.4 !important;
     font-weight: 600 !important;
     letter-spacing: 0.02em !important;
@@ -180,7 +217,7 @@ li,
 
   /* ТЕКСТ "Трафик-менеджмент" — ОПИСАНИЕ КАРТОЧКИ */
   #services .group p {
-    font-size: 13px !important;
+    font-size: 13px !important;  /* ← РАЗМЕР ОПИСАНИЯ */
     letter-spacing: 0.12em !important;
     color: #22d3ee !important;
   }
@@ -223,23 +260,23 @@ li,
 
   /* Orbit.Digital / Core */
   #about .text-purple-500.font-bold {
-    font-size: 14px !important;
+    font-size: 14px !important;  /* ← РАЗМЕР "Orbit.Digital / Core" */
   }
 
   /* ЗАГОЛОВОК "Инженерный Интеллект" */
   #about h2 {
-    font-size: 32px !important;
+    font-size: 32px !important;  /* ← РАЗМЕР "Инженерный Интеллект" */
   }
 
   /* ОСНОВНОЙ ТЕКСТ ОПИСАНИЯ */
   #about .text-lg.md\:text-xl.lg\:text-2xl {
-    font-size: 18px !important;
+    font-size: 18px !important;  /* ← РАЗМЕР ОСНОВНОГО ТЕКСТА */
     line-height: 1.6 !important;
   }
 
   /* ТЕКСТ СТАТУСА */
   #about .text-xs.sm\:text-sm.md\:text-base {
-    font-size: 14px !important;
+    font-size: 14px !important;  /* ← РАЗМЕР СТАТУСА */
     margin-top: 20px !important;
     margin-bottom: 20px !important;
     display: block !important;
@@ -257,14 +294,14 @@ li,
 
   /* Раздел "Проекты в разработке" */
   #products .group .font-bold.uppercase {
-    font-size: 16px !important;
+    font-size: 16px !important;  /* ← РАЗМЕР "01. DPI SYSTEMS" в продуктах */
     letter-spacing: 0.1em !important;
   }
 
   /* ТЕКСТ В КАРТОЧКАХ "ПРОЕКТЫ В РАЗРАБОТКЕ" */
   #products .group .text-gray-400,
   #products .group .whitespace-pre-line {
-    font-size: 14px !important;
+    font-size: 14px !important;  /* ← РАЗМЕР ОПИСАНИЯ В ПРОДУКТАХ */
     line-height: 1.65 !important;
     color: #e0e0e0 !important;
   }
@@ -297,13 +334,13 @@ li,
 
   /* ЗАГОЛОВОК "ORBIT" на десктопе */
   .text-5xl {
-    font-size: 80px !important;
+    font-size: 80px !important;  /* ← РАЗМЕР ORBIT на десктопе */
     line-height: 1.2 !important;
   }
 
   /* ЗАГОЛОВОК "Digital" на десктопе */
   h1 span:last-child {
-    font-size: 70px !important;
+    font-size: 70px !important;  /* ← РАЗМЕР Digital на десктопе */
     line-height: 1.3 !important;
   }
 
@@ -578,6 +615,7 @@ li,
     text-align: center !important;
   }
 
+  /* ИСПРАВЛЕНИЕ ФОРМЫ В МОДАЛЬНОМ ОКНЕ (от наложения текста) */
   .fixed.inset-0 form textarea {
     margin-bottom: 45px !important;
     display: block !important;
@@ -589,6 +627,21 @@ li,
     position: relative !important;
     top: auto !important;
     bottom: auto !important;
+  }
+  
+  /* ДОПОЛНИТЕЛЬНОЕ ИСПРАВЛЕНИЕ ДЛЯ МОДАЛЬНОГО ОКНА */
+  .fixed.inset-0 form {
+    gap: 16px !important;
+  }
+  
+  .fixed.inset-0 form input,
+  .fixed.inset-0 form textarea {
+    margin-bottom: 0 !important;
+  }
+  
+  .fixed.inset-0 form button[type="submit"] {
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
   }
 }
 
