@@ -53,11 +53,9 @@ const SpaceBackground = () => {
   const targetScrollRotation = useRef(0);
   const currentScrollRotation = useRef(0);
   
-  // 👇 ДЛЯ ОТДЕЛЬНЫХ НАСТРОЕК НА ТЕЛЕФОНЕ
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // 👇 ОТСЛЕЖИВАЕМ РАЗМЕР ЭКРАНА
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -84,7 +82,6 @@ const SpaceBackground = () => {
     };
 
     const initSpace = () => {
-      // ==================== ТУННЕЛЬНЫЕ ЗВЁЗДЫ ====================
       tunnelStars = [];
       for (let i = 0; i < 400; i++) {
         tunnelStars.push({
@@ -95,7 +92,6 @@ const SpaceBackground = () => {
         });
       }
 
-      // ==================== СТАТИЧНЫЕ ЗВЁЗДЫ ====================
       staticStars = [];
       const starCount = isMobile ? 400 : 600;
       for (let i = 0; i < starCount; i++) {
@@ -108,7 +104,6 @@ const SpaceBackground = () => {
         });
       }
 
-      // ==================== МЛЕЧНЫЙ ПУТЬ ====================
       galaxyStars = [];
       const branches = 5;
       const galaxyCount = isMobile ? 150 : 400;
@@ -132,7 +127,6 @@ const SpaceBackground = () => {
       ctx.fillStyle = 'black';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // ==================== ТУННЕЛЬНЫЕ ЗВЁЗДЫ ====================
       const constantSpeed = 2;
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
       ctx.lineWidth = 1;
@@ -159,7 +153,6 @@ const SpaceBackground = () => {
         s.pz = s.z;
       });
 
-      // ==================== СТАТИЧНЫЕ ЗВЁЗДЫ ====================
       ctx.globalAlpha = 1;
       staticStars.forEach(p => {
         p.opacity += p.blink;
@@ -170,7 +163,6 @@ const SpaceBackground = () => {
         ctx.fill();
       });
 
-      // ==================== МЛЕЧНЫЙ ПУТЬ ====================
       const gCenterX = canvas.width * 0.12;
       const gCenterY = canvas.height * 0.32;
       
@@ -212,14 +204,12 @@ const SpaceBackground = () => {
 // 4. ОСНОВНОЙ КОМПОНЕНТ ПРИЛОЖЕНИЯ (APP)
 // ==========================================
 function App() {
-  // ==================== СОСТОЯНИЯ ====================
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [expandedProduct, setExpandedProduct] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // ==================== ОПРЕДЕЛЕНИЕ ТЕЛЕФОНА ====================
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -229,7 +219,6 @@ function App() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // ==================== Intersection Observer ДЛЯ АНИМАЦИИ ====================
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -254,19 +243,15 @@ function App() {
     };
   }, []);
 
-  // ==================== СКРОЛЛ К ПРОДУКТУ ====================
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      const windowHeight = window.innerHeight;
       const elementRect = productElement.getBoundingClientRect();
-      const elementHeight = elementRect.height;
-
-      let offsetPosition = elementRect.top + window.pageYOffset - (windowHeight / 2) + (elementHeight / 2);
-      offsetPosition = offsetPosition - 30;
-
+      const absoluteElementTop = elementRect.top + window.pageYOffset;
+      const middleOfElement = absoluteElementTop - (window.innerHeight / 2) + (elementRect.height / 2);
+      
       window.scrollTo({
-        top: offsetPosition,
+        top: middleOfElement,
         behavior: 'smooth'
       });
 
@@ -276,7 +261,6 @@ function App() {
     }
   };
 
-  // ==================== ДАННЫЕ ДЛЯ СЕКЦИИ "НАШИ НАПРАВЛЕНИЯ" ====================
   const servicesList = [
     {
       label: "01. DPI SYSTEMS",
@@ -315,7 +299,6 @@ function App() {
     }
   ];
 
-  // ==================== ДАННЫЕ ДЛЯ СЕКЦИИ "ПРОЕКТЫ В РАЗРАБОТКЕ" ====================
   const products = [
     {
       id: "product-0",
@@ -359,7 +342,6 @@ function App() {
     }
   ];
 
-  // ==================== НАСТРОЙКА РАЗМЕРА ШРИФТА ====================
   useEffect(() => {
     const dpr = window.devicePixelRatio || 1;
     const baseFontSize = 16;
@@ -367,7 +349,6 @@ function App() {
     document.documentElement.style.fontSize = `${adjustedFontSize}px`;
   }, []);
 
-  // ==================== ОТКРЫТИЕ/ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ====================
   const openModal = () => {
     setIsModalOpen(true);
     setIsMobileMenuOpen(false);
@@ -379,20 +360,18 @@ function App() {
     document.body.style.overflow = 'auto';
   };
 
-  // ==================== НАВИГАЦИЯ ПО ЯКОРЯМ ====================
   const handleNavClick = (e, id) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       window.scrollTo({
-        top: element.offsetTop - 120,
+        top: element.offsetTop - 80,
         behavior: 'smooth'
       });
     }
   };
 
-  // ==================== АНИМАЦИИ ДЛЯ СЕКЦИЙ ====================
   const sectionVariants = {
     hidden: { opacity: 0, scale: 0.95, filter: "blur(10px)" },
     visible: {
@@ -403,20 +382,14 @@ function App() {
     }
   };
 
-  // ==================== ОСНОВНАЯ ВЁРСТКА ====================
   return (
     <div className="min-h-screen bg-black text-[#BBBBBB] font-['Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif] selection:bg-cyan-500/30 overflow-x-hidden relative">
       
-      {/* КОСМИЧЕСКИЙ ФОН */}
       <SpaceBackground />
-      
-      {/* КНОПКА "НАВЕРХ" */}
       <ScrollToTop />
 
-      {/* ==================== ШАПКА САЙТА (HEADER) ==================== */}
+      {/* ==================== ШАПКА САЙТА ==================== */}
       <header className="fixed top-0 left-0 w-full z-[100] px-4 md:px-16 h-20 md:h-28 flex items-center justify-between border-b border-cyan-500/20 backdrop-blur-xl bg-black/60">
-        
-        {/* ЛОГОТИП */}
         <div className="flex-shrink-0 relative group">
           <div className="absolute inset-0 bg-cyan-500 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
           <img
@@ -427,7 +400,6 @@ function App() {
           />
         </div>
 
-        {/* НАВИГАЦИЯ (ДЕСКТОП) */}
         <div className="flex items-center gap-4 md:gap-10">
           <nav className="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-[0.4em] font-medium font-['Inter',system-ui,sans-serif]">
             {['about', 'services', 'products', 'partners'].map((item) => (
@@ -447,7 +419,6 @@ function App() {
             ))}
           </nav>
 
-          {/* КНОПКА "СВЯЗАТЬСЯ" */}
           <button onClick={openModal} className="relative px-6 md:px-8 py-2 md:py-2.5 group transition-all duration-500">
             <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-['Inter',system-ui,sans-serif]">Связаться</span>
             <span className="absolute inset-0 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-sm group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-500"></span>
@@ -455,7 +426,6 @@ function App() {
             <span className="absolute right-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
           </button>
 
-          {/* КНОПКА МОБИЛЬНОГО МЕНЮ (БУРГЕР) */}
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden flex flex-col gap-2 p-2 focus:outline-none group">
             <span className={`h-[1px] bg-cyan-400 transition-all duration-300 ${isMobileMenuOpen ? 'w-6 rotate-45 translate-y-2.5' : 'w-8 group-hover:w-6'}`}></span>
             <span className={`h-[1px] bg-cyan-400 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : 'w-8 group-hover:w-4'}`}></span>
@@ -464,7 +434,7 @@ function App() {
         </div>
       </header>
 
-      {/* ==================== МОБИЛЬНОЕ МЕНЮ (АНТИМАЦИЯ) ==================== */}
+      {/* ==================== МОБИЛЬНОЕ МЕНЮ ==================== */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -473,10 +443,10 @@ function App() {
             exit={{ opacity: 0, scale: 1.1 }}
             className="fixed inset-0 z-[45] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:gap-12 font-['Inter',system-ui,sans-serif]"
           >
-            <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">О компании</a>
-            <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Услуги</a>
-            <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Продукты</a>
-            <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-xs md:text-sm tracking-widest hover:bg-cyan-400 font-['Inter',system-ui,sans-serif]">Начать проект</button>
+            <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">О компании</a>
+            <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Услуги</a>
+            <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Продукты</a>
+            <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-base md:text-sm tracking-widest hover:bg-cyan-400 font-['Inter',system-ui,sans-serif]">Начать проект</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -487,9 +457,7 @@ function App() {
         {/* ========================================== */}
         {/* ГЛАВНЫЙ ЭКРАН (HERO) */}
         {/* ========================================== */}
-        <section className="py-20 sm:py-32 md:py-72 px-5 sm:px-10 text-center relative overflow-visible">
-
-          {/* СПУТНИК (ДЕКОРАТИВНЫЙ) */}
+        <section className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center py-10 text-center relative overflow-visible">
           <motion.img
             src={orbitImg}
             alt="Orbit Space Object"
@@ -499,25 +467,20 @@ function App() {
             className="absolute top-[-5%] right-[-55%] sm:top-[-10%] sm:right-[-45%] md:top-[-20%] md:right-[-65%] xl:top-[-25%] xl:right-[-70%] w-[200px] sm:w-[280px] md:w-[400px] xl:w-[600px] h-auto pointer-events-none z-0 opacity-70"
           />
 
-          {/* РАЗМЫТОЕ ПЯТНО (ДЕКОР) */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
-            
-            {/* ЗАГОЛОВОК "ORBIT" */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.2 }}
+            className="w-full"
+          >
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[1.1] mb-0 sm:mb-1 md:mb-2 tracking-tighter select-none font-['Inter',system-ui,sans-serif] text-center">
               <span className="text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] uppercase block">ORBIT</span>
-              
-              {/* ЗАГОЛОВОК "Digital" (ГРАДИЕНТ) */}
-              <span
-                className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block font-['Inter',system-ui,sans-serif]"
-                style={{ lineHeight: 1.3, paddingBottom: '0.2em', marginTop: '-0.15em' }}
-              >
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block font-['Inter',system-ui,sans-serif]" style={{ lineHeight: 1.3, paddingBottom: '0.2em', marginTop: '-0.15em' }}>
                 Digital
               </span>
             </h1>
-
-            {/* ПОДЗАГОЛОВОК (СЛОГАН) */}
             <p className="custom-subtitle text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8 font-['Inter',system-ui,sans-serif]">
               // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
             </p>
@@ -528,8 +491,6 @@ function App() {
         {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
         {/* ========================================== */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
-          
-          {/* ЗАГОЛОВОК СЕКЦИИ */}
           <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
             <div className="flex items-center gap-4 mb-3">
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
@@ -547,7 +508,6 @@ function App() {
             <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
           </div>
 
-          {/* СПИСОК НАПРАВЛЕНИЙ (КАРТОЧКИ) */}
           <div className="flex flex-col gap-4 relative z-10">
             {servicesList.map((item, i) => {
               const isHovered = hoveredIndex === i;
@@ -591,7 +551,6 @@ function App() {
           </div>
         </section>
 
-        {/* РАЗДЕЛИТЕЛЬНАЯ ЛИНИЯ */}
         <div className="w-full flex justify-center my-20 md:my-32">
           <div className="w-[1px] h-20 md:h-32 bg-gradient-to-b from-cyan-500/50 via-transparent to-transparent" />
         </div>
@@ -610,7 +569,6 @@ function App() {
           <div className="absolute inset-0 opacity-10 [background-image:linear-gradient(#444_1px,transparent_1px),linear-gradient(90deg,#444_1px,transparent_1px)] [background-size:32px_32px]"></div>
           
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-10 md:gap-12 items-start">
-            
             <div className="flex flex-col gap-4 border-l-2 border-purple-500 pl-6">
               <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[11px] md:text-[13px] font-['Inter',system-ui,sans-serif]">Orbit.Digital / Core</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-['Inter',system-ui,sans-serif] uppercase text-left">Инженерный <br /> Интеллект.</h2>
@@ -621,10 +579,16 @@ function App() {
                 Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
               
-              {/* СТАТУС (ДВЕ СТРОКИ, БЕЗ НАЛОЖЕНИЯ) */}
               <div className="flex items-start gap-3">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mt-1.5 flex-shrink-0"></span>
-        
+                <div className="flex flex-col gap-1">
+                  <span className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter',system-ui,sans-serif]">
+                    // СТАТУС: АНАЛИЗ ПОТОКОВ ЗАПУЩЕН.
+                  </span>
+                  <span className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter',system-ui,sans-serif]">
+                    СИСТЕМА АКТИВНА.
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -671,7 +635,6 @@ function App() {
                   
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
-                      {/* 👇👇👇 ИЗМЕНЕНО: ДОБАВЛЕН КЛАСС product-title 👇👇👇 */}
                       <span className={`${item.textColor} product-title mb-3 block tracking-[0.4em] font-bold uppercase font-['Inter',system-ui,sans-serif]`}>
                         {item.label}
                       </span>
@@ -726,7 +689,7 @@ function App() {
         </section>
       </main>
 
-      {/* ==================== ПОДВАЛ (FOOTER) ==================== */}
+      {/* ==================== ПОДВАЛ ==================== */}
       <footer className="border-t border-white/5 py-10 md:py-16 bg-[#030303] text-center relative z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
           <p className="text-gray-500 text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light max-w-[200px] md:max-w-none font-['Inter',system-ui,sans-serif]">
@@ -735,7 +698,7 @@ function App() {
         </div>
       </footer>
 
-      {/* ==================== МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ ==================== */}
+      {/* ==================== МОДАЛЬНОЕ ОКНО ==================== */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
