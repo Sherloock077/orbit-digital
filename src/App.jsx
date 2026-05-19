@@ -246,7 +246,7 @@ function App() {
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      // Функция для выполнения скролла
+      // Функция скролла
       const performScroll = () => {
         const rect = productElement.getBoundingClientRect();
         const absoluteTop = rect.top + window.scrollY;
@@ -259,16 +259,11 @@ function App() {
         });
       };
 
-      // Проверяем, загружена ли страница
-      if (document.readyState === 'complete') {
-        // Страница загружена, можно скроллить
-        setTimeout(performScroll, 100);
-      } else {
-        // Ждём полной загрузки страницы
-        window.addEventListener('load', () => {
-          setTimeout(performScroll, 100);
-        });
-      }
+      // ДВАЖДЫ ВЫЗЫВАЕМ С НЕБОЛЬШИМ ИНТЕРВАЛОМ
+      // Первый вызов - пробный
+      setTimeout(performScroll, 50);
+      // Второй вызов - корректирующий (через 150ms, когда картинки точно загрузились)
+      setTimeout(performScroll, 200);
     }
 
     if (isMobile) {
