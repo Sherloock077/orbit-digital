@@ -710,25 +710,34 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6"
+            className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4"
             onClick={closeModal}
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl"
+              // ИСПРАВЛЕНИЕ ЗДЕСЬ: убрал max-h-[90vh], добавил overflow-y-auto и pb-2
+              className="bg-black border border-cyan-500 p-6 w-full max-w-md relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none font-['Inter',system-ui,sans-serif]">&times;</button>
-              <h3 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif] text-center">Связаться с нами</h3>
+              <button onClick={closeModal} className="absolute top-3 right-4 text-cyan-500/50 hover:text-cyan-400 text-3xl focus:outline-none z-10">
+                &times;
+              </button>
 
-              <form className="flex flex-col gap-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
+              <h3 className="text-2xl md:text-3xl font-black mb-6 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif] text-center pr-4">
+                Связаться с нами
+              </h3>
+
+              {/* ИСПРАВЛЕНИЕ ЗДЕСЬ: добавил отступ снизу pb-4 для формы */}
+              <form className="space-y-4 pb-4" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
                 <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" required />
                 <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" required />
                 <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" />
                 <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-base font-['Inter',system-ui,sans-serif]"></textarea>
-                <button type="submit" className="w-full bg-cyan-500 text-black py-4 rounded-2xl text-lg font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all font-['Inter',system-ui,sans-serif] mt-4">Отправить запрос</button>
+                <button type="submit" className="w-full bg-cyan-500 text-black py-4 rounded-2xl text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all mt-2">
+                  Отправить запрос
+                </button>
               </form>
             </motion.div>
           </motion.div>
