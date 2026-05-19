@@ -411,7 +411,7 @@ li,
 
   #products .group .text-gray-400,
   #products .group .whitespace-pre-line {
-    font-size: 17px !important;
+    font-size: 15px !important;
     /* описание текстов подробнее */
     line-height: 1.7 !important;
     color: #d1d5db !important;
