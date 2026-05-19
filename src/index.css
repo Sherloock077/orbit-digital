@@ -641,3 +641,22 @@ li,
     scroll-margin-top: 85px;
   }
 }
+/* ==========================================
+   УВЕЛИЧЕНИЕ ТЕКСТА В БУРГЕР-МЕНЮ (ТОЛЬКО ТЕЛЕФОН)
+   ========================================== */
+
+@media (max-width: 768px) {
+  /* Пункты меню: О компании, Услуги, Продукты */
+  .fixed.inset-0.z-\[45\].bg-black\/95 a {
+    font-size: 40px !important;      /* ← УВЕЛИЧЬТЕ ЭТО ЧИСЛО (было ~28px) */
+    font-weight: 900 !important;
+    letter-spacing: -0.02em !important;
+  }
+  
+  /* Кнопка "Начать проект" */
+  .fixed.inset-0.z-\[45\].bg-black\/95 button {
+    font-size: 24px !important;      /* ← УВЕЛИЧЬТЕ ЭТО ЧИСЛО (было ~16px) */
+    padding: 18px 40px !important;
+    margin-top: 30px !important;
+  }
+}
