@@ -243,15 +243,20 @@ function App() {
     };
   }, []);
 
+  // ==================== ИСПРАВЛЕННЫЙ СКРОЛЛ К ПРОДУКТУ ====================
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      const elementRect = productElement.getBoundingClientRect();
-      const absoluteElementTop = elementRect.top + window.pageYOffset;
-      const middleOfElement = absoluteElementTop - (window.innerHeight / 2) + (elementRect.height / 2);
+      const rect = productElement.getBoundingClientRect();
+      const scrollTop = window.scrollY || window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      const elementHeight = rect.height;
+      
+      // Верх картинки оказывается вверху экрана + небольшой отступ
+      const offsetPosition = scrollTop + rect.top - 80;
       
       window.scrollTo({
-        top: middleOfElement,
+        top: offsetPosition,
         behavior: 'smooth'
       });
 
@@ -455,9 +460,9 @@ function App() {
       <main className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 pt-20">
         
         {/* ========================================== */}
-        {/* ГЛАВНЫЙ ЭКРАН (HERO) */}
+        {/* ГЛАВНЫЙ ЭКРАН (HERO) - ПОДНЯТ ВВЕРХ */}
         {/* ========================================== */}
-        <section className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center py-10 text-center relative overflow-visible">
+        <section className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center py-16 text-center relative overflow-visible" style={{ minHeight: 'calc(100vh - 80px)', marginTop: '-40px' }}>
           <motion.img
             src={orbitImg}
             alt="Orbit Space Object"
@@ -716,14 +721,14 @@ function App() {
               onClick={(e) => e.stopPropagation()}
             >
               <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none font-['Inter',system-ui,sans-serif]">&times;</button>
-              <h3 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif]">Связаться с нами</h3>
+              <h3 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif] text-center">Связаться с нами</h3>
               
-              <form className="space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
-                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base font-['Inter',system-ui,sans-serif]" required />
-                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base font-['Inter',system-ui,sans-serif]" required />
-                <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base font-['Inter',system-ui,sans-serif]" />
-                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base font-['Inter',system-ui,sans-serif]"></textarea>
-                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-2xl text-sm md:text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all font-['Inter',system-ui,sans-serif]">Отправить запрос</button>
+              <form className="flex flex-col gap-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
+                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" required />
+                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" required />
+                <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" />
+                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-base font-['Inter',system-ui,sans-serif]"></textarea>
+                <button type="submit" className="w-full bg-cyan-500 text-black py-4 rounded-2xl text-lg font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all font-['Inter',system-ui,sans-serif] mt-4">Отправить запрос</button>
               </form>
             </motion.div>
           </motion.div>
