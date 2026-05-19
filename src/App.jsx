@@ -246,12 +246,12 @@ function App() {
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      // Функция скролла
       const performScroll = () => {
         const rect = productElement.getBoundingClientRect();
         const absoluteTop = rect.top + window.scrollY;
         const headerHeight = window.innerWidth <= 768 ? 65 : 80;
-        const offsetPosition = absoluteTop - headerHeight - 10;
+        // Уменьшил отступ для первого скролла
+        const offsetPosition = absoluteTop - headerHeight;
 
         window.scrollTo({
           top: offsetPosition,
@@ -259,11 +259,14 @@ function App() {
         });
       };
 
-      // ДВАЖДЫ ВЫЗЫВАЕМ С НЕБОЛЬШИМ ИНТЕРВАЛОМ
-      // Первый вызов - пробный
-      setTimeout(performScroll, 50);
-      // Второй вызов - корректирующий (через 150ms, когда картинки точно загрузились)
-      setTimeout(performScroll, 200);
+      // Первый вызов - быстрый
+      performScroll();
+
+      // Второй вызов - через 100ms для корректировки
+      setTimeout(performScroll, 100);
+
+      // Третий вызов - через 300ms для страховки (решает проблему с изображениями)
+      setTimeout(performScroll, 300);
     }
 
     if (isMobile) {
