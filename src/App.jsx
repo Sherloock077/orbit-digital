@@ -5,10 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 // 1. ИМПОРТЫ СТАТИЧЕСКИХ РЕСУРСОВ (ИЗОБРАЖЕНИЙ)
 // ==========================================
 import logoImg from './assets/logo.png';
-// ==========================================
-// ⚠️ ПЛАНЕТА (ЛУНА) - ЗАКОММЕНТИРОВАНА ⚠️
-// ==========================================
-// import planetImg from './assets/planet.png'; // Планета (временно удалена)
 import orbitImg from './assets/orbit.jpg';
 import imgBigData from './assets/bigdata.jpg';
 import imgDPI from './assets/DPI.jpg';
@@ -244,15 +240,11 @@ function App() {
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      // Получаем высоту экрана и высоту элемента
       const windowHeight = window.innerHeight;
       const elementRect = productElement.getBoundingClientRect();
       const elementHeight = elementRect.height;
 
-      // Считаем позицию для идеального центрирования
       let offsetPosition = elementRect.top + window.pageYOffset - (windowHeight / 2) + (elementHeight / 2);
-
-      // Дополнительный отступ для шапки (65px)
       offsetPosition = offsetPosition - 30;
 
       window.scrollTo({
@@ -260,12 +252,12 @@ function App() {
         behavior: 'smooth'
       });
 
-      // Раскрываем карточку на телефоне
       if (isMobile) {
         setExpandedProduct(index);
       }
     }
   };
+
   const servicesList = [
     {
       label: "01. DPI SYSTEMS",
@@ -388,7 +380,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-[#BBBBBB] font-mono selection:bg-cyan-500/30 overflow-x-hidden relative">
+    <div className="min-h-screen bg-black text-[#BBBBBB] font-['Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif] selection:bg-cyan-500/30 overflow-x-hidden relative">
       <SpaceBackground />
       <ScrollToTop />
 
@@ -405,7 +397,7 @@ function App() {
         </div>
 
         <div className="flex items-center gap-4 md:gap-10">
-          <nav className="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-[0.4em] font-medium">
+          <nav className="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-[0.4em] font-medium font-['Inter',system-ui,sans-serif]">
             {['about', 'services', 'products', 'partners'].map((item) => (
               <a
                 key={item}
@@ -424,7 +416,7 @@ function App() {
           </nav>
 
           <button onClick={openModal} className="relative px-6 md:px-8 py-2 md:py-2.5 group transition-all duration-500">
-            <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-sans">Связаться</span>
+            <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-['Inter',system-ui,sans-serif]">Связаться</span>
             <span className="absolute inset-0 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-sm group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-500"></span>
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
             <span className="absolute right-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
@@ -443,12 +435,12 @@ function App() {
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }}
-            className="fixed inset-0 z-[45] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:gap-12 font-sans"
+            className="fixed inset-0 z-[45] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:gap-12 font-['Inter',system-ui,sans-serif]"
           >
             <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">О компании</a>
             <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Услуги</a>
             <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Продукты</a>
-            <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-xs md:text-sm tracking-widest hover:bg-cyan-400">Начать проект</button>
+            <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-xs md:text-sm tracking-widest hover:bg-cyan-400 font-['Inter',system-ui,sans-serif]">Начать проект</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -459,7 +451,7 @@ function App() {
         {/* ========================================== */}
         <section className="py-20 sm:py-32 md:py-72 px-5 sm:px-10 text-center relative overflow-visible">
 
-          {/* НОВЫЙ СПУТНИК ВМЕСТО ПЛАНЕТЫ */}
+          {/* СПУТНИК */}
           <motion.img
             src={orbitImg}
             alt="Orbit Space Object"
@@ -472,10 +464,10 @@ function App() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.2 }}>
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[1.1] mb-0 sm:mb-1 md:mb-2 tracking-tighter select-none font-sans text-center">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-[1.1] mb-0 sm:mb-1 md:mb-2 tracking-tighter select-none font-['Inter',system-ui,sans-serif] text-center">
               <span className="text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] uppercase block">ORBIT</span>
               <span
-                className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block"
+                className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 block font-['Inter',system-ui,sans-serif]"
                 style={{ lineHeight: 1.3, paddingBottom: '0.2em', marginTop: '-0.15em' }}
               >
                 Digital
@@ -483,26 +475,26 @@ function App() {
             </h1>
 
             {/* УВЕЛИЧЕННЫЙ СЛОГАН */}
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8">
+            <p className="custom-subtitle text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8 font-['Inter',system-ui,sans-serif]">
               // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
             </p>
           </motion.div>
         </section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ — С ВОЗМОЖНОСТЬЮ КЛИКА */}
+        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
         {/* ========================================== */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
           <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
             <div className="flex items-center gap-4 mb-3">
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-              <span className="text-cyan-400 font-mono text-[10px] md:text-[12px] tracking-[0.6em] uppercase font-bold">
+              <span className="text-cyan-400 font-['Inter',system-ui,sans-serif] text-[10px] md:text-[12px] tracking-[0.6em] uppercase font-bold">
                 [ Core Capabilities ]
               </span>
               <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
             </div>
 
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-sans relative select-none">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-['Inter',system-ui,sans-serif] relative select-none">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">направления</span>
             </h2>
@@ -520,7 +512,6 @@ function App() {
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => {
                     scrollToProduct(item.productIndex);
-                    // Визуальная обратная связь при клике
                     setHoveredIndex(i);
                     setTimeout(() => setHoveredIndex(null), 300);
                   }}
@@ -533,20 +524,20 @@ function App() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none rounded-2xl md:rounded-3xl" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
 
                   <div className="md:w-5/12 mb-3 md:mb-0 z-10 relative">
-                    <h3 className={`text-base md:text-xl lg:text-2xl font-black font-mono tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
+                    <h3 className={`text-base md:text-xl lg:text-2xl font-black font-['Inter',system-ui,sans-serif] tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
                       {item.label}
                     </h3>
                   </div>
 
                   <div className="md:w-7/12 z-10 md:pl-6 relative">
-                    <p className={`text-sm md:text-base lg:text-lg leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
+                    <p className={`text-sm md:text-base lg:text-lg leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 font-['Inter',system-ui,sans-serif] ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
                       {item.desc}
                     </p>
                   </div>
 
                   <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" style={{ backgroundColor: item.activeColor, boxShadow: `0 0 10px ${item.activeColor}` }} />
 
-                  <div className="absolute top-3 right-3 text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-mono">
+                  <div className="absolute top-3 right-3 text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-['Inter',system-ui,sans-serif]">
                     [ подробнее ]
                   </div>
                 </div>
@@ -573,16 +564,15 @@ function App() {
           <div className="absolute inset-0 opacity-10 [background-image:linear-gradient(#444_1px,transparent_1px),linear-gradient(90deg,#444_1px,transparent_1px)] [background-size:32px_32px]"></div>
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-10 md:gap-12 items-start">
             <div className="flex flex-col gap-4 border-l-2 border-purple-500 pl-6">
-              <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[11px] md:text-[13px]">Orbit.Digital / Core</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-sans uppercase text-left">Инженерный <br /> Интеллект.</h2>
+              <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[11px] md:text-[13px] font-['Inter',system-ui,sans-serif]">Orbit.Digital / Core</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-['Inter',system-ui,sans-serif] uppercase text-left">Инженерный <br /> Интеллект.</h2>
             </div>
             <div className="space-y-6 md:space-y-8">
-              <p className="text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl">
+              <p className="text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl font-['Inter',system-ui,sans-serif]">
                 Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
-              <div className="text-cyan-400 text-xs sm:text-sm md:text-base uppercase text-left font-mono tracking-widest flex items-center gap-3">
-                <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
-                // СТАТУС: АНАЛИЗ ПОТОКОВ ЗАПУЩЕН. СИСТЕМА АКТИВНА.
+              {/* СТАТУС - ИСПРАВЛЕННАЯ ВЕРСИЯ БЕЗ НАЛОЖЕНИЯ */}
+              <div className="flex items-start gap-3">
               </div>
             </div>
           </div>
@@ -598,7 +588,7 @@ function App() {
             viewport={{ once: true, amount: 0.1 }}
             variants={sectionVariants}
           >
-            <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20">// Проекты в разработке</h2>
+            <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Проекты в разработке</h2>
             <div className="flex flex-col gap-8 max-w-5xl mx-auto">
               {products.map((item, i) => (
                 <motion.div
@@ -627,10 +617,10 @@ function App() {
                   </div>
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
-                      <span className={`${item.textColor} text-[11px] md:text-[13px] lg:text-[14px] mb-3 block tracking-[0.4em] font-bold uppercase`}>{item.label}</span>
+                      <span className={`${item.textColor} text-[11px] md:text-[13px] lg:text-[14px] mb-3 block tracking-[0.4em] font-bold uppercase font-['Inter',system-ui,sans-serif]`}>{item.label}</span>
 
                       {(!isMobile || (isMobile && expandedProduct === i)) && (
-                        <p className="text-sm md:text-base lg:text-lg text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line">
+                        <p className="text-sm md:text-base lg:text-lg text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line font-['Inter',system-ui,sans-serif]">
                           {item.desc}
                         </p>
                       )}
@@ -643,7 +633,7 @@ function App() {
                       </div>
 
                       {isMobile && (
-                        <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 font-mono">
+                        <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 font-['Inter',system-ui,sans-serif]">
                           {expandedProduct === i ? '[ закрыть ]' : '[ подробнее ]'}
                         </span>
                       )}
@@ -659,7 +649,7 @@ function App() {
 
         {/* ПАРТНЕРЫ */}
         <section id="partners" className="mb-32 md:mb-64">
-          <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20">// Партнеры</h2>
+          <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Партнеры</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {[1, 2, 3, 4].map((id) => (
               <motion.div
@@ -670,7 +660,7 @@ function App() {
                 className="h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden rounded-2xl"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000"></div>
-                <span className="text-[#444] group-hover:text-cyan-400 font-bold text-[11px] md:text-sm tracking-widest uppercase relative z-10">Partner_0{id}</span>
+                <span className="text-[#444] group-hover:text-cyan-400 font-bold text-[11px] md:text-sm tracking-widest uppercase relative z-10 font-['Inter',system-ui,sans-serif]">Partner_0{id}</span>
               </motion.div>
             ))}
           </div>
@@ -680,7 +670,7 @@ function App() {
       {/* ПОДВАЛ */}
       <footer className="border-t border-white/5 py-10 md:py-16 bg-[#030303] text-center relative z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
-          <p className="text-gray-500 text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light max-w-[200px] md:max-w-none">
+          <p className="text-gray-500 text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light max-w-[200px] md:max-w-none font-['Inter',system-ui,sans-serif]">
             &copy; 2026 Orbit Digital // Технологии для эффективной работы.
           </p>
         </div>
@@ -691,14 +681,14 @@ function App() {
         {isModalOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-6" onClick={closeModal}>
             <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-black border border-cyan-500 p-6 md:p-16 w-full max-w-2xl relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl" onClick={(e) => e.stopPropagation()}>
-              <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none">&times;</button>
-              <h3 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-sans">Связаться с нами</h3>
+              <button onClick={closeModal} className="absolute top-4 right-4 md:top-6 md:right-6 text-cyan-500/50 hover:text-cyan-400 text-2xl md:text-3xl focus:outline-none font-['Inter',system-ui,sans-serif]">&times;</button>
+              <h3 className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif]">Связаться с нами</h3>
               <form className="space-y-4 md:space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
-                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
-                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" required />
-                <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base" />
-                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base"></textarea>
-                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-2xl text-sm md:text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">Отправить запрос</button>
+                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base font-['Inter',system-ui,sans-serif]" required />
+                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base font-['Inter',system-ui,sans-serif]" required />
+                <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 text-sm md:text-base font-['Inter',system-ui,sans-serif]" />
+                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-sm md:text-base font-['Inter',system-ui,sans-serif]"></textarea>
+                <button type="submit" className="w-full bg-cyan-500 text-black py-4 md:py-6 rounded-2xl text-sm md:text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all font-['Inter',system-ui,sans-serif]">Отправить запрос</button>
               </form>
             </motion.div>
           </motion.div>
