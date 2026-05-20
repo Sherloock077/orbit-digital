@@ -340,18 +340,12 @@ li,
   }
 
   .hero-subtitle {
-    font-size: 18px !important;
+    font-size: 15px !important;
     /* подзаголовок */
     line-height: 1.6 !important;
   }
 
-  .text-base {
-    font-size: 12px !important;
-    /* подзаголовок */
-    letter-spacing: 0.08em !important;
-    line-height: 1.5 !important;
-    color: #cccccc !important;
-  }
+ 
 
   /* ========== СЕКЦИЯ "НАШИ НАПРАВЛЕНИЯ" ========== */
   #services .flex.items-center.gap-4 span {
@@ -369,6 +363,8 @@ li,
     font-size: 16px !important;
     /* DPI 1 systems */
     font-weight: 700 !important;
+     white-space: pre-line !important;  /* ← ПЕРЕНОС ПО \n */
+  line-height: 1.4 !important;       /* ← ВЫСОТА СТРОКИ МЕЖДУ СЛОВАМИ */
   }
 
   #services .group p {

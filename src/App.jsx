@@ -579,17 +579,10 @@ function App() {
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-['Inter',system-ui,sans-serif] uppercase text-left">Инженерный <br /> Интеллект.</h2>
             </div>
 
-            <div className="space-y-6 md:space-y-8">
-              <p className="about-text text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left max-w-3xl font-['Inter',system-ui,sans-serif]">
+            <div className="space-y-6 md:space-y-8 w-full md:-mr-8 lg:-mr-12">
+              <p className="about-text text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left font-['Inter',system-ui,sans-serif]">
                 Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
               </p>
-
-              <div className="flex items-start gap-3">
-                <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mt-1.5 flex-shrink-0"></span>
-                <div className="flex flex-col gap-1">
-
-                </div>
-              </div>
             </div>
           </div>
         </motion.section>
@@ -606,7 +599,7 @@ function App() {
           >
             <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Проекты в разработке</h2>
 
-            <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+            <div className="flex flex-col gap-8 max-w-none -mx-8 md:-mx-32 lg:-mx-48 xl:-mx-64 2xl:-mx-80">
               {products.map((item, i) => (
                 <motion.div
                   key={i}
@@ -633,7 +626,7 @@ function App() {
                     <img src={item.img} alt={item.label} className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100" />
                   </div>
 
-                  <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                  <div className="p-6 md:p-8 md:pl-12 md:pr-0 flex-1 flex flex-col justify-between">
                     <div>
                       <span className={`${item.textColor} product-title mb-3 block tracking-[0.4em] font-bold uppercase font-['Inter',system-ui,sans-serif]`}>
                         {item.label}
