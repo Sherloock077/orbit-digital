@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { sendFormData } from './services/messageService';
 
 // ==========================================
 // 1. ИМПОРТЫ СТАТИЧЕСКИХ РЕСУРСОВ (ИЗОБРАЖЕНИЙ)
@@ -208,6 +209,15 @@ function App() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [expandedProduct, setExpandedProduct] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  
+  // Состояние формы
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -363,6 +373,46 @@ function App() {
   const closeModal = () => {
     setIsModalOpen(false);
     document.body.style.overflow = 'auto';
+    // Очистка формы
+    setFormData({ name: '', email: '', phone: '', message: '' });
+  };
+
+  // Обработчик изменения поля формы
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Обработчик отправки формы
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.message) {
+      alert('Заполните все обязательные поля: Имя, Email и Сообщение');
+      return;
+    }
+
+    setIsSending(true);
+    
+    try {
+      const result = await sendFormData(formData);
+      
+      if (result.success) {
+        alert('✅ Спасибо! Ваша заявка отправлена. Мы скоро вам напишем.');
+        closeModal();
+      } else {
+        alert('❌ Ошибка при отправке. Пожалуйста, попробуйте позже.');
+        console.error('Send error:', result.error);
+      }
+    } catch (error) {
+      alert('❌ Ошибка при отправке. Пожалуйста, попробуйте позже.');
+      console.error('Form submission error:', error);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleNavClick = (e, id) => {
@@ -661,25 +711,27 @@ function App() {
         </section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ: ПАРТНЕРЫ */}
+        {/* СЕКЦИЯ: ПАРТНЕРЫ (временно скрыта) */}
         {/* ========================================== */}
-        <section id="partners" className="mb-32 md:mb-64">
-          <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Партнеры</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {[1, 2, 3, 4].map((id) => (
-              <motion.div
-                key={id}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: id * 0.1, duration: 0.3 }}
-                className="h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden rounded-2xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000"></div>
-                <span className="text-[#444] group-hover:text-cyan-400 font-bold text-[11px] md:text-sm tracking-widest uppercase relative z-10 font-['Inter',system-ui,sans-serif]">Partner_0{id}</span>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+        {false && (
+          <section id="partners" className="mb-32 md:mb-64">
+            <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Партнеры</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {[1, 2, 3, 4].map((id) => (
+                <motion.div
+                  key={id}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: id * 0.1, duration: 0.3 }}
+                  className="h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden rounded-2xl"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000"></div>
+                  <span className="text-[#444] group-hover:text-cyan-400 font-bold text-[11px] md:text-sm tracking-widest uppercase relative z-10 font-['Inter',system-ui,sans-serif]">Partner_0{id}</span>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       {/* ==================== ПОДВАЛ ==================== */}
@@ -718,13 +770,47 @@ function App() {
               </h3>
 
               {/* ИСПРАВЛЕНИЕ ЗДЕСЬ: добавил отступ снизу pb-4 для формы */}
-              <form className="space-y-4 pb-4" onSubmit={(e) => { e.preventDefault(); alert('Сообщение отправлено.'); closeModal(); }}>
-                <input type="text" placeholder="Ваше имя" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" required />
-                <input type="email" placeholder="Email для связи" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" required />
-                <input type="tel" placeholder="+7 ___ ___ __ __" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]" />
-                <textarea placeholder="Как мы можем вам помочь?" rows="3" className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-base font-['Inter',system-ui,sans-serif]"></textarea>
-                <button type="submit" className="w-full bg-cyan-500 text-black py-4 rounded-2xl text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all mt-2">
-                  Отправить запрос
+              <form className="space-y-4 pb-4" onSubmit={handleFormSubmit}>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Ваше имя"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email для связи"
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="+7 ___ ___ __ __"
+                  value={formData.phone}
+                  onChange={handleFormChange}
+                  className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
+                />
+                <textarea
+                  name="message"
+                  placeholder="Как мы можем вам помочь?"
+                  rows="3"
+                  value={formData.message}
+                  onChange={handleFormChange}
+                  className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-base font-['Inter',system-ui,sans-serif]"
+                ></textarea>
+                <button
+                  type="submit"
+                  disabled={isSending}
+                  className="w-full bg-cyan-500 text-black py-4 rounded-2xl text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSending ? 'Отправка...' : 'Отправить запрос'}
                 </button>
               </form>
             </motion.div>
