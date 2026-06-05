@@ -3,11 +3,9 @@
  */
 
 export const sendWhatsAppViaMakeWebhook = async (formData) => {
-  const webhookUrl = import.meta.env.VITE_MAKE_WEBHOOK_URL;
-
-  if (!webhookUrl) {
-    throw new Error('VITE_MAKE_WEBHOOK_URL is not configured');
-  }
+  // Используем жестко заданный webhook URL (по запросу пользователя).
+  // При желании можно вернуть использование переменной окружения: import.meta.env.VITE_MAKE_WEBHOOK_URL
+  const webhookUrl = "https://hook.eu1.make.com/y8tfmjf6b734cbe3533dqokv3j818e9i";
 
   const payload = {
     name: formData.name,
