@@ -12,6 +12,9 @@ import imgDPI from './assets/DPI.jpg';
 import imgDron from './assets/dron2.jpg';
 import imgOSINT from './assets/OSINT.jpg';
 import imgOutsorcing from './assets/outsorcing.jpg';
+// ВРЕМЕННО используем DPI.jpg (замените на реальные изображения)
+import imgFintech from './assets/fintech.jpg';
+import imgCasting from './assets/casting.jpg';
 
 // ==========================================
 // 2. КОМПОНЕНТ: КНОПКА "НАВЕРХ"
@@ -252,22 +255,17 @@ function App() {
     };
   }, []);
 
-  // ==================== ИСПРАВЛЕННЫЙ СКРОЛЛ К ПРОДУКТУ (С ЗАДЕРЖКОЙ) ====================
+  // ==================== СКРОЛЛ К ПРОДУКТУ ====================
   const scrollToProduct = (index) => {
     const productElement = document.getElementById(`product-${index}`);
     if (productElement) {
-      // Функция скролла
       const scrollNow = () => {
         productElement.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
       };
-
-      // Вызываем сразу
       scrollNow();
-
-      // И ещё раз через 100ms для корректировки (убирает накопленный сдвиг)
       setTimeout(scrollNow, 100);
     }
 
@@ -276,6 +274,7 @@ function App() {
     }
   };
 
+  // ==================== СПИСОК НАПРАВЛЕНИЙ (7 пунктов) ====================
   const servicesList = [
     {
       label: "01. DPI SYSTEMS",
@@ -307,13 +306,28 @@ function App() {
     },
     {
       label: "05. CORE OUTSOURCING",
-      desc: "Разработка под ключ.",
+      desc: "Разработка под ключ",
       activeColor: "#10b981",
       textColor: "text-emerald-500",
       productIndex: 4
+    },
+    {
+      label: "06. FINTECH",
+      desc: "Инвестиционные платформы и экосистемы",
+      activeColor: "#3b82f6",
+      textColor: "text-blue-500",
+      productIndex: 5
+    },
+    {
+      label: "07. CASTING CONNECT",
+      desc: "Цифровая платформа для поиска актеров и моделей",
+      activeColor: "#ec4899",
+      textColor: "text-pink-500",
+      productIndex: 6
     }
   ];
 
+  // ==================== СПИСОК ПРОДУКТОВ (7 продуктов) ====================
   const products = [
     {
       id: "product-0",
@@ -354,6 +368,22 @@ function App() {
       activeColor: "#10b981",
       textColor: "text-emerald-500",
       img: imgOutsorcing
+    },
+    {
+      id: "product-5",
+      label: "06. FINTECH",
+      desc: `• ДЛЯ ИНВЕСТОРОВ: Интуитивно понятный поиск по категориям интересов, полная прозрачность сделки и персональное сопровождение. С момента регистрации вас ведет персональный менеджер, который обеспечит профессиональную коммуникацию с проектом.\n• ДЛЯ ПРЕДПРИНИМАТЕЛЕЙ: Удобная площадка для презентации вашего бизнеса широкому кругу потенциальных партнеров. Мы помогаем структурировать ваш проект для успешного прохождения проверки.\n• УМНАЯ АРХИТЕКТУРА СВЯЗЕЙ: Наша система использует визуальную архитектуру данных: вы всегда видите «дерево» актуальных взаимодействий, где инвестор и инициатор проекта объединены четкой и понятной линией сотрудничества.`,
+      activeColor: "#3b82f6",
+      textColor: "text-blue-500",
+      img: imgFintech
+    },
+    {
+      id: "product-6",
+      label: "07. CASTING CONNECT",
+      desc: `• Цифровая платформа для поиска актеров и моделей БЕЗ КАСТИНГОВ.\n• ДЛЯ РЕЖИССЕРОВ И ПРОДЮСЕРОВ: Умные фильтры по типажу, опыту, параметрам (рост, возраст, цвет волос/глаз). Просмотр анкет с фото, видео-визитками и портфолио. Экономия времени на очных кастингах.\n• ДЛЯ МОДЕЛЕЙ И АКТЕРОВ: Личное портфолио, история участия (где и с кем работали), автоматические подборки подходящих проектов. Персональное сопровождение менеджера с момента регистрации.\n• УМНАЯ АРХИТЕКТУРА: Система использует AI для подбора идеальных кандидатов под описание роли. Визуальное «дерево» взаимодействий между режиссером и моделью — полная прозрачность процесса.`,
+      activeColor: "#ec4899",
+      textColor: "text-pink-500",
+      img: imgCasting
     }
   ];
 
@@ -373,11 +403,9 @@ function App() {
   const closeModal = () => {
     setIsModalOpen(false);
     document.body.style.overflow = 'auto';
-    // Очистка формы
     setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
-  // Обработчик изменения поля формы
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -386,7 +414,6 @@ function App() {
     }));
   };
 
-  // Обработчик отправки формы
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     
@@ -499,7 +526,7 @@ function App() {
             className="fixed inset-0 z-[45] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:gap-12 font-['Inter',system-ui,sans-serif]"
           >
             <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">О компании</a>
-            <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Услуги</a>
+            <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Направления</a>
             <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Продукты</a>
             <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-base md:text-sm tracking-widest hover:bg-cyan-400 font-['Inter',system-ui,sans-serif]">Начать проект</button>
           </motion.div>
@@ -543,7 +570,7 @@ function App() {
         </section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ */}
+        {/* СЕКЦИЯ 1: НАШИ НАПРАВЛЕНИЯ (7 пунктов) */}
         {/* ========================================== */}
         <section id="services" className="py-20 px-4 max-w-5xl mx-auto scroll-mt-32">
           <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
@@ -585,7 +612,6 @@ function App() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 pointer-events-none rounded-2xl md:rounded-3xl" style={{ background: `linear-gradient(90deg, ${item.activeColor} 0%, transparent 80%)` }} />
 
                   <div className="md:w-5/12 mb-3 md:mb-0 z-10 relative">
-                    {/* 👇👇👇 ДОБАВЛЕН КЛАСС services-card-title 👇👇👇 */}
                     <h3 className={`services-card-title text-base md:text-xl lg:text-2xl font-black font-['Inter',system-ui,sans-serif] tracking-[0.4em] uppercase transition-all duration-300 translate-x-0 group-hover:translate-x-2 inline-block ${isHovered ? item.textColor : 'text-slate-400'}`}>
                       {item.label}
                     </h3>
@@ -610,6 +636,7 @@ function App() {
         <div className="w-full flex justify-center my-20 md:my-32">
           <div className="w-[1px] h-20 md:h-32 bg-gradient-to-b from-cyan-500/50 via-transparent to-transparent" />
         </div>
+
         {/* ========================================== */}
         {/* СЕКЦИЯ: О КОМПАНИИ */}
         {/* ========================================== */}
@@ -638,7 +665,7 @@ function App() {
         </motion.section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ */}
+        {/* СЕКЦИЯ 2: ПРОЕКТЫ В РАЗРАБОТКЕ (7 продуктов) */}
         {/* ========================================== */}
         <section id="products" className="mb-32 md:mb-64">
           <motion.div
@@ -757,7 +784,6 @@ function App() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              // ИСПРАВЛЕНИЕ ЗДЕСЬ: убрал max-h-[90vh], добавил overflow-y-auto и pb-2
               className="bg-black border border-cyan-500 p-6 w-full max-w-md relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
@@ -769,7 +795,6 @@ function App() {
                 Связаться с нами
               </h3>
 
-              {/* ИСПРАВЛЕНИЕ ЗДЕСЬ: добавил отступ снизу pb-4 для формы */}
               <form className="space-y-4 pb-4" onSubmit={handleFormSubmit}>
                 <input
                   type="text"
