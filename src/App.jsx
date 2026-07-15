@@ -397,6 +397,11 @@ function App() {
       logo: "/starcharge.png",          // файл лежит в папке public/
       url: "https://www.starcharge.com/",
     },
+    {
+      name: "ELINC",
+      logo: "/elinc.png",
+      url: "https://www.elinc.com.cn/",
+    },
   ];
 
   useEffect(() => {
