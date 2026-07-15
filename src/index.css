@@ -270,10 +270,20 @@ li,
     font-size: 14px !important;
   }
 
-  /* ========== СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ" ========== */
-  #products h2 {
-    font-size: 18px !important;
+  /* ========== СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ" (как "Наши направления") ========== */
+  #products .flex.items-center.gap-4 span {
+    font-size: 11px !important;
     letter-spacing: 0.4em !important;
+  }
+
+  #products .flex.items-center.gap-4 div {
+    width: 30px !important;
+  }
+
+  #products h2 {
+    font-size: 36px !important;
+    line-height: 1.3 !important;
+    padding: 7px 0 !important;
   }
 
   #products .group .text-gray-400,
@@ -287,14 +297,20 @@ li,
     font-size: 11px !important;
   }
 
-  /* ========== ПАРТНЕРЫ ========== */
-  #partners h2 {
+  /* ========== ПАРТНЁРЫ (как "Наши направления") ========== */
+  #partners .flex.items-center.gap-4 span {
     font-size: 11px !important;
     letter-spacing: 0.4em !important;
   }
 
-  #partners span {
-    font-size: 11px !important;
+  #partners .flex.items-center.gap-4 div {
+    width: 30px !important;
+  }
+
+  #partners h2 {
+    font-size: 36px !important;
+    line-height: 1.3 !important;
+    padding: 7px 0 !important;
   }
 
   /* ========== ПОДВАЛ ========== */
@@ -398,11 +414,14 @@ li,
     /* статус текст */
   }
 
-  /* ========== СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ" ========== */
+  /* ========== СЕКЦИЯ "ПРОЕКТЫ В РАЗРАБОТКЕ" (как "Наши направления") ========== */
+  #products .flex.items-center.gap-4 span {
+    font-size: 12px !important;
+    letter-spacing: 0.4em !important;
+  }
+
   #products h2 {
-    font-size: 20px !important;
-    /*/ // Проекты в разработке*/
-    letter-spacing: 0.6em !important;
+    font-size: 35px !important;
   }
 
   #products .group .text-gray-400,
@@ -429,14 +448,14 @@ li,
     transition: all 0.5s ease-in-out !important;
   }
 
-  /* ========== ПАРТНЕРЫ ========== */
-  #partners h2 {
-    font-size: 14px !important;
-    letter-spacing: 0.6em !important;
+  /* ========== ПАРТНЁРЫ (как "Наши направления") ========== */
+  #partners .flex.items-center.gap-4 span {
+    font-size: 12px !important;
+    letter-spacing: 0.4em !important;
   }
 
-  #partners span {
-    font-size: 14px !important;
+  #partners h2 {
+    font-size: 35px !important;
   }
 }
 

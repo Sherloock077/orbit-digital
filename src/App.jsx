@@ -387,6 +387,18 @@ function App() {
     }
   ];
 
+  // ==================== СПИСОК ПАРТНЁРОВ ====================
+  // Замени на реальных партнёров. name — подпись/название.
+  // logo (необязательно) — импортируй логотип сверху и подставь сюда,
+  // тогда вместо текста покажется картинка (ч/б, в цвет при наведении).
+  const partners = [
+    {
+      name: "Starcharge",
+      logo: "/starcharge.png",          // файл лежит в папке public/
+      url: "https://www.starcharge.com/",
+    },
+  ];
+
   useEffect(() => {
     const dpr = window.devicePixelRatio || 1;
     const baseFontSize = 16;
@@ -446,12 +458,22 @@ function App() {
     e.preventDefault();
     setIsMobileMenuOpen(false);
     const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      });
+    if (!element) return;
+
+    const headerOffset = 80;
+    const rect = element.getBoundingClientRect();
+    const absoluteTop = rect.top + window.scrollY;
+
+    // Короткую секцию центрируем по экрану; высокую (выше вьюпорта)
+    // прижимаем к верху под шапку, чтобы не уехал заголовок.
+    let top;
+    if (rect.height < window.innerHeight - headerOffset) {
+      top = absoluteTop - (window.innerHeight - rect.height) / 2;
+    } else {
+      top = absoluteTop - headerOffset;
     }
+
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   };
 
   const sectionVariants = {
@@ -528,6 +550,7 @@ function App() {
             <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">О компании</a>
             <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Направления</a>
             <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Продукты</a>
+            <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Партнёры</a>
             <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-base md:text-sm tracking-widest hover:bg-cyan-400 font-['Inter',system-ui,sans-serif]">Начать проект</button>
           </motion.div>
         )}
@@ -674,7 +697,22 @@ function App() {
             viewport={{ once: true, amount: 0.1 }}
             variants={sectionVariants}
           >
-            <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.6em] text-purple-500/60 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Проекты в разработке</h2>
+            <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="w-12 h-[1px] bg-purple-500/40 shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
+                <span className="text-purple-400 font-['Inter',system-ui,sans-serif] text-[10px] md:text-[12px] tracking-[0.6em] uppercase font-bold">
+                  [ In Development ]
+                </span>
+                <div className="w-12 h-[1px] bg-purple-500/40 shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
+              </div>
+
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-['Inter',system-ui,sans-serif] relative select-none">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-500 drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">продукты</span>
+              </h2>
+
+              <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
+            </div>
 
             <div className="flex flex-col gap-8 max-w-none -mx-8 md:-mx-32 lg:-mx-48 xl:-mx-64 2xl:-mx-80">
               {products.map((item, i) => (
@@ -738,27 +776,77 @@ function App() {
         </section>
 
         {/* ========================================== */}
-        {/* СЕКЦИЯ: ПАРТНЕРЫ (временно скрыта) */}
+        {/* СЕКЦИЯ: ПАРТНЁРЫ */}
         {/* ========================================== */}
-        {false && (
-          <section id="partners" className="mb-32 md:mb-64">
-            <h2 className="text-center text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] md:tracking-[0.6em] text-gray-600 mb-10 md:mb-20 font-['Inter',system-ui,sans-serif]">// Партнеры</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              {[1, 2, 3, 4].map((id) => (
-                <motion.div
-                  key={id}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: id * 0.1, duration: 0.3 }}
-                  className="h-24 md:h-32 border border-white/5 flex items-center justify-center bg-white/[0.01] hover:bg-cyan-950/20 hover:border-cyan-500/50 transition-all group relative overflow-hidden rounded-2xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000"></div>
-                  <span className="text-[#444] group-hover:text-cyan-400 font-bold text-[11px] md:text-sm tracking-widest uppercase relative z-10 font-['Inter',system-ui,sans-serif]">Partner_0{id}</span>
-                </motion.div>
-              ))}
+        <motion.section
+          id="partners"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={sectionVariants}
+          className="mb-32 md:mb-48 scroll-mt-32"
+        >
+          <div className="relative z-10 flex flex-col items-center text-center mb-16 md:mb-24">
+            <div className="flex items-center gap-4 mb-3">
+              <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
+              <span className="text-cyan-400 font-['Inter',system-ui,sans-serif] text-[10px] md:text-[12px] tracking-[0.6em] uppercase font-bold">
+                [ Trusted Partners ]
+              </span>
+              <div className="w-12 h-[1px] bg-cyan-500/40 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
             </div>
-          </section>
-        )}
+
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-['Inter',system-ui,sans-serif] relative select-none">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">партнёры</span>
+            </h2>
+
+            <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+            {partners.map((partner, i) => {
+              const cardClass =
+                "group relative w-full max-w-sm h-36 md:h-44 flex items-center justify-center border border-white/10 bg-black/30 backdrop-blur-sm rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:border-cyan-500/50 hover:bg-cyan-950/10 hover:shadow-[0_0_25px_rgba(34,211,238,0.15)]";
+              const inner = (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000" />
+                  {partner.logo ? (
+                    <div className="relative z-10 flex flex-col items-center gap-3 md:gap-4">
+                      <img
+                        src={partner.logo}
+                        alt={partner.name}
+                        className="max-h-12 md:max-h-14 w-auto object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                      />
+                      <span className="text-slate-200 group-hover:text-cyan-300 font-black text-xl md:text-2xl tracking-[0.2em] uppercase transition-colors duration-500 font-['Inter',system-ui,sans-serif]">
+                        {partner.name}
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="text-slate-400 group-hover:text-cyan-300 font-black text-2xl md:text-3xl tracking-[0.15em] uppercase relative z-10 transition-colors duration-500 text-center px-4 font-['Inter',system-ui,sans-serif]">
+                      {partner.name}
+                    </span>
+                  )}
+                </>
+              );
+              return partner.url ? (
+                <a
+                  key={i}
+                  href={partner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={partner.name}
+                  className={cardClass}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div key={i} className={cardClass}>
+                  {inner}
+                </div>
+              );
+            })}
+          </div>
+        </motion.section>
       </main>
 
       {/* ==================== ПОДВАЛ ==================== */}
