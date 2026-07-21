@@ -1155,14 +1155,18 @@ function App() {
               </button>
 
               {status === 'success' ? (
-                <div className="text-center py-6">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cyan-500/15 border border-cyan-400/40 flex items-center justify-center">
+                <div className="text-center py-4 px-2">
+                  <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-cyan-500/15 border border-cyan-400/40 flex items-center justify-center">
                     <svg viewBox="0 0 24 24" className="w-8 h-8 fill-none stroke-cyan-400 stroke-2">
                       <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-black text-white uppercase mb-2 font-['Inter',system-ui,sans-serif]">{t.modal.successTitle}</h3>
-                  <p className="text-gray-400 mb-6 font-['Inter',system-ui,sans-serif]">{t.modal.successText}</p>
+                  <div className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-3 leading-tight font-['Inter',system-ui,sans-serif]">
+                    {t.modal.successTitle}
+                  </div>
+                  <p className="text-gray-400 text-sm md:text-base mb-6 max-w-xs mx-auto leading-snug font-['Inter',system-ui,sans-serif]">
+                    {t.modal.successText}
+                  </p>
                   <button onClick={closeModal} className="bg-cyan-500 text-black py-3 px-8 rounded-2xl font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">
                     {t.modal.close}
                   </button>
