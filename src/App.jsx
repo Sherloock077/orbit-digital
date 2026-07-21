@@ -15,6 +15,9 @@ import imgOutsorcing from './assets/outsorcing.webp';
 import imgFintech from './assets/fintech.webp';
 import imgCasting from './assets/casting.webp';
 
+// Публичный ключ Cloudflare Turnstile (можно хранить в коде — привязан к домену)
+const TURNSTILE_SITE_KEY = '0x4AAAAAAD6g763Nfeu-Lbhp';
+
 // ==========================================
 // 2. КОМПОНЕНТ: КНОПКА "НАВЕРХ"
 // ==========================================
@@ -251,7 +254,24 @@ const translations = {
     aboutTitle2: 'Интеллект.',
     aboutText: 'Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.',
     copyright: '© 2026 Orbit Digital // Технологии для эффективной работы.',
-    modal: { title: 'Связаться с нами', name: 'Ваше имя', email: 'Email для связи', phone: '+7 ___ ___ __ __', message: 'Как мы можем вам помочь?', submit: 'Отправить запрос', sending: 'Отправка...' },
+    privacyLink: 'Политика конфиденциальности',
+    cookie: { text: 'Мы используем cookie и локальное хранилище для работы сайта и аналитики.', more: 'Подробнее', accept: 'Принять' },
+    modal: {
+      title: 'Связаться с нами',
+      nameLabel: 'Имя', namePh: 'Ваше имя',
+      emailLabel: 'Email', emailPh: 'you@example.com',
+      phoneLabel: 'Телефон', phonePh: '+7 ___ ___ __ __',
+      messageLabel: 'Сообщение', messagePh: 'Как мы можем вам помочь?',
+      consent: 'Я согласен на обработку персональных данных',
+      submit: 'Отправить запрос', sending: 'Отправка…', close: 'Закрыть',
+      successTitle: 'Спасибо!', successText: 'Ваша заявка отправлена — мы скоро свяжемся с вами.',
+      errorText: 'Не удалось отправить. Попробуйте ещё раз или напишите нам в WhatsApp / Telegram.',
+      errName: 'Введите имя',
+      errEmailReq: 'Введите email', errEmail: 'Некорректный email',
+      errMessage: 'Напишите сообщение',
+      errConsent: 'Отметьте согласие на обработку данных',
+      errCaptcha: 'Подтвердите, что вы не робот',
+    },
     alerts: { required: 'Заполните все обязательные поля: Имя, Email и Сообщение', success: '✅ Спасибо! Ваша заявка отправлена. Мы скоро вам напишем.', error: '❌ Ошибка при отправке. Пожалуйста, попробуйте позже.' },
     services: [
       'Трафик-менеджмент',
@@ -283,7 +303,24 @@ const translations = {
     aboutTitle2: 'Интеллект.',
     aboutText: 'Біз терең трафик талдау жүйелерін, автономды ұшу шешімдерін және цифрлық барлау құралдарын жобалаймыз. Біздің өнімдеріміз шикі деректерді бизнесіңізді қорғау мен масштабтауға арналған бақыланатын ортаға айналдырады.',
     copyright: '© 2026 Orbit Digital // Тиімді жұмысқа арналған технологиялар.',
-    modal: { title: 'Бізбен байланысу', name: 'Атыңыз', email: 'Байланыс Email', phone: '+7 ___ ___ __ __', message: 'Сізге қалай көмектесе аламыз?', submit: 'Сұраныс жіберу', sending: 'Жіберілуде...' },
+    privacyLink: 'Құпиялылық саясаты',
+    cookie: { text: 'Сайттың жұмысы мен аналитика үшін cookie және жергілікті сақтауды қолданамыз.', more: 'Толығырақ', accept: 'Қабылдау' },
+    modal: {
+      title: 'Бізбен байланысу',
+      nameLabel: 'Аты', namePh: 'Атыңыз',
+      emailLabel: 'Email', emailPh: 'you@example.com',
+      phoneLabel: 'Телефон', phonePh: '+7 ___ ___ __ __',
+      messageLabel: 'Хабарлама', messagePh: 'Сізге қалай көмектесе аламыз?',
+      consent: 'Дербес деректерді өңдеуге келісім беремін',
+      submit: 'Сұраныс жіберу', sending: 'Жіберілуде…', close: 'Жабу',
+      successTitle: 'Рахмет!', successText: 'Өтінішіңіз жіберілді — жақын арада хабарласамыз.',
+      errorText: 'Жіберілмеді. Қайталап көріңіз немесе WhatsApp / Telegram арқылы жазыңыз.',
+      errName: 'Атыңызды енгізіңіз',
+      errEmailReq: 'Email енгізіңіз', errEmail: 'Email қате',
+      errMessage: 'Хабарлама жазыңыз',
+      errConsent: 'Деректерді өңдеуге келісіміңізді белгілеңіз',
+      errCaptcha: 'Робот еместігіңізді растаңыз',
+    },
     alerts: { required: 'Барлық міндетті өрістерді толтырыңыз: Аты, Email және Хабарлама', success: '✅ Рахмет! Өтінішіңіз жіберілді. Жақын арада хабарласамыз.', error: '❌ Жіберу кезінде қате. Кейінірек қайталап көріңіз.' },
     services: [
       'Трафикті басқару',
@@ -307,6 +344,87 @@ const translations = {
 };
 
 // ==========================================
+//  ПОЛЕ ФОРМЫ (с меткой, валидацией и ошибкой)
+// ==========================================
+function Field({ label, name, type = 'text', value, onChange, placeholder, error, required, textarea }) {
+  const base =
+    "w-full bg-white/5 border p-4 rounded-2xl text-white outline-none text-base font-['Inter',system-ui,sans-serif] transition-colors";
+  const border = error
+    ? 'border-red-500/70 focus:border-red-500'
+    : 'border-white/10 focus:border-cyan-500';
+  return (
+    <div>
+      <label
+        htmlFor={name}
+        className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1.5 font-['Inter',system-ui,sans-serif]"
+      >
+        {label}
+        {required && <span className="text-cyan-400"> *</span>}
+      </label>
+      {textarea ? (
+        <textarea
+          id={name}
+          name={name}
+          rows="3"
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          aria-invalid={error ? 'true' : 'false'}
+          className={`${base} ${border} resize-none`}
+        />
+      ) : (
+        <input
+          id={name}
+          name={name}
+          type={type}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          aria-invalid={error ? 'true' : 'false'}
+          className={`${base} ${border}`}
+        />
+      )}
+      {error && <p className="text-red-400 text-xs mt-1.5">{error}</p>}
+    </div>
+  );
+}
+
+// ==========================================
+//  COOKIE-БАННЕР
+// ==========================================
+function CookieBanner({ t }) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    try {
+      if (localStorage.getItem('cookieConsent') !== '1') setVisible(true);
+    } catch (e) { /* ignore */ }
+  }, []);
+  if (!visible) return null;
+  const accept = () => {
+    try { localStorage.setItem('cookieConsent', '1'); } catch (e) { /* ignore */ }
+    setVisible(false);
+  };
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-[120] p-3 md:p-4">
+      <div className="max-w-4xl mx-auto bg-black/90 backdrop-blur-xl border border-white/15 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center gap-3 shadow-[0_0_30px_rgba(0,0,0,0.6)]">
+        <p className="text-xs md:text-sm text-gray-300 flex-1 leading-snug font-['Inter',system-ui,sans-serif]">
+          {t.cookie.text}{' '}
+          <a href="/privacy.html" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 underline">
+            {t.cookie.more}
+          </a>
+        </p>
+        <button
+          onClick={accept}
+          className="shrink-0 bg-cyan-500 text-black px-6 py-2 rounded-full font-bold uppercase text-xs tracking-widest hover:bg-cyan-400 transition-colors"
+        >
+          {t.cookie.accept}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
 // 4. ОСНОВНОЙ КОМПОНЕНТ ПРИЛОЖЕНИЯ (APP)
 // ==========================================
 function App() {
@@ -324,7 +442,49 @@ function App() {
     message: '',
     website: '', // honeypot — реальные пользователи это поле не видят/не заполняют
   });
-  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const [errors, setErrors] = useState({});
+  const [consent, setConsent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef(null);
+  const widgetIdRef = useRef(null);
+
+  const resetTurnstile = () => {
+    setTurnstileToken('');
+    if (typeof window !== 'undefined' && window.turnstile && widgetIdRef.current !== null) {
+      try { window.turnstile.reset(widgetIdRef.current); } catch (e) { /* ignore */ }
+    }
+  };
+
+  // Рендер виджета Turnstile при открытии модалки
+  useEffect(() => {
+    if (!isModalOpen) return;
+    let cancelled = false;
+    let tries = 0;
+    const render = () => {
+      if (cancelled) return;
+      if (window.turnstile && turnstileRef.current && widgetIdRef.current === null) {
+        widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: (tok) => setTurnstileToken(tok),
+          'error-callback': () => setTurnstileToken(''),
+          'expired-callback': () => setTurnstileToken(''),
+        });
+      } else if (widgetIdRef.current === null && tries < 60) {
+        tries += 1;
+        setTimeout(render, 150);
+      }
+    };
+    render();
+    return () => {
+      cancelled = true;
+      if (window.turnstile && widgetIdRef.current !== null) {
+        try { window.turnstile.remove(widgetIdRef.current); } catch (e) { /* ignore */ }
+      }
+      widgetIdRef.current = null;
+      setTurnstileToken('');
+    };
+  }, [isModalOpen]);
 
   // ==================== ЯЗЫК (i18n) ====================
   const [lang, setLang] = useState(() => {
@@ -451,6 +611,9 @@ function App() {
     setIsModalOpen(false);
     document.body.style.overflow = 'auto';
     setFormData({ name: '', email: '', phone: '', message: '', website: '' });
+    setErrors({});
+    setConsent(false);
+    setStatus('idle');
   };
 
   const handleFormChange = (e) => {
@@ -459,6 +622,8 @@ function App() {
       ...prev,
       [name]: value
     }));
+    // убираем ошибку поля по мере ввода
+    setErrors(prev => (prev[name] ? { ...prev, [name]: undefined } : prev));
   };
 
   const handleFormSubmit = async (e) => {
@@ -470,28 +635,31 @@ function App() {
       return;
     }
 
-    if (!formData.name || !formData.email || !formData.message) {
-      alert(t.alerts.required);
-      return;
-    }
+    // Валидация с сообщениями под полями
+    const errs = {};
+    if (!formData.name.trim()) errs.name = t.modal.errName;
+    if (!formData.email.trim()) errs.email = t.modal.errEmailReq;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) errs.email = t.modal.errEmail;
+    if (!formData.message.trim()) errs.message = t.modal.errMessage;
+    if (!consent) errs.consent = t.modal.errConsent;
+    if (!turnstileToken) errs.captcha = t.modal.errCaptcha;
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
 
-    setIsSending(true);
-
+    setStatus('sending');
     try {
-      const result = await sendFormData(formData);
-
+      const result = await sendFormData({ ...formData, token: turnstileToken });
       if (result.success) {
-        alert(t.alerts.success);
-        closeModal();
+        setStatus('success');
       } else {
-        alert(t.alerts.error);
+        setStatus('error');
+        resetTurnstile();
         console.error('Send error:', result.error);
       }
     } catch (error) {
-      alert(t.alerts.error);
+      setStatus('error');
+      resetTurnstile();
       console.error('Form submission error:', error);
-    } finally {
-      setIsSending(false);
     }
   };
 
@@ -532,6 +700,7 @@ function App() {
 
       <SpaceBackground />
       <ScrollToTop />
+      <CookieBanner t={t} />
 
       {/* ==================== ШАПКА САЙТА ==================== */}
       <header className="fixed top-0 left-0 w-full z-[100] px-4 md:px-16 h-20 md:h-28 flex items-center justify-between border-b border-cyan-500/20 backdrop-blur-xl bg-black/60">
@@ -949,10 +1118,18 @@ function App() {
           {/* Разделитель */}
           <div className="w-40 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-          {/* Копирайт */}
+          {/* Копирайт + политика */}
           <p className="text-gray-500 text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light text-center font-['Inter',system-ui,sans-serif]">
             {t.copyright}
           </p>
+          <a
+            href="/privacy.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-cyan-300 text-[9px] md:text-[10px] uppercase tracking-[0.2em] transition-colors font-['Inter',system-ui,sans-serif]"
+          >
+            {t.privacyLink}
+          </a>
         </div>
       </footer>
 
@@ -973,68 +1150,92 @@ function App() {
               className="bg-black border border-cyan-500 p-6 w-full max-w-md relative shadow-[0_0_50px_rgba(34,211,238,0.2)] rounded-3xl overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={closeModal} className="absolute top-3 right-4 text-cyan-500/50 hover:text-cyan-400 text-3xl focus:outline-none z-10">
+              <button onClick={closeModal} aria-label={t.modal.close} className="absolute top-3 right-4 text-cyan-500/50 hover:text-cyan-400 text-3xl focus:outline-none z-10">
                 &times;
               </button>
 
-              <h3 className="text-2xl md:text-3xl font-black mb-6 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif] text-center pr-4">
-                {t.modal.title}
-              </h3>
+              {status === 'success' ? (
+                <div className="text-center py-6">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cyan-500/15 border border-cyan-400/40 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" className="w-8 h-8 fill-none stroke-cyan-400 stroke-2">
+                      <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-black text-white uppercase mb-2 font-['Inter',system-ui,sans-serif]">{t.modal.successTitle}</h3>
+                  <p className="text-gray-400 mb-6 font-['Inter',system-ui,sans-serif]">{t.modal.successText}</p>
+                  <button onClick={closeModal} className="bg-cyan-500 text-black py-3 px-8 rounded-2xl font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all">
+                    {t.modal.close}
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-2xl md:text-3xl font-black mb-6 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif] text-center pr-4">
+                    {t.modal.title}
+                  </h3>
 
-              <form className="space-y-4 pb-4" onSubmit={handleFormSubmit}>
-                {/* Honeypot: скрыт от людей, ловит ботов */}
-                <input
-                  type="text"
-                  name="website"
-                  value={formData.website}
-                  onChange={handleFormChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  className="absolute left-[-9999px] top-[-9999px] w-px h-px opacity-0 pointer-events-none"
-                />
-                <input
-                  type="text"
-                  name="name"
-                  placeholder={t.modal.name}
-                  value={formData.name}
-                  onChange={handleFormChange}
-                  className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder={t.modal.email}
-                  value={formData.email}
-                  onChange={handleFormChange}
-                  className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
-                  required
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder={t.modal.phone}
-                  value={formData.phone}
-                  onChange={handleFormChange}
-                  className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
-                />
-                <textarea
-                  name="message"
-                  placeholder={t.modal.message}
-                  rows="3"
-                  value={formData.message}
-                  onChange={handleFormChange}
-                  className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 resize-none text-base font-['Inter',system-ui,sans-serif]"
-                ></textarea>
-                <button
-                  type="submit"
-                  disabled={isSending}
-                  className="w-full bg-cyan-500 text-black py-4 rounded-2xl text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSending ? t.modal.sending : t.modal.submit}
-                </button>
-              </form>
+                  <form className="space-y-4 pb-4" onSubmit={handleFormSubmit} noValidate>
+                    {/* Honeypot: скрыт от людей, ловит ботов */}
+                    <input
+                      type="text"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleFormChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      className="absolute left-[-9999px] top-[-9999px] w-px h-px opacity-0 pointer-events-none"
+                    />
+
+                    {status === 'error' && (
+                      <div className="rounded-2xl border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-300 font-['Inter',system-ui,sans-serif]">
+                        {t.modal.errorText}
+                      </div>
+                    )}
+
+                    <Field label={t.modal.nameLabel} name="name" value={formData.name} onChange={handleFormChange} placeholder={t.modal.namePh} error={errors.name} required />
+                    <Field label={t.modal.emailLabel} name="email" type="email" value={formData.email} onChange={handleFormChange} placeholder={t.modal.emailPh} error={errors.email} required />
+                    <Field label={t.modal.phoneLabel} name="phone" type="tel" value={formData.phone} onChange={handleFormChange} placeholder={t.modal.phonePh} />
+                    <Field label={t.modal.messageLabel} name="message" textarea value={formData.message} onChange={handleFormChange} placeholder={t.modal.messagePh} error={errors.message} required />
+
+                    <div>
+                      <label className="flex items-start gap-3 cursor-pointer select-none text-left">
+                        <input
+                          type="checkbox"
+                          checked={consent}
+                          onChange={(e) => { setConsent(e.target.checked); setErrors(prev => ({ ...prev, consent: undefined })); }}
+                          className="mt-1 h-4 w-4 shrink-0 accent-cyan-500"
+                        />
+                        <span className="flex-1 min-w-0 text-[11px] leading-snug text-gray-400 font-['Inter',system-ui,sans-serif]">{t.modal.consent}</span>
+                      </label>
+                      {errors.consent && <p className="text-red-400 text-xs mt-1.5">{errors.consent}</p>}
+                    </div>
+
+                    {/* Cloudflare Turnstile (антиспам) */}
+                    <div>
+                      <div ref={turnstileRef} className="min-h-[65px]" />
+                      {errors.captcha && <p className="text-red-400 text-xs mt-1.5">{errors.captcha}</p>}
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={status === 'sending'}
+                      className="w-full bg-cyan-500 text-black py-4 rounded-2xl text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {status === 'sending' ? (
+                        <>
+                          <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+                            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                          </svg>
+                          {t.modal.sending}
+                        </>
+                      ) : (
+                        t.modal.submit
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}

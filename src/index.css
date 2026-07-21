@@ -611,6 +611,22 @@ li,
   outline: none !important;
 }
 
+/* Чекбокс согласия не должен наследовать стили текстовых полей */
+.fixed.inset-0 form input[type="checkbox"] {
+  width: 1rem !important;
+  height: 1rem !important;
+  min-width: 1rem !important;
+  padding: 0 !important;
+  margin: 2px 0 0 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 3px !important;
+  flex: none !important;
+  accent-color: #22d3ee !important;
+  -webkit-appearance: checkbox !important;
+  appearance: auto !important;
+}
+
 /* Плейсхолдер (подсказка внутри поля) */
 .fixed.inset-0 form input::placeholder,
 .fixed.inset-0 form textarea::placeholder {

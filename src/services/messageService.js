@@ -1,35 +1,7 @@
 /**
- * Сервис для отправки данных формы через Make.com webhook
- * Теперь этот вебхук принимает данные и сам отправляет их в WhatsApp и Telegram
- */
-export const sendFormToMakeWebhook = async (formData) => {
-  const webhookUrl = "https://hook.eu1.make.com/y8tfmjf6b734cbe3533dqokv3j818e9i";
-
-  const payload = {
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    message: formData.message,
-  };
-
-  const response = await fetch(webhookUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Make webhook responded with ${response.status}: ${errorText}`);
-  }
-
-  return true;
-};
-
-/**
- * Главная функция отправки формы, которую ты вызываешь при сабмите
+ * Отправка формы через собственную серверную функцию Cloudflare (/api/contact),
+ * которая проверяет капчу Turnstile и пересылает данные в Make.
+ * Вебхук Make на клиенте больше не светится.
  */
 export const sendFormData = async (formData) => {
   try {
@@ -37,9 +9,23 @@ export const sendFormData = async (formData) => {
       throw new Error('Заполните обязательные поля: имя, email и сообщение');
     }
 
-    // Отправляем данные на один единый вебхук Make
-    await sendFormToMakeWebhook(formData);
-    console.log('✅ Данные успешно переданы в Make.com');
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        token: formData.token, // токен Cloudflare Turnstile
+      }),
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || `HTTP ${response.status}`);
+    }
 
     return { success: true };
   } catch (error) {
