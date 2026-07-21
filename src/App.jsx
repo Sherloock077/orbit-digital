@@ -5,16 +5,15 @@ import { sendFormData } from './services/messageService';
 // ==========================================
 // 1. ИМПОРТЫ СТАТИЧЕСКИХ РЕСУРСОВ (ИЗОБРАЖЕНИЙ)
 // ==========================================
-import logoImg from './assets/logo.png';
-import orbitImg from './assets/orbit.jpg';
-import imgBigData from './assets/bigdata.jpg';
-import imgDPI from './assets/DPI.jpg';
-import imgDron from './assets/dron2.jpg';
-import imgOSINT from './assets/OSINT.jpg';
-import imgOutsorcing from './assets/outsorcing.jpg';
-// ВРЕМЕННО используем DPI.jpg (замените на реальные изображения)
-import imgFintech from './assets/fintech.jpg';
-import imgCasting from './assets/casting.jpg';
+import logoImg from './assets/logo.webp';
+import orbitImg from './assets/orbit.webp';
+import imgBigData from './assets/bigdata.webp';
+import imgDPI from './assets/DPI.webp';
+import imgDron from './assets/dron2.webp';
+import imgOSINT from './assets/OSINT.webp';
+import imgOutsorcing from './assets/outsorcing.webp';
+import imgFintech from './assets/fintech.webp';
+import imgCasting from './assets/casting.webp';
 
 // ==========================================
 // 2. КОМПОНЕНТ: КНОПКА "НАВЕРХ"
@@ -68,7 +67,10 @@ const SpaceBackground = () => {
     const handleScroll = () => {
       targetScrollRotation.current = window.scrollY * 0.003;
     };
-    window.addEventListener('scroll', handleScroll);
+    const prefersReduced =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) window.addEventListener('scroll', handleScroll);
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -82,6 +84,7 @@ const SpaceBackground = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       initSpace();
+      if (prefersReduced) drawStatic();
     };
 
     const initSpace = () => {
@@ -188,9 +191,38 @@ const SpaceBackground = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
+    // Статичный кадр для режима «уменьшить движение» — без цикла анимации.
+    const drawStatic = () => {
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 1;
+      staticStars.forEach(p => {
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 0.7})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      const gCenterX = canvas.width * 0.12;
+      const gCenterY = canvas.height * 0.32;
+      galaxyStars.forEach(s => {
+        const x = gCenterX + Math.cos(s.angle) * s.dist;
+        const y = gCenterY + Math.sin(s.angle) * s.dist * 0.6;
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = s.opacity * 0.6;
+        ctx.beginPath();
+        ctx.arc(x, y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+    };
+
     window.addEventListener('resize', resize);
     resize();
-    animate();
+    if (prefersReduced) {
+      drawStatic();
+    } else {
+      animate();
+    }
 
     return () => {
       window.removeEventListener('resize', resize);
@@ -201,6 +233,77 @@ const SpaceBackground = () => {
   }, [isMobile]);
 
   return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />;
+};
+
+// ==========================================
+//  ПЕРЕВОДЫ (RU / KK) — i18n
+//  Технические названия (01. DPI SYSTEMS и т.п.) и англ. бейджи не переводятся.
+// ==========================================
+const translations = {
+  ru: {
+    nav: { about: 'О нас', services: 'Направления', products: 'Продукты', partners: 'Партнеры', contact: 'Связаться' },
+    menu: { about: 'О компании', services: 'Направления', products: 'Продукты', partners: 'Партнёры', start: 'Начать проект' },
+    heroSubtitle: '// Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.',
+    head: { our: 'Наши', services: 'направления', products: 'продукты', partners: 'партнёры' },
+    more: '[ подробнее ]',
+    close: '[ закрыть ]',
+    aboutTitle1: 'Инженерный',
+    aboutTitle2: 'Интеллект.',
+    aboutText: 'Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.',
+    copyright: '© 2026 Orbit Digital // Технологии для эффективной работы.',
+    modal: { title: 'Связаться с нами', name: 'Ваше имя', email: 'Email для связи', phone: '+7 ___ ___ __ __', message: 'Как мы можем вам помочь?', submit: 'Отправить запрос', sending: 'Отправка...' },
+    alerts: { required: 'Заполните все обязательные поля: Имя, Email и Сообщение', success: '✅ Спасибо! Ваша заявка отправлена. Мы скоро вам напишем.', error: '❌ Ошибка при отправке. Пожалуйста, попробуйте позже.' },
+    services: [
+      'Трафик-менеджмент',
+      'БАС (Беспилотные авиационные системы)',
+      'Автоматизированный сбор данных',
+      'Архитектуры хранения терабайтов данных',
+      'Разработка под ключ',
+      'Инвестиционные платформы и экосистемы',
+      'Цифровая платформа для поиска актеров и моделей',
+    ],
+    products: [
+      `• Анализ и управление сетевым трафиком.\n• Разработка систем глубокого анализа пакетов для классификации и приоритизации трафика.\n• Решения для кибербезопасности: обнаружение вторжений (IDS) и предотвращение утечек данных на лету.\n• Оптимизация пропускной способности сетей для крупных корпоративных узлов.`,
+      `• Алгоритмы обнаружения дронов по анализу их радиосигналов.\n• Программное подавление (глушение) каналов управления, навигации и телеметрии.\n• Перехват управления дроном: взлом связи, подмена координат и автоматическая посадка.\n• Программное обеспечение для координации систем перехвата и работы с радиолокационными станциями.`,
+      `• Автоматизированный сбор и сквозной мониторинг открытых данных.\n• Глубокий анализ потенциальных рисков и угроз безопасности.\n• Выявление и визуализация скрытых взаимосвязей в цифровой среде.\n• Аудит репутации и проверка контрагентов через открытые источники данных.`,
+      `• Строим надёжные системы для хранения и обработки очень больших объёмов информации (терабайты и больше).\n• Разрабатываем модели прогнозирования и алгоритмы машинного обучения.\n• Делаем понятные дашборды и визуализацию процессов в реальном времени.\n• Находим скрытые закономерности и полезные для бизнеса выводы в любых массивах данных.`,
+      `• Выделенные команды разработчиков с полным техническим сопровождением.\n• Экспертиза в разработке на React, Python и современных веб-технологиях.\n• Полный цикл: архитектура, разработка, тестирование, развёртывание.\n• Прозрачный контроль процессов, код-ревью и постоянная поддержка.`,
+      `• ДЛЯ ИНВЕСТОРОВ: Интуитивно понятный поиск по категориям интересов, полная прозрачность сделки и персональное сопровождение. С момента регистрации вас ведет персональный менеджер, который обеспечит профессиональную коммуникацию с проектом.\n• ДЛЯ ПРЕДПРИНИМАТЕЛЕЙ: Удобная площадка для презентации вашего бизнеса широкому кругу потенциальных партнеров. Мы помогаем структурировать ваш проект для успешного прохождения проверки.\n• УМНАЯ АРХИТЕКТУРА СВЯЗЕЙ: Наша система использует визуальную архитектуру данных: вы всегда видите «дерево» актуальных взаимодействий, где инвестор и инициатор проекта объединены четкой и понятной линией сотрудничества.`,
+      `• Цифровая платформа для поиска актеров и моделей БЕЗ КАСТИНГОВ.\n• ДЛЯ РЕЖИССЕРОВ И ПРОДЮСЕРОВ: Умные фильтры по типажу, опыту, параметрам (рост, возраст, цвет волос/глаз). Просмотр анкет с фото, видео-визитками и портфолио. Экономия времени на очных кастингах.\n• ДЛЯ МОДЕЛЕЙ И АКТЕРОВ: Личное портфолио, история участия (где и с кем работали), автоматические подборки подходящих проектов. Персональное сопровождение менеджера с момента регистрации.\n• УМНАЯ АРХИТЕКТУРА: Система использует AI для подбора идеальных кандидатов под описание роли. Визуальное «дерево» взаимодействий между режиссером и моделью — полная прозрачность процесса.`,
+    ],
+  },
+  kk: {
+    nav: { about: 'Біз туралы', services: 'Бағыттар', products: 'Өнімдер', partners: 'Серіктестер', contact: 'Байланысу' },
+    menu: { about: 'Компания туралы', services: 'Бағыттар', products: 'Өнімдер', partners: 'Серіктестер', start: 'Жобаны бастау' },
+    heroSubtitle: '// Біз физикалық қауіпсіздік пен цифрлық интеллект тоғысында технологиялар жасаймыз.',
+    head: { our: 'Біздің', services: 'бағыттарымыз', products: 'өнімдеріміз', partners: 'серіктестеріміз' },
+    more: '[ толығырақ ]',
+    close: '[ жабу ]',
+    aboutTitle1: 'Инженерлік',
+    aboutTitle2: 'Интеллект.',
+    aboutText: 'Біз терең трафик талдау жүйелерін, автономды ұшу шешімдерін және цифрлық барлау құралдарын жобалаймыз. Біздің өнімдеріміз шикі деректерді бизнесіңізді қорғау мен масштабтауға арналған бақыланатын ортаға айналдырады.',
+    copyright: '© 2026 Orbit Digital // Тиімді жұмысқа арналған технологиялар.',
+    modal: { title: 'Бізбен байланысу', name: 'Атыңыз', email: 'Байланыс Email', phone: '+7 ___ ___ __ __', message: 'Сізге қалай көмектесе аламыз?', submit: 'Сұраныс жіберу', sending: 'Жіберілуде...' },
+    alerts: { required: 'Барлық міндетті өрістерді толтырыңыз: Аты, Email және Хабарлама', success: '✅ Рахмет! Өтінішіңіз жіберілді. Жақын арада хабарласамыз.', error: '❌ Жіберу кезінде қате. Кейінірек қайталап көріңіз.' },
+    services: [
+      'Трафикті басқару',
+      'ҰҰЖ (Ұшқышсыз ұшу жүйелері)',
+      'Деректерді автоматты жинау',
+      'Терабайт деректерді сақтау архитектурасы',
+      'Кілтке дейін әзірлеу',
+      'Инвестициялық платформалар мен экожүйелер',
+      'Актерлер мен модельдерді іздеуге арналған цифрлық платформа',
+    ],
+    products: [
+      `• Желілік трафикті талдау және басқару.\n• Трафикті жіктеу мен басымдық беру үшін терең пакеттік талдау жүйелерін әзірлеу.\n• Киберқауіпсіздік шешімдері: шабуылдарды анықтау (IDS) және деректердің ағып кетуін нақты уақытта болдырмау.\n• Ірі корпоративтік түйіндер үшін желі өткізу қабілетін оңтайландыру.`,
+      `• Дрондарды радиосигналдарын талдау арқылы анықтау алгоритмдері.\n• Басқару, навигация және телеметрия арналарын бағдарламалық басу (кедергі жасау).\n• Дронды басқаруды ұстап алу: байланысты бұзу, координаттарды алмастыру және автоматты қону.\n• Ұстап алу жүйелерін үйлестіру және радиолокациялық станциялармен жұмыс істеуге арналған бағдарламалық қамтамасыз ету.`,
+      `• Ашық деректерді автоматты жинау және тұтас мониторинг.\n• Ықтимал тәуекелдер мен қауіпсіздік қатерлерін терең талдау.\n• Цифрлық ортадағы жасырын байланыстарды анықтау және визуализациялау.\n• Ашық дереккөздер арқылы бедел аудиті және контрагенттерді тексеру.`,
+      `• Өте үлкен көлемдегі ақпаратты (терабайт және одан көп) сақтау мен өңдеуге арналған сенімді жүйелер құрамыз.\n• Болжау модельдері мен машиналық оқыту алгоритмдерін әзірлейміз.\n• Түсінікті дашбордтар мен процестерді нақты уақытта визуализациялаймыз.\n• Кез келген дерек массивтерінен жасырын заңдылықтар мен бизнеске пайдалы қорытындылар табамыз.`,
+      `• Толық техникалық қолдауы бар бөлінген әзірлеуші командалары.\n• React, Python және заманауи веб-технологияларда әзірлеу тәжірибесі.\n• Толық цикл: архитектура, әзірлеу, тестілеу, орналастыру.\n• Процестердің ашық бақылауы, код-ревью және тұрақты қолдау.`,
+      `• ИНВЕСТОРЛАРҒА: Қызығушылық санаттары бойынша интуитивті іздеу, мәміленің толық ашықтығы және жеке сүйемелдеу. Тіркелген сәттен бастап сізді жобамен кәсіби қарым-қатынасты қамтамасыз ететін жеке менеджер алып жүреді.\n• КӘСІПКЕРЛЕРГЕ: Бизнесіңізді әлеуетті серіктестердің кең ортасына таныстыруға арналған ыңғайлы алаң. Біз жобаңызды тексеруден сәтті өту үшін құрылымдауға көмектесеміз.\n• АҚЫЛДЫ БАЙЛАНЫС АРХИТЕКТУРАСЫ: Жүйеміз деректердің визуалды архитектурасын пайдаланады: сіз әрдайым инвестор мен жоба бастаушысы нақты әрі түсінікті ынтымақтастық сызығымен байланысқан өзекті өзара әрекеттердің «ағашын» көресіз.`,
+      `• Кастингсіз актерлер мен модельдерді іздеуге арналған цифрлық платформа.\n• РЕЖИССЕРЛЕР МЕН ПРОДЮСЕРЛЕРГЕ: Типаж, тәжірибе, параметрлер (бойы, жасы, шаш/көз түсі) бойынша ақылды сүзгілер. Фото, бейне-визитка және портфолиосы бар анкеталарды қарау. Ашық кастингтерде уақытты үнемдеу.\n• МОДЕЛЬДЕР МЕН АКТЕРЛЕРГЕ: Жеке портфолио, қатысу тарихы (қайда және кіммен жұмыс істегені), сәйкес жобалардың автоматты таңдауы. Тіркелген сәттен бастап менеджердің жеке сүйемелдеуі.\n• АҚЫЛДЫ АРХИТЕКТУРА: Жүйе рөл сипаттамасына сай мінсіз үміткерлерді таңдау үшін AI қолданады. Режиссер мен модель арасындағы өзара әрекеттердің визуалды «ағашы» — процестің толық ашықтығы.`,
+    ],
+  },
 };
 
 // ==========================================
@@ -219,8 +322,26 @@ function App() {
     email: '',
     phone: '',
     message: '',
+    website: '', // honeypot — реальные пользователи это поле не видят/не заполняют
   });
   const [isSending, setIsSending] = useState(false);
+
+  // ==================== ЯЗЫК (i18n) ====================
+  const [lang, setLang] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      const saved = localStorage.getItem('lang');
+      if (saved === 'ru' || saved === 'kk') return saved;
+    }
+    return 'ru';
+  });
+  const t = translations[lang];
+  const changeLang = (next) => {
+    setLang(next);
+    if (typeof localStorage !== 'undefined') localStorage.setItem('lang', next);
+  };
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -276,115 +397,24 @@ function App() {
 
   // ==================== СПИСОК НАПРАВЛЕНИЙ (7 пунктов) ====================
   const servicesList = [
-    {
-      label: "01. DPI SYSTEMS",
-      desc: "Трафик-менеджмент",
-      activeColor: "#ef4444",
-      textColor: "text-red-500",
-      productIndex: 0
-    },
-    {
-      label: "02. DRONE TECH",
-      desc: "БАС (Беспилотные авиационные системы)",
-      activeColor: "#22d3ee",
-      textColor: "text-cyan-400",
-      productIndex: 1
-    },
-    {
-      label: "03. OSINT INTELLIGENCE",
-      desc: "Автоматизированный сбор данных",
-      activeColor: "#fbbf24",
-      textColor: "text-amber-400",
-      productIndex: 2
-    },
-    {
-      label: "04. BIG DATA ANALYSIS",
-      desc: "Архитектуры хранения терабайтов данных",
-      activeColor: "#a855f7",
-      textColor: "text-purple-400",
-      productIndex: 3
-    },
-    {
-      label: "05. CORE OUTSOURCING",
-      desc: "Разработка под ключ",
-      activeColor: "#10b981",
-      textColor: "text-emerald-500",
-      productIndex: 4
-    },
-    {
-      label: "06. FINTECH",
-      desc: "Инвестиционные платформы и экосистемы",
-      activeColor: "#3b82f6",
-      textColor: "text-blue-500",
-      productIndex: 5
-    },
-    {
-      label: "07. CASTING CONNECT",
-      desc: "Цифровая платформа для поиска актеров и моделей",
-      activeColor: "#ec4899",
-      textColor: "text-pink-500",
-      productIndex: 6
-    }
+    { label: "01. DPI SYSTEMS", desc: t.services[0], activeColor: "#ef4444", textColor: "text-red-500", productIndex: 0 },
+    { label: "02. DRONE TECH", desc: t.services[1], activeColor: "#22d3ee", textColor: "text-cyan-400", productIndex: 1 },
+    { label: "03. OSINT INTELLIGENCE", desc: t.services[2], activeColor: "#fbbf24", textColor: "text-amber-400", productIndex: 2 },
+    { label: "04. BIG DATA ANALYSIS", desc: t.services[3], activeColor: "#a855f7", textColor: "text-purple-400", productIndex: 3 },
+    { label: "05. CORE OUTSOURCING", desc: t.services[4], activeColor: "#10b981", textColor: "text-emerald-500", productIndex: 4 },
+    { label: "06. FINTECH", desc: t.services[5], activeColor: "#3b82f6", textColor: "text-blue-500", productIndex: 5 },
+    { label: "07. CASTING CONNECT", desc: t.services[6], activeColor: "#ec4899", textColor: "text-pink-500", productIndex: 6 }
   ];
 
   // ==================== СПИСОК ПРОДУКТОВ (7 продуктов) ====================
   const products = [
-    {
-      id: "product-0",
-      label: "01. DPI SYSTEMS",
-      desc: `• Анализ и управление сетевым трафиком.\n• Разработка систем глубокого анализа пакетов для классификации и приоритизации трафика.\n• Решения для кибербезопасности: обнаружение вторжений (IDS) и предотвращение утечек данных на лету.\n• Оптимизация пропускной способности сетей для крупных корпоративных узлов.`,
-      activeColor: "#ef4444",
-      textColor: "text-red-500",
-      img: imgDPI
-    },
-    {
-      id: "product-1",
-      label: "02. DRONE TECH",
-      desc: `• Алгоритмы обнаружения дронов по анализу их радиосигналов.\n• Программное подавление (глушение) каналов управления, навигации и телеметрии.\n• Перехват управления дроном: взлом связи, подмена координат и автоматическая посадка.\n• Программное обеспечение для координации систем перехвата и работы с радиолокационными станциями.`,
-      activeColor: "#22d3ee",
-      textColor: "text-cyan-400",
-      img: imgDron
-    },
-    {
-      id: "product-2",
-      label: "03. OSINT INTELLIGENCE",
-      desc: `• Автоматизированный сбор и сквозной мониторинг открытых данных.\n• Глубокий анализ потенциальных рисков и угроз безопасности.\n• Выявление и визуализация скрытых взаимосвязей в цифровой среде.\n• Аудит репутации и проверка контрагентов через открытые источники данных.`,
-      activeColor: "#fbbf24",
-      textColor: "text-amber-400",
-      img: imgOSINT
-    },
-    {
-      id: "product-3",
-      label: "04. BIG DATA ANALYSIS",
-      desc: `• Строим надёжные системы для хранения и обработки очень больших объёмов информации (терабайты и больше).\n• Разрабатываем модели прогнозирования и алгоритмы машинного обучения.\n• Делаем понятные дашборды и визуализацию процессов в реальном времени.\n• Находим скрытые закономерности и полезные для бизнеса выводы в любых массивах данных.`,
-      activeColor: "#a855f7",
-      textColor: "text-purple-400",
-      img: imgBigData
-    },
-    {
-      id: "product-4",
-      label: "05. CORE OUTSOURCING",
-      desc: `• Выделенные команды разработчиков с полным техническим сопровождением.\n• Экспертиза в разработке на React, Python и современных веб-технологиях.\n• Полный цикл: архитектура, разработка, тестирование, развёртывание.\n• Прозрачный контроль процессов, код-ревью и постоянная поддержка.`,
-      activeColor: "#10b981",
-      textColor: "text-emerald-500",
-      img: imgOutsorcing
-    },
-    {
-      id: "product-5",
-      label: "06. FINTECH",
-      desc: `• ДЛЯ ИНВЕСТОРОВ: Интуитивно понятный поиск по категориям интересов, полная прозрачность сделки и персональное сопровождение. С момента регистрации вас ведет персональный менеджер, который обеспечит профессиональную коммуникацию с проектом.\n• ДЛЯ ПРЕДПРИНИМАТЕЛЕЙ: Удобная площадка для презентации вашего бизнеса широкому кругу потенциальных партнеров. Мы помогаем структурировать ваш проект для успешного прохождения проверки.\n• УМНАЯ АРХИТЕКТУРА СВЯЗЕЙ: Наша система использует визуальную архитектуру данных: вы всегда видите «дерево» актуальных взаимодействий, где инвестор и инициатор проекта объединены четкой и понятной линией сотрудничества.`,
-      activeColor: "#3b82f6",
-      textColor: "text-blue-500",
-      img: imgFintech
-    },
-    {
-      id: "product-6",
-      label: "07. CASTING CONNECT",
-      desc: `• Цифровая платформа для поиска актеров и моделей БЕЗ КАСТИНГОВ.\n• ДЛЯ РЕЖИССЕРОВ И ПРОДЮСЕРОВ: Умные фильтры по типажу, опыту, параметрам (рост, возраст, цвет волос/глаз). Просмотр анкет с фото, видео-визитками и портфолио. Экономия времени на очных кастингах.\n• ДЛЯ МОДЕЛЕЙ И АКТЕРОВ: Личное портфолио, история участия (где и с кем работали), автоматические подборки подходящих проектов. Персональное сопровождение менеджера с момента регистрации.\n• УМНАЯ АРХИТЕКТУРА: Система использует AI для подбора идеальных кандидатов под описание роли. Визуальное «дерево» взаимодействий между режиссером и моделью — полная прозрачность процесса.`,
-      activeColor: "#ec4899",
-      textColor: "text-pink-500",
-      img: imgCasting
-    }
+    { id: "product-0", label: "01. DPI SYSTEMS", desc: t.products[0], activeColor: "#ef4444", textColor: "text-red-500", img: imgDPI },
+    { id: "product-1", label: "02. DRONE TECH", desc: t.products[1], activeColor: "#22d3ee", textColor: "text-cyan-400", img: imgDron },
+    { id: "product-2", label: "03. OSINT INTELLIGENCE", desc: t.products[2], activeColor: "#fbbf24", textColor: "text-amber-400", img: imgOSINT },
+    { id: "product-3", label: "04. BIG DATA ANALYSIS", desc: t.products[3], activeColor: "#a855f7", textColor: "text-purple-400", img: imgBigData },
+    { id: "product-4", label: "05. CORE OUTSOURCING", desc: t.products[4], activeColor: "#10b981", textColor: "text-emerald-500", img: imgOutsorcing },
+    { id: "product-5", label: "06. FINTECH", desc: t.products[5], activeColor: "#3b82f6", textColor: "text-blue-500", img: imgFintech },
+    { id: "product-6", label: "07. CASTING CONNECT", desc: t.products[6], activeColor: "#ec4899", textColor: "text-pink-500", img: imgCasting }
   ];
 
   // ==================== СПИСОК ПАРТНЁРОВ ====================
@@ -420,7 +450,7 @@ function App() {
   const closeModal = () => {
     setIsModalOpen(false);
     document.body.style.overflow = 'auto';
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    setFormData({ name: '', email: '', phone: '', message: '', website: '' });
   };
 
   const handleFormChange = (e) => {
@@ -433,26 +463,32 @@ function App() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    
+
+    // Honeypot: если скрытое поле заполнено — это бот. Тихо закрываем, не отправляя.
+    if (formData.website) {
+      closeModal();
+      return;
+    }
+
     if (!formData.name || !formData.email || !formData.message) {
-      alert('Заполните все обязательные поля: Имя, Email и Сообщение');
+      alert(t.alerts.required);
       return;
     }
 
     setIsSending(true);
-    
+
     try {
       const result = await sendFormData(formData);
-      
+
       if (result.success) {
-        alert('✅ Спасибо! Ваша заявка отправлена. Мы скоро вам напишем.');
+        alert(t.alerts.success);
         closeModal();
       } else {
-        alert('❌ Ошибка при отправке. Пожалуйста, попробуйте позже.');
+        alert(t.alerts.error);
         console.error('Send error:', result.error);
       }
     } catch (error) {
-      alert('❌ Ошибка при отправке. Пожалуйста, попробуйте позже.');
+      alert(t.alerts.error);
       console.error('Form submission error:', error);
     } finally {
       setIsSending(false);
@@ -520,7 +556,7 @@ function App() {
               >
                 <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-cyan-500 transition-all duration-300 mr-1.5 text-[14px] font-light">[</span>
                 <span className="relative">
-                  {item === 'about' ? 'О нас' : item === 'services' ? 'Направления' : item === 'products' ? 'Продукты' : 'Партнеры'}
+                  {t.nav[item]}
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all duration-300 group-hover:w-full"></span>
                 </span>
                 <span className="opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-cyan-500 transition-all duration-300 ml-1.5 text-[14px] font-light">]</span>
@@ -528,8 +564,22 @@ function App() {
             ))}
           </nav>
 
+          {/* Переключатель языка РУС / ҚАЗ */}
+          <div className="flex items-center rounded-full border border-white/15 overflow-hidden text-[9px] md:text-[11px] font-bold tracking-wider uppercase shrink-0">
+            <button
+              onClick={() => changeLang('ru')}
+              className={`px-2 md:px-2.5 py-1 md:py-1.5 transition-colors ${lang === 'ru' ? 'bg-cyan-500 text-black' : 'text-gray-400 hover:text-white'}`}
+              aria-label="Русский"
+            >РУС</button>
+            <button
+              onClick={() => changeLang('kk')}
+              className={`px-2 md:px-2.5 py-1 md:py-1.5 transition-colors ${lang === 'kk' ? 'bg-cyan-500 text-black' : 'text-gray-400 hover:text-white'}`}
+              aria-label="Қазақша"
+            >ҚАЗ</button>
+          </div>
+
           <button onClick={openModal} className="relative px-6 md:px-8 py-2 md:py-2.5 group transition-all duration-500">
-            <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-['Inter',system-ui,sans-serif]">Связаться</span>
+            <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-['Inter',system-ui,sans-serif]">{t.nav.contact}</span>
             <span className="absolute inset-0 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-sm group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-500"></span>
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
             <span className="absolute right-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
@@ -552,11 +602,11 @@ function App() {
             exit={{ opacity: 0, scale: 1.1 }}
             className="fixed inset-0 z-[45] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:gap-12 font-['Inter',system-ui,sans-serif]"
           >
-            <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">О компании</a>
-            <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Направления</a>
-            <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Продукты</a>
-            <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">Партнёры</a>
-            <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-base md:text-sm tracking-widest hover:bg-cyan-400 font-['Inter',system-ui,sans-serif]">Начать проект</button>
+            <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.about}</a>
+            <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.services}</a>
+            <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.products}</a>
+            <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.partners}</a>
+            <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-base md:text-sm tracking-widest hover:bg-cyan-400 font-['Inter',system-ui,sans-serif]">{t.menu.start}</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -592,7 +642,7 @@ function App() {
               </span>
             </h1>
             <p className="hero-subtitle custom-subtitle text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 w-full max-w-4xl mx-auto font-light tracking-[0.05em] sm:tracking-[0.1em] md:tracking-[0.2em] uppercase leading-[1.6] border-t border-b border-white/10 py-4 sm:py-5 md:py-6 bg-black/20 backdrop-blur-sm px-4 sm:px-6 md:px-8 font-['Inter',system-ui,sans-serif]">
-  // Мы создаем технологии на стыке физической безопасности и цифрового интеллекта.
+              {t.heroSubtitle}
             </p>
           </motion.div>
         </section>
@@ -611,8 +661,8 @@ function App() {
             </div>
 
             <h2 className="services-heading text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-['Inter',system-ui,sans-serif] relative select-none">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">направления</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">{t.head.our}</span>{' '}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">{t.head.services}</span>
             </h2>
 
             <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
@@ -653,7 +703,7 @@ function App() {
 
                   <div className="absolute bottom-3 right-3 w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" style={{ backgroundColor: item.activeColor, boxShadow: `0 0 10px ${item.activeColor}` }} />
                   <div className="absolute top-3 right-3 text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-['Inter',system-ui,sans-serif]">
-                    [ подробнее ]
+                    {t.more}
                   </div>
                 </div>
               );
@@ -681,12 +731,12 @@ function App() {
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-10 md:gap-12 items-start">
             <div className="flex flex-col gap-4 border-l-2 border-purple-500 pl-6">
               <span className="text-purple-500 font-bold tracking-[0.5em] uppercase text-[11px] md:text-[13px] font-['Inter',system-ui,sans-serif]">Orbit.Digital / Core</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-['Inter',system-ui,sans-serif] uppercase text-left">Инженерный <br /> Интеллект.</h2>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none font-['Inter',system-ui,sans-serif] uppercase text-left">{t.aboutTitle1} <br /> {t.aboutTitle2}</h2>
             </div>
 
             <div className="space-y-6 md:space-y-8 w-full md:-mr-8 lg:-mr-12">
               <p className="about-text text-lg md:text-xl lg:text-2xl text-[#CCCCCC] leading-relaxed font-light text-left font-['Inter',system-ui,sans-serif]">
-                Мы проектируем системы глубокого анализа трафика, автономные полетные решения и инструменты цифровой разведки. Наши продукты превращают сырые данные в контролируемую среду для защиты и масштабирования вашего бизнеса.
+                {t.aboutText}
               </p>
             </div>
           </div>
@@ -712,14 +762,14 @@ function App() {
               </div>
 
               <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-['Inter',system-ui,sans-serif] relative select-none">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-500 drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">продукты</span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">{t.head.our}</span>{' '}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-500 drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">{t.head.products}</span>
               </h2>
 
               <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
             </div>
 
-            <div className="flex flex-col gap-8 max-w-none -mx-8 md:-mx-32 lg:-mx-48 xl:-mx-64 2xl:-mx-80">
+            <div className="flex flex-col gap-8 max-w-none -ml-8 md:-ml-32 lg:-ml-48 xl:-ml-64 2xl:-ml-80">
               {products.map((item, i) => (
                 <motion.div
                   key={i}
@@ -743,7 +793,7 @@ function App() {
                 >
                   <div className="relative w-full md:w-5/12 min-h-[220px] md:min-h-full overflow-hidden bg-black/40 flex items-center justify-center p-4 border-b md:border-b-0 md:border-r border-white/5 rounded-t-2xl md:rounded-l-3xl md:rounded-t-none">
                     <div className="absolute inset-0 z-10 opacity-5 group-hover:opacity-0 transition-opacity duration-500" style={{ backgroundColor: item.activeColor }} />
-                    <img src={item.img} alt={item.label} className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100" />
+                    <img src={item.img} alt={item.label} loading="lazy" decoding="async" className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100" />
                   </div>
 
                   <div className="p-6 md:p-8 md:pl-12 md:pr-0 flex-1 flex flex-col justify-between">
@@ -767,7 +817,7 @@ function App() {
 
                       {isMobile && (
                         <span className="text-[9px] md:text-[10px] uppercase tracking-wider text-gray-500 font-['Inter',system-ui,sans-serif]">
-                          {expandedProduct === i ? '[ закрыть ]' : '[ подробнее ]'}
+                          {expandedProduct === i ? t.close : t.more}
                         </span>
                       )}
 
@@ -801,8 +851,8 @@ function App() {
             </div>
 
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight font-['Inter',system-ui,sans-serif] relative select-none">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">Наши</span>{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">партнёры</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">{t.head.our}</span>{' '}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">{t.head.partners}</span>
             </h2>
 
             <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
@@ -901,7 +951,7 @@ function App() {
 
           {/* Копирайт */}
           <p className="text-gray-500 text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.4em] font-light text-center font-['Inter',system-ui,sans-serif]">
-            &copy; 2026 Orbit Digital // Технологии для эффективной работы.
+            {t.copyright}
           </p>
         </div>
       </footer>
@@ -928,14 +978,25 @@ function App() {
               </button>
 
               <h3 className="text-2xl md:text-3xl font-black mb-6 text-white tracking-tighter uppercase font-['Inter',system-ui,sans-serif] text-center pr-4">
-                Связаться с нами
+                {t.modal.title}
               </h3>
 
               <form className="space-y-4 pb-4" onSubmit={handleFormSubmit}>
+                {/* Honeypot: скрыт от людей, ловит ботов */}
+                <input
+                  type="text"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleFormChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute left-[-9999px] top-[-9999px] w-px h-px opacity-0 pointer-events-none"
+                />
                 <input
                   type="text"
                   name="name"
-                  placeholder="Ваше имя"
+                  placeholder={t.modal.name}
                   value={formData.name}
                   onChange={handleFormChange}
                   className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
@@ -944,7 +1005,7 @@ function App() {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email для связи"
+                  placeholder={t.modal.email}
                   value={formData.email}
                   onChange={handleFormChange}
                   className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
@@ -953,14 +1014,14 @@ function App() {
                 <input
                   type="tel"
                   name="phone"
-                  placeholder="+7 ___ ___ __ __"
+                  placeholder={t.modal.phone}
                   value={formData.phone}
                   onChange={handleFormChange}
                   className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-cyan-500 text-base font-['Inter',system-ui,sans-serif]"
                 />
                 <textarea
                   name="message"
-                  placeholder="Как мы можем вам помочь?"
+                  placeholder={t.modal.message}
                   rows="3"
                   value={formData.message}
                   onChange={handleFormChange}
@@ -971,7 +1032,7 @@ function App() {
                   disabled={isSending}
                   className="w-full bg-cyan-500 text-black py-4 rounded-2xl text-base font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSending ? 'Отправка...' : 'Отправить запрос'}
+                  {isSending ? t.modal.sending : t.modal.submit}
                 </button>
               </form>
             </motion.div>
