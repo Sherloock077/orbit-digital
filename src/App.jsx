@@ -578,7 +578,7 @@ function App() {
             >ҚАЗ</button>
           </div>
 
-          <button onClick={openModal} className="relative px-6 md:px-8 py-2 md:py-2.5 group transition-all duration-500">
+          <button onClick={openModal} className="relative hidden sm:block px-6 md:px-8 py-2 md:py-2.5 group transition-all duration-500">
             <span className="relative z-10 text-[9px] md:text-[10px] font-medium uppercase tracking-[0.25em] text-white/70 group-hover:text-white transition-colors duration-500 font-['Inter',system-ui,sans-serif]">{t.nav.contact}</span>
             <span className="absolute inset-0 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-sm group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-500"></span>
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
@@ -602,10 +602,10 @@ function App() {
             exit={{ opacity: 0, scale: 1.1 }}
             className="fixed inset-0 z-[45] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:gap-12 font-['Inter',system-ui,sans-serif]"
           >
-            <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.about}</a>
-            <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.services}</a>
-            <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.products}</a>
-            <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')} className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.partners}</a>
+            <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.about}</a>
+            <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.services}</a>
+            <a href="#products" onClick={(e) => handleNavClick(e, 'products')} className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.products}</a>
+            <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')} className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-gray-200 hover:text-cyan-400 transition-colors">{t.menu.partners}</a>
             <button onClick={openModal} className="mt-6 md:mt-10 bg-cyan-500 text-black px-8 md:px-12 py-4 md:py-5 rounded-full font-bold uppercase text-base md:text-sm tracking-widest hover:bg-cyan-400 font-['Inter',system-ui,sans-serif]">{t.menu.start}</button>
           </motion.div>
         )}
