@@ -41,7 +41,7 @@ export async function onRequestPost(context) {
     );
     const outcome = await verifyRes.json();
     if (!outcome.success) {
-      return json({ success: false, error: 'captcha_failed' }, 400);
+      return json({ success: false, error: 'captcha_failed', codes: outcome['error-codes'] }, 400);
     }
   } catch {
     return json({ success: false, error: 'captcha_error' }, 502);
