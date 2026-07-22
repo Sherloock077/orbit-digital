@@ -288,8 +288,8 @@ const translations = {
       `• Автоматизированный сбор и сквозной мониторинг открытых данных.\n• Глубокий анализ потенциальных рисков и угроз безопасности.\n• Выявление и визуализация скрытых взаимосвязей в цифровой среде.\n• Аудит репутации и проверка контрагентов через открытые источники данных.`,
       `• Строим надёжные системы для хранения и обработки очень больших объёмов информации (терабайты и больше).\n• Разрабатываем модели прогнозирования и алгоритмы машинного обучения.\n• Делаем понятные дашборды и визуализацию процессов в реальном времени.\n• Находим скрытые закономерности и полезные для бизнеса выводы в любых массивах данных.`,
       `• Выделенные команды разработчиков с полным техническим сопровождением.\n• Экспертиза в разработке на React, Python и современных веб-технологиях.\n• Полный цикл: архитектура, разработка, тестирование, развёртывание.\n• Прозрачный контроль процессов, код-ревью и постоянная поддержка.`,
-      `• ДЛЯ ИНВЕСТОРОВ: Интуитивно понятный поиск по категориям интересов, полная прозрачность сделки и персональное сопровождение. С момента регистрации вас ведет персональный менеджер, который обеспечит профессиональную коммуникацию с проектом.\n• ДЛЯ ПРЕДПРИНИМАТЕЛЕЙ: Удобная площадка для презентации вашего бизнеса широкому кругу потенциальных партнеров. Мы помогаем структурировать ваш проект для успешного прохождения проверки.\n• УМНАЯ АРХИТЕКТУРА СВЯЗЕЙ: Наша система использует визуальную архитектуру данных: вы всегда видите «дерево» актуальных взаимодействий, где инвестор и инициатор проекта объединены четкой и понятной линией сотрудничества.`,
-      `• Цифровая платформа для поиска актеров и моделей БЕЗ КАСТИНГОВ.\n• ДЛЯ РЕЖИССЕРОВ И ПРОДЮСЕРОВ: Умные фильтры по типажу, опыту, параметрам (рост, возраст, цвет волос/глаз). Просмотр анкет с фото, видео-визитками и портфолио. Экономия времени на очных кастингах.\n• ДЛЯ МОДЕЛЕЙ И АКТЕРОВ: Личное портфолио, история участия (где и с кем работали), автоматические подборки подходящих проектов. Персональное сопровождение менеджера с момента регистрации.\n• УМНАЯ АРХИТЕКТУРА: Система использует AI для подбора идеальных кандидатов под описание роли. Визуальное «дерево» взаимодействий между режиссером и моделью — полная прозрачность процесса.`,
+      `• Для инвесторов: интуитивно понятный поиск по категориям интересов, полная прозрачность сделки и персональное сопровождение. С момента регистрации вас ведёт персональный менеджер, который обеспечит профессиональную коммуникацию с проектом.\n• Для предпринимателей: удобная площадка для презентации вашего бизнеса широкому кругу потенциальных партнёров. Мы помогаем структурировать ваш проект для успешного прохождения проверки.\n• Умная архитектура связей: наша система использует визуальную архитектуру данных — вы всегда видите «дерево» актуальных взаимодействий, где инвестор и инициатор проекта объединены чёткой и понятной линией сотрудничества.`,
+      `• Цифровая платформа для поиска актёров и моделей без кастингов.\n• Для режиссёров и продюсеров: умные фильтры по типажу, опыту, параметрам (рост, возраст, цвет волос/глаз). Просмотр анкет с фото, видео-визитками и портфолио. Экономия времени на очных кастингах.\n• Для моделей и актёров: личное портфолио, история участия (где и с кем работали), автоматические подборки подходящих проектов. Персональное сопровождение менеджера с момента регистрации.\n• Умная архитектура: система использует AI для подбора идеальных кандидатов под описание роли. Визуальное «дерево» взаимодействий между режиссёром и моделью — полная прозрачность процесса.`,
     ],
   },
   kk: {
@@ -337,8 +337,57 @@ const translations = {
       `• Ашық деректерді автоматты жинау және тұтас мониторинг.\n• Ықтимал тәуекелдер мен қауіпсіздік қатерлерін терең талдау.\n• Цифрлық ортадағы жасырын байланыстарды анықтау және визуализациялау.\n• Ашық дереккөздер арқылы бедел аудиті және контрагенттерді тексеру.`,
       `• Өте үлкен көлемдегі ақпаратты (терабайт және одан көп) сақтау мен өңдеуге арналған сенімді жүйелер құрамыз.\n• Болжау модельдері мен машиналық оқыту алгоритмдерін әзірлейміз.\n• Түсінікті дашбордтар мен процестерді нақты уақытта визуализациялаймыз.\n• Кез келген дерек массивтерінен жасырын заңдылықтар мен бизнеске пайдалы қорытындылар табамыз.`,
       `• Толық техникалық қолдауы бар бөлінген әзірлеуші командалары.\n• React, Python және заманауи веб-технологияларда әзірлеу тәжірибесі.\n• Толық цикл: архитектура, әзірлеу, тестілеу, орналастыру.\n• Процестердің ашық бақылауы, код-ревью және тұрақты қолдау.`,
-      `• ИНВЕСТОРЛАРҒА: Қызығушылық санаттары бойынша интуитивті іздеу, мәміленің толық ашықтығы және жеке сүйемелдеу. Тіркелген сәттен бастап сізді жобамен кәсіби қарым-қатынасты қамтамасыз ететін жеке менеджер алып жүреді.\n• КӘСІПКЕРЛЕРГЕ: Бизнесіңізді әлеуетті серіктестердің кең ортасына таныстыруға арналған ыңғайлы алаң. Біз жобаңызды тексеруден сәтті өту үшін құрылымдауға көмектесеміз.\n• АҚЫЛДЫ БАЙЛАНЫС АРХИТЕКТУРАСЫ: Жүйеміз деректердің визуалды архитектурасын пайдаланады: сіз әрдайым инвестор мен жоба бастаушысы нақты әрі түсінікті ынтымақтастық сызығымен байланысқан өзекті өзара әрекеттердің «ағашын» көресіз.`,
-      `• Кастингсіз актерлер мен модельдерді іздеуге арналған цифрлық платформа.\n• РЕЖИССЕРЛЕР МЕН ПРОДЮСЕРЛЕРГЕ: Типаж, тәжірибе, параметрлер (бойы, жасы, шаш/көз түсі) бойынша ақылды сүзгілер. Фото, бейне-визитка және портфолиосы бар анкеталарды қарау. Ашық кастингтерде уақытты үнемдеу.\n• МОДЕЛЬДЕР МЕН АКТЕРЛЕРГЕ: Жеке портфолио, қатысу тарихы (қайда және кіммен жұмыс істегені), сәйкес жобалардың автоматты таңдауы. Тіркелген сәттен бастап менеджердің жеке сүйемелдеуі.\n• АҚЫЛДЫ АРХИТЕКТУРА: Жүйе рөл сипаттамасына сай мінсіз үміткерлерді таңдау үшін AI қолданады. Режиссер мен модель арасындағы өзара әрекеттердің визуалды «ағашы» — процестің толық ашықтығы.`,
+      `• Инвесторларға: қызығушылық санаттары бойынша интуитивті іздеу, мәміленің толық ашықтығы және жеке сүйемелдеу. Тіркелген сәттен бастап сізді жобамен кәсіби қарым-қатынасты қамтамасыз ететін жеке менеджер алып жүреді.\n• Кәсіпкерлерге: бизнесіңізді әлеуетті серіктестердің кең ортасына таныстыруға арналған ыңғайлы алаң. Біз жобаңызды тексеруден сәтті өту үшін құрылымдауға көмектесеміз.\n• Ақылды байланыс архитектурасы: жүйеміз деректердің визуалды архитектурасын пайдаланады — сіз әрдайым инвестор мен жоба бастаушысы нақты әрі түсінікті ынтымақтастық сызығымен байланысқан өзекті өзара әрекеттердің «ағашын» көресіз.`,
+      `• Кастингсіз актерлер мен модельдерді іздеуге арналған цифрлық платформа.\n• Режиссерлер мен продюсерлерге: типаж, тәжірибе, параметрлер (бойы, жасы, шаш/көз түсі) бойынша ақылды сүзгілер. Фото, бейне-визитка және портфолиосы бар анкеталарды қарау. Ашық кастингтерде уақытты үнемдеу.\n• Модельдер мен актерлерге: жеке портфолио, қатысу тарихы (қайда және кіммен жұмыс істегені), сәйкес жобалардың автоматты таңдауы. Тіркелген сәттен бастап менеджердің жеке сүйемелдеуі.\n• Ақылды архитектура: жүйе рөл сипаттамасына сай мінсіз үміткерлерді таңдау үшін AI қолданады. Режиссер мен модель арасындағы өзара әрекеттердің визуалды «ағашы» — процестің толық ашықтығы.`,
+    ],
+  },
+  en: {
+    nav: { about: 'About', services: 'Solutions', products: 'Products', partners: 'Partners', contact: 'Contact' },
+    menu: { about: 'About', services: 'Solutions', products: 'Products', partners: 'Partners', start: 'Start a project' },
+    heroSubtitle: '// We build technology at the intersection of physical security and digital intelligence.',
+    head: { our: 'Our', services: 'solutions', products: 'products', partners: 'partners' },
+    more: '[ more ]',
+    close: '[ close ]',
+    aboutTitle1: 'Engineering',
+    aboutTitle2: 'Intelligence.',
+    aboutText: 'We design deep traffic analysis systems, autonomous flight solutions and digital intelligence tools. Our products turn raw data into a controlled environment for protecting and scaling your business.',
+    copyright: '© 2026 Orbit Digital // Technology for effective work.',
+    privacyLink: 'Privacy Policy',
+    cookie: { text: 'We use cookies and local storage for the site to work and for analytics.', more: 'Learn more', accept: 'Accept' },
+    modal: {
+      title: 'Contact us',
+      nameLabel: 'Name', namePh: 'Your name',
+      emailLabel: 'Email', emailPh: 'you@example.com',
+      phoneLabel: 'Phone', phonePh: '+7 ___ ___ __ __',
+      messageLabel: 'Message', messagePh: 'How can we help you?',
+      consent: 'I agree to the processing of personal data',
+      submit: 'Send request', sending: 'Sending…', close: 'Close',
+      successTitle: 'Thank you!', successText: 'Your request has been sent — we will get in touch soon.',
+      errorText: 'Could not send. Please try again or message us on WhatsApp / Telegram.',
+      errName: 'Enter your name',
+      errEmailReq: 'Enter your email', errEmail: 'Invalid email',
+      errMessage: 'Write a message',
+      errConsent: 'Please accept the data processing',
+      errCaptcha: 'Please confirm you are not a robot',
+    },
+    alerts: { required: 'Fill in all required fields: Name, Email and Message', success: '✅ Thank you! Your request has been sent. We will write to you soon.', error: '❌ Sending error. Please try again later.' },
+    services: [
+      'Traffic management',
+      'UAS (Unmanned Aerial Systems)',
+      'Automated data collection',
+      'Terabyte-scale data storage architectures',
+      'Turnkey development',
+      'Investment platforms and ecosystems',
+      'Digital platform for finding actors and models',
+    ],
+    products: [
+      `• Analysis and management of network traffic.\n• Development of deep packet inspection systems for traffic classification and prioritization.\n• Cybersecurity solutions: intrusion detection (IDS) and on-the-fly data leak prevention.\n• Network throughput optimization for large enterprise nodes.`,
+      `• Algorithms for detecting drones by analyzing their radio signals.\n• Software jamming of control, navigation and telemetry channels.\n• Drone control takeover: link hacking, coordinate spoofing and automatic landing.\n• Software for coordinating interception systems and working with radar stations.`,
+      `• Automated collection and end-to-end monitoring of open data.\n• Deep analysis of potential risks and security threats.\n• Detection and visualization of hidden connections in the digital environment.\n• Reputation audit and counterparty verification through open data sources.`,
+      `• We build reliable systems for storing and processing very large volumes of information (terabytes and more).\n• We develop forecasting models and machine learning algorithms.\n• We create clear dashboards and real-time process visualization.\n• We find hidden patterns and business-useful insights in any data sets.`,
+      `• Dedicated development teams with full technical support.\n• Expertise in development with React, Python and modern web technologies.\n• Full cycle: architecture, development, testing, deployment.\n• Transparent process control, code review and continuous support.`,
+      `• For investors: intuitive search by interest categories, full deal transparency and personal support. From the moment of registration, a personal manager guides you and ensures professional communication with the project.\n• For entrepreneurs: a convenient platform to present your business to a wide range of potential partners. We help structure your project to successfully pass the review.\n• Smart connection architecture: our system uses a visual data architecture — you always see a "tree" of current interactions, where the investor and the project initiator are linked by a clear and understandable line of cooperation.`,
+      `• A digital platform for finding actors and models without castings.\n• For directors and producers: smart filters by type, experience, parameters (height, age, hair/eye color). View profiles with photos, video business cards and portfolios. Save time on in-person castings.\n• For models and actors: personal portfolio, participation history (where and with whom you worked), automatic selections of suitable projects. Personal manager support from the moment of registration.\n• Smart architecture: the system uses AI to select ideal candidates for the role description. A visual "tree" of interactions between director and model — full process transparency.`,
     ],
   },
 };
@@ -490,7 +539,7 @@ function App() {
   const [lang, setLang] = useState(() => {
     if (typeof localStorage !== 'undefined') {
       const saved = localStorage.getItem('lang');
-      if (saved === 'ru' || saved === 'kk') return saved;
+      if (saved === 'ru' || saved === 'kk' || saved === 'en') return saved;
     }
     return 'ru';
   });
@@ -745,6 +794,11 @@ function App() {
               className={`px-2 md:px-2.5 py-1 md:py-1.5 transition-colors ${lang === 'kk' ? 'bg-cyan-500 text-black' : 'text-gray-400 hover:text-white'}`}
               aria-label="Қазақша"
             >ҚАЗ</button>
+            <button
+              onClick={() => changeLang('en')}
+              className={`px-2 md:px-2.5 py-1 md:py-1.5 transition-colors ${lang === 'en' ? 'bg-cyan-500 text-black' : 'text-gray-400 hover:text-white'}`}
+              aria-label="English"
+            >ENG</button>
           </div>
 
           <button onClick={openModal} className="relative hidden sm:block px-6 md:px-8 py-2 md:py-2.5 group transition-all duration-500">
@@ -865,7 +919,7 @@ function App() {
                   </div>
 
                   <div className="md:w-7/12 z-10 md:pl-6 relative">
-                    <p className={`services-card-desc text-sm md:text-base lg:text-lg leading-relaxed font-normal md:font-light uppercase tracking-wide transition-colors duration-500 font-['Inter',system-ui,sans-serif] ${isHovered ? 'text-gray-100' : 'text-gray-400'}`}>
+                    <p className={`services-card-desc text-sm md:text-base lg:text-lg leading-relaxed font-normal md:font-light tracking-normal transition-colors duration-500 font-['Inter',system-ui,sans-serif] ${isHovered ? 'text-gray-100' : 'text-gray-300'}`}>
                       {item.desc}
                     </p>
                   </div>
@@ -938,7 +992,10 @@ function App() {
               <div className="mt-8 w-40 h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
             </div>
 
-            <div className="flex flex-col gap-8 max-w-none -ml-8 md:-ml-32 lg:-ml-48 xl:-ml-64 2xl:-ml-80">
+            <div
+              className="flex flex-col gap-8"
+              style={{ width: 'min(94vw, 960px)', marginLeft: 'calc(50% - min(47vw, 480px))' }}
+            >
               {products.map((item, i) => (
                 <motion.div
                   key={i}
@@ -965,14 +1022,14 @@ function App() {
                     <img src={item.img} alt={item.label} loading="lazy" decoding="async" className="w-full h-full max-h-[260px] md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 scale-102 group-hover:scale-100" />
                   </div>
 
-                  <div className="p-6 md:p-8 md:pl-12 md:pr-0 flex-1 flex flex-col justify-between">
+                  <div className="p-6 md:p-8 md:pl-12 md:pr-10 flex-1 flex flex-col justify-between">
                     <div>
                       <span className={`${item.textColor} product-title mb-3 block tracking-[0.4em] font-bold uppercase font-['Inter',system-ui,sans-serif]`}>
                         {item.label}
                       </span>
 
                       {(!isMobile || (isMobile && expandedProduct === i)) && (
-                        <p className="text-sm md:text-base lg:text-lg text-gray-400 leading-relaxed font-light mb-6 uppercase tracking-tight whitespace-pre-line font-['Inter',system-ui,sans-serif]">
+                        <p className="text-sm md:text-base lg:text-lg text-gray-300 leading-relaxed font-light mb-6 tracking-normal whitespace-pre-line font-['Inter',system-ui,sans-serif]">
                           {item.desc}
                         </p>
                       )}
